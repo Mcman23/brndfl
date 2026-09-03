@@ -1,4 +1,4 @@
-﻿{
+{
   "installCommand": "cd backend && npm install --include=dev && npx prisma generate",
   "buildCommand": "echo static",
   "outputDirectory": ".",
