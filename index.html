@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brandfull — İnsanlar Üçün Əhəmiyyətli İşlər Yaradırıq</title>
+  <meta name="description" content="Biz Brandfull-uq — texnologiya və mədəniyyətin bizneslərdən daha sürətlə dəyişdiyi anlar üçün qurulmuş insan mərkəzli, süni intellekt əsaslı dizayn və texnologiya şirkəti." />
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-weight='900' fill='%23ff0090'>B</text></svg>" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <!-- Progressive Top Blur Header Filter -->
+  <div class="progressive-blur" aria-hidden="true"></div>
+
+  <!-- ========================================================================
+       1. GLOBAL SITE HEADER
+       ======================================================================== -->
+  <header class="site-header">
+    <a href="/" data-route="home" class="site-logo-link" aria-label="Brandfull Ana Səhifə">
+      <span style="font-size: 1.95rem; font-weight: 900; letter-spacing: -0.04em; color: var(--color-brand-magenta);">
+        Brandfull
+      </span>
+    </a>
+
+    <!-- Primary Desktop Nav -->
+    <nav class="primary-nav" aria-label="Əsas Naviqasiya">
+      <a href="#work" data-route="work" class="nav-link">İşlərimiz</a>
+      <a href="#solutions" data-route="solutions" class="nav-link">Həllər</a>
+      <a href="#approach" data-route="approach" class="nav-link">Yanaşma</a>
+      <a href="#company" data-route="company" class="nav-link">Haqqımızda</a>
+      <a href="#ideas" data-route="ideas" class="nav-link">Fikirlər</a>
+      <a href="#careers" data-route="careers" class="nav-link">Karyera</a>
+    </nav>
+
+    <!-- Header Actions -->
+    <div class="header-actions">
+      <a href="/contact" data-open-contact class="btn-pill" data-btn-hover style="background-color: #ffffff; color: #000000; padding: 0.75rem 1.6rem; text-decoration: none;">
+        <span>Bizimlə danışın</span>
+      </a>
+      <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Menyunu Aç">
+        Menyu
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       2. FULL-SCREEN MOBILE NAVIGATION DRAWER
+       ======================================================================== -->
+  <div class="mobile-menu-overlay" id="mobileMenu" aria-modal="true" role="dialog">
+    <div class="mobile-menu-header">
+      <a href="/" data-route="home" class="site-logo-link">
+        <span style="font-size: 1.85rem; font-weight: 900; color: var(--color-brand-magenta);">
+          Brandfull<span style="color: #ffffff;">.</span>
+        </span>
+      </a>
+      <button class="modal-close-btn" id="closeMobileMenuBtn" aria-label="Menyunu Bağla" style="position:static; width:3rem; height:3rem; border:1px solid var(--theme-border-subtle); color:var(--theme-text-primary); background:transparent;">
+        ✕
+      </button>
+    </div>
+
+    <nav class="mobile-menu-links">
+      <a href="/work" data-route="work" class="mobile-menu-link">İşlərimiz</a>
+      <a href="/solutions" data-route="solutions" class="mobile-menu-link">Həllər</a>
+      <a href="/approach" data-route="approach" class="mobile-menu-link">Yanaşma</a>
+      <a href="/company" data-route="company" class="mobile-menu-link">Haqqımızda</a>
+      <a href="/ideas" data-route="ideas" class="mobile-menu-link">Fikirlər</a>
+      <a href="/careers" data-route="careers" class="mobile-menu-link">Karyera</a>
+    </nav>
+
+    <div class="mobile-menu-footer">
+      <a href="/contact" data-open-contact class="btn-pill btn-pill-magenta" style="width: 100%;">
+        <span>Bizimlə danışın</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       3. MAIN CONTENT CONTAINER (SPA VIEWS)
+       ======================================================================== -->
+  <main>
+
+    <!-- ----------------------------------------------------------------------
+         VIEW 1: ANA SƏHİFƏ (HOMEPAGE - EXACT 1:1 VIDEO REPLICA)
+         ---------------------------------------------------------------------- -->
+    <div data-page-view="home" class="page-view">
+      
+      <!-- ==================================================================
+           FRAME 00:00 - 00:06: DARK OPENING SCREEN WITH 3D INFLATABLE LETTER
+           ================================================================== -->
+      <section class="hero-dark-opening">
+        <div class="hero-dark-center-visual">
+          <img class="inflatable-3d-letter" src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt248c176a03654ddd/6a905376a594511f0962c3ec/Hs_Poster.jpg?auto=webp" alt="Brandfull 3D Visual" />
+        </div>
+
+        <div class="hero-dark-bottom-content">
+          <div style="z-index: 10;">
+            <h1 class="hero-hello-title">Salam<span class="color-magenta">.</span></h1>
+            <p class="hero-hello-subtitle" id="dynamic-greeting-text">Xoş gəlmisiniz. Biznesinizi gələcəyə daşımağa hazırıq.</p>
+          </div>
+          <div class="scroll-down-badge" onclick="document.getElementById('statementSection').scrollIntoView({behavior: 'smooth'})">
+            <span class="scroll-text-track">Scroll down &nbsp;&nbsp;&nbsp; Scroll down &nbsp;&nbsp;&nbsp; Scroll down &nbsp;&nbsp;&nbsp;</span>
+          </div>
+        </div>
+      </section>
+      <!-- ==================================================================
+           FRAME 00:07 - 00:09: KINETIC MORPHING STATEMENT
+           ================================================================== -->
+      <section class="kinetic-statement-section" id="statementSection">
+        <h2 class="kinetic-statement-text">
+          Əhəmiyyətli işlər yaradırıq 
+          <span class="word-scroller">
+            <span class="scrolling-words">
+              <span class="word">bizneslər üçün.</span>
+              <span class="word">brendlər üçün.</span>
+              <span class="word">insanlar üçün.</span>
+              <span class="word">komandalar üçün.</span>
+              <span class="word">bizneslər üçün.</span>
+            </span>
+          </span>
+        </h2>
+      </section>
+
+      <!-- ==================================================================
+           FRAME 00:10 - 00:15: SPLIT STATEMENT + QUICK LINKS
+           ================================================================== -->
+      <section class="hero-split-wrap">
+        <div class="hero-split-grid">
+          <div>
+            <h2 class="scroll-reveal-text" id="revealText">
+              <span>Hər</span> <span>kəs</span> <span>nəsə</span> <span>yarada</span> <span>bilər.</span>
+              <span>Lakin</span> <span class="color-magenta">mədəniyyət</span> <span class="color-magenta">və</span> <span class="color-magenta">bizneslə</span>
+              <span>rezonans</span> <span>doğuran</span> <span>təcrübələr</span> <span>yaratmaq</span> <span>çətin</span> <span>tərəfdir.</span>
+              <span>Bu,</span> <span>dizayn,</span> <span>texnologiya</span> <span>və</span> <span>insan</span> <span>zəkası</span> <span>tələb</span> <span>edir.</span>
+            </h2>
+          </div>
+
+          <nav class="hero-nav-list" aria-label="Əsas Keçidlər">
+            <a href="/work" data-route="work" class="hero-nav-item">
+              <span>İşlərimizə baxın.</span>
+              <span class="hero-nav-arrow">→</span>
+            </a>
+            <a href="/solutions" data-route="solutions" class="hero-nav-item">
+              <span>Həllərimizi kəşf edin.</span>
+              <span class="hero-nav-arrow">→</span>
+            </a>
+            <a href="/approach" data-route="approach" class="hero-nav-item">
+              <span>Yanaşmamıza baxın.</span>
+              <span class="hero-nav-arrow">→</span>
+            </a>
+            <a href="/ideas" data-route="ideas" class="hero-nav-item">
+              <span>Son fikirlər və xəbərlər.</span>
+              <span class="hero-nav-arrow">→</span>
+            </a>
+            <a href="/company" data-route="company" class="hero-nav-item">
+              <span>Brandfull haqqında.</span>
+              <span class="hero-nav-arrow">→</span>
+            </a>
+            <a href="/careers" data-route="careers" class="hero-nav-item">
+              <span>Bizə qoşulmaq istəyirsiniz?</span>
+              <span class="hero-nav-arrow">→</span>
+            </a>
+          </nav>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           FRAME 00:16 - 00:17: 8-BOX CLIENT LOGO GRID
+           ================================================================== -->
+      <section class="client-logo-grid">
+        <div class="client-logo-box"><img src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt3d44e42f259e0241/6a8ef31f8814aa40d789b067/mcdonalds.svg" alt="McDonald's" /></div>
+        <div class="client-logo-box"><img src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt60dcaa824a8f5b35/6a8ef33c1eb9e500972c605c/google.svg" alt="Google" /></div>
+        <div class="client-logo-box"><img src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt5128afbbed6a5c03/6a7f094cafd7dbe48552b5a9/nbc.svg" alt="NBC" /></div>
+        <div class="client-logo-box"><img src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt6b1a6ac451742f15/6a7f1dda1f7b5a8072791015/nike.svg" alt="Nike" /></div>
+        <div class="client-logo-box"><img src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/bltdb2e9e3ad8d787c0/6a8ebd20da6aea230c37b3d2/logo-big-green-egg_1_(1).svg" alt="Big Green Egg" /></div>
+        <div class="client-logo-box"><img src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt627a1e6b813a9b44/6a8ef348893681f9633dc03b/hublot.svg" alt="Hublot" /></div>
+        <div class="client-logo-box"><img src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/bltf37588a9bce18298/6a8ebf2949d429003da4f58f/Aon_Corporation_logo_1.svg" alt="Aon" /></div>
+        <div class="client-logo-box"><img src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt0e542406d535b67d/6a8ef32eecdaa75a2d0504a2/the-ring.svg" alt="The Ring" /></div>
+      </section>
+
+      <!-- ==================================================================
+           FRAME 00:18 - 00:26: "OUR WORK" DARK SHOWCASE
+           ================================================================== -->
+      <section class="horizontal-scroll-section" style="height: 300vh; background-color: transparent; color: #ffffff;">
+        <div class="sticky-container" style="position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; padding-top: calc(var(--header-height) + 2rem);">
+          <div style="padding: 0 var(--page-margin);">
+            <h2 class="showcase-dark-title" style="margin-bottom: 2rem; color:#ffffff;">İşlərimiz<span class="color-magenta">.</span></h2>
+          </div>
+          
+          <div class="showcase-scroller" style="display: flex; gap: 3rem; padding: 0 var(--page-margin); height: 100%; will-change: transform;">
+            
+            <!-- Featured Big Card 1 (NBCU) -->
+            <div class="showcase-feature-card" data-project-id="proj-1" style="flex-shrink: 0; width: 75vw; max-width: 900px; height: 60vh; margin-bottom: 0;">
+              <img class="showcase-card-img" src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt3a6e2eac48d33039/6a7f98b7c5d6fd3c6f95a049/pf-work-desktop.png?auto=webp" alt="NBCU" style="height: 100%;" />
+              <div class="showcase-card-caption">
+                <span class="text-tiny font-bold color-magenta uppercase">NBCU</span>
+                <h3 class="text-h2 font-bold" style="color:#ffffff;">Süni intellektlə maneəsiz kəşfiyyat və cədvəl sistemi.</h3>
+              </div>
+            </div>
+
+            <!-- Featured Big Card 2 (CoinTracker) -->
+            <div class="showcase-feature-card" data-project-id="proj-6" style="flex-shrink: 0; width: 75vw; max-width: 900px; height: 60vh; margin-bottom: 0;">
+              <img class="showcase-card-img" src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt0530344a794f8eb9/6a7e3366c2602380abb38815/darling-work-desktop.png?auto=webp" alt="CoinTracker" style="height: 100%;" />
+              <div class="showcase-card-caption">
+                <span class="text-tiny font-bold color-magenta uppercase">CoinTracker</span>
+                <h3 class="text-h2 font-bold" style="color:#ffffff;">Kripto vergi hesabatlığı, asanlaşdırıldı.</h3>
+              </div>
+            </div>
+
+            <!-- Featured Big Card 3 (Big Green Egg) -->
+            <div class="showcase-feature-card" data-project-id="proj-3" style="flex-shrink: 0; width: 75vw; max-width: 900px; height: 60vh; margin-bottom: 0;">
+              <img class="showcase-card-img" src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blta60cfcc49c2620ad/6a7afb67e35d026e9803369d/biggreenegg.png?auto=webp" alt="Big Green Egg" style="height: 100%;" />
+              <div class="showcase-card-caption">
+                <span class="text-tiny font-bold color-magenta uppercase">Big Green Egg</span>
+                <h3 class="text-h2 font-bold" style="color:#ffffff;">Lüks BBQ brendi üçün e-ticarət və kulinariya sintezi.</h3>
+              </div>
+            </div>
+
+            <!-- Featured Big Card 4 (Google) -->
+            <div class="showcase-feature-card" data-project-id="proj-2" style="flex-shrink: 0; width: 75vw; max-width: 900px; height: 60vh; margin-bottom: 0; margin-right: var(--page-margin);">
+              <img class="showcase-card-img" src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/bltcd4497cb29be25b1/6a7f96530da6733cca57cef3/CS_Thumb_Google_RightSide.png?auto=webp" alt="Google" style="height: 100%;" />
+              <div class="showcase-card-caption">
+                <span class="text-tiny font-bold color-magenta uppercase">Google</span>
+                <h3 class="text-h2 font-bold" style="color:#ffffff;">14+ illik tərəfdaşlıq və qlobal innovasiya platformaları.</h3>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           FRAME 00:27 - 00:31: "NEVER ONE AND DONE" ARC CARDS
+           ================================================================== -->
+      <section class="horizontal-scroll-section" style="height: 300vh; background-color: transparent; color: #ffffff;">
+        <div class="sticky-container" style="position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; justify-content: center; padding-top: var(--header-height);">
+          <div style="padding: 0 var(--page-margin); margin-bottom: 3rem; text-align: center;">
+            <span class="text-tiny font-bold color-magenta uppercase tracking-wide">Heç vaxt təsadüfi deyil.</span>
+            <h2 class="text-display-lg" style="color:#ffffff; margin: 0.5rem auto 1rem; max-width: 900px;">Müştərilərimizlə gələcəyi birgə qurur, təsirini ölçür və yenidən təkrarlayırıq.</h2>
+          </div>
+          
+          <div class="showcase-scroller" style="display: flex; gap: 4rem; padding: 4rem 50vw; width: max-content; will-change: transform; align-items: center;">
+            
+            <div class="arc-item-wrapper" style="flex-shrink: 0; width: 350px;">
+              <div class="tilted-card" data-project-id="proj-2" style="margin:0; transform: none;">
+                <img src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/bltd793a99dfb7d7474/6a84991ec8ced9b524052d0a/google-work-mobile.png?auto=webp" alt="Google" />
+                <div style="padding: 1.5rem 2rem;">
+                  <span class="text-tiny font-bold color-magenta">Google</span>
+                  <h3 class="text-h3 font-bold" style="color:#ffffff; margin-top:0.25rem;">Daimi yenilənmə və çoxşaxəli bizneslər.</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="arc-item-wrapper" style="flex-shrink: 0; width: 350px;">
+              <div class="tilted-card" data-project-id="proj-5" style="margin:0; transform: none;">
+                <img src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt2392791254379ac0/6a918d74d62e1190d2e36c40/AGV_vUdEM2i7xQuh-q4YkBq82pShRC1nWZAO1tYBKJaTLWRtqR9UE9VB-SavVWlh2J91JHEygxsi_yYFg_oafW4JfZZWSJCNtgXUY_QFpX9oxNhN7PTZdof3lX7DhVsQw3IpDtj4V_smDV5w43gn9kVPOw8_s2048.png?auto=webp" alt="Hublot" />
+                <div style="padding: 1.5rem 2rem;">
+                  <span class="text-tiny font-bold color-magenta">Hublot</span>
+                  <h3 class="text-h3 font-bold" style="color:#ffffff; margin-top:0.25rem;">Yeni rəqəmsal brend ifadəsi.</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="arc-item-wrapper" style="flex-shrink: 0; width: 350px;">
+              <div class="tilted-card" data-project-id="proj-4" style="margin:0; transform: none;">
+                <img src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/bltaebfd21236e11c77/6a7e342cbe33786fa4daea9a/mcd-work-desktop.png?auto=webp" alt="LINK" />
+                <div style="padding: 1.5rem 2rem;">
+                  <span class="text-tiny font-bold color-magenta">LINK</span>
+                  <h3 class="text-h3 font-bold" style="color:#ffffff; margin-top:0.25rem;">İntellektual rəqəmsal məhsullar paketi.</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="arc-item-wrapper" style="flex-shrink: 0; width: 350px;">
+              <div class="tilted-card" data-project-id="proj-7" style="margin:0; transform: none;">
+                <img src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/bltf3b23f7ffeb198ab/6a6752ae17e9ee7038e38af1/the-ring.webp" alt="The Ring" />
+                <div style="padding: 1.5rem 2rem;">
+                  <span class="text-tiny font-bold color-magenta">The Ring</span>
+                  <h3 class="text-h3 font-bold" style="color:#ffffff; margin-top:0.25rem;">Qlobal idman azarkeşlərini cəlb edən təcrübələr.</h3>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           FRAME 00:32 - 00:38: STACKING SOLUTIONS ACCORDION
+           ================================================================== -->
+      <section class="solutions-stack-section">
+        <h2 class="text-display-giant" style="color:#ffffff; margin-bottom: 1.5rem;">Həllərimiz<span class="color-magenta">.</span></h2>
+        <p class="text-body-lead" style="color:#a5a19d; margin-bottom: 4rem; max-width: 800px;">
+          AI Əsaslı. Sistemli. Ekspertlərin İdarəçiliyində. İdeyaları real təsirə çevirən qabiliyyətlər.
+        </p>
+
+        <!-- Stacking Card 01 -->
+        <div class="stack-card-item" onclick="App.navigateTo('solutions')">
+          <div>
+            <span class="stack-num">01</span>
+            <h3 class="stack-title">Brend strategiyası və dizayn.</h3>
+          </div>
+          <p class="stack-tagline">Mədəniyyətlə birgə addımlayan brendlər. →</p>
+        </div>
+
+        <!-- Stacking Card 02 -->
+        <div class="stack-card-item" onclick="App.navigateTo('solutions')">
+          <div>
+            <span class="stack-num">02</span>
+            <h3 class="stack-title">Marketinq və məzmun.</h3>
+          </div>
+          <p class="stack-tagline">Səs-küyü yaran dərin strateji anlayış və yaradıcılıq. →</p>
+        </div>
+
+        <!-- Stacking Card 03 -->
+        <div class="stack-card-item" onclick="App.navigateTo('solutions')">
+          <div>
+            <span class="stack-num">03</span>
+            <h3 class="stack-title">Məhsullar və platformalar.</h3>
+          </div>
+          <p class="stack-tagline">İdeyadan sürətli istifadəyə və qlobal tətbiqə. →</p>
+        </div>
+
+        <!-- Stacking Card 04 -->
+        <div class="stack-card-item" onclick="App.navigateTo('solutions')">
+          <div>
+            <span class="stack-num">04</span>
+            <h3 class="stack-title">Kompozisiya e-ticarəti.</h3>
+          </div>
+          <p class="stack-tagline">Gəliri artıran və miqyaslanan çevik ticarət infrastrukturu. →</p>
+        </div>
+
+        <!-- Stacking Card 05 -->
+        <div class="stack-card-item" onclick="App.navigateTo('solutions')">
+          <div>
+            <span class="stack-num">05</span>
+            <h3 class="stack-title">Müştəri təcrübəsi (CX).</h3>
+          </div>
+          <p class="stack-tagline">İnsanları brendlə bağlayan unudulmaz təcrübələr. →</p>
+        </div>
+
+        <!-- Stacking Card 06 -->
+        <div class="stack-card-item" onclick="App.navigateTo('solutions')">
+          <div>
+            <span class="stack-num">06</span>
+            <h3 class="stack-title">Süni intellekt aktivasiyası.</h3>
+          </div>
+          <p class="stack-tagline">Komandaların işləmə tərzini dəyişirik. →</p>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           FRAME 00:39 - 00:40: DUAL SPLIT CARDS (WORK & CONTACT)
+           ================================================================== -->
+      <section class="dual-action-grid">
+        <a href="/work" data-route="work" class="dual-action-card">
+          <span class="text-tiny font-bold color-magenta uppercase">İşlərimiz</span>
+          <h3 class="text-display-lg">Son işlərimizə baxın<span class="color-magenta">.</span></h3>
+          <span class="text-h3 font-bold">Kəşf edin →</span>
+        </a>
+
+        <a href="/contact" data-open-contact class="dual-action-card">
+          <span class="text-tiny font-bold color-magenta uppercase">Əlaqə</span>
+          <h3 class="text-display-lg">Danışmağa hazırsınız<span class="color-magenta">?</span></h3>
+          <span class="text-h3 font-bold">Bizimlə əlaqə →</span>
+        </a>
+      </section>
+
+    </div>
+
+    <!-- ----------------------------------------------------------------------
+         VIEW 8: ƏLAQƏ (CONTACT)
+         ---------------------------------------------------------------------- -->
+    <div data-page-view="contact" class="page-view" style="display: none;">
+      <section class="hero-split-wrap" style="padding-top: calc(var(--header-height) + 3rem);">
+        <span class="text-tiny font-bold color-magenta uppercase">Əlaqə</span>
+        <h1 class="text-display-giant" style="margin: 0.5rem 0 1.5rem;">Gələcəyi birlikdə quraq<span class="color-magenta">.</span></h1>
+        <p class="text-body-lead" style="max-width: 800px;">
+          İddialı bir layihəniz var? Birbaşa rəhbərliyimiz və tərəfdaşlıq komandamızla əlaqə saxlayın.
+        </p>
+      </section>
+
+      <section style="padding: 2rem var(--page-margin) 6rem;">
+        <div class="grid grid-cols-2 gap-12">
+          <div>
+            <h3 class="text-h2 font-bold" style="margin-bottom: 1.5rem;">Dialoqa Başlayın</h3>
+            <p class="text-body" style="margin-bottom: 2rem;">Müraciət formasını doldurun və ya aşağıdakı birbaşa əlaqə vasitələrimizlə bizə yazın.</p>
+            <div class="flex flex-col gap-4">
+              <div>
+                <p class="text-tiny uppercase font-bold color-magenta">Yeni Biznes və Tərəfdaşlıq</p>
+                <p class="text-h4 font-bold"><a href="mailto:business@brandfull.com">business@brandfull.com</a></p>
+              </div>
+              <div>
+                <p class="text-tiny uppercase font-bold color-magenta">Media və Mətbuat</p>
+                <p class="text-h4 font-bold"><a href="mailto:press@brandfull.com">press@brandfull.com</a></p>
+              </div>
+              <div>
+                <p class="text-tiny uppercase font-bold color-magenta">Baş Qərargah</p>
+                <p class="text-body">Nizami küç. 142, Landmark Plaza, Bakı</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <form id="contactInquiryForm" class="flex flex-col gap-6" novalidate>
+              <div>
+                <label for="contactName" class="text-tiny font-bold uppercase" style="display:block; margin-bottom:0.5rem; letter-spacing:0.05em;">Ad və Soyadınız *</label>
+                <input id="contactName" type="text" required class="w-full" style="padding:1rem; border-radius:0; border:none; border-bottom:1px solid var(--theme-border-strong); background:transparent; color:inherit; outline:none;" placeholder="Adınız" />
+              </div>
+              <div>
+                <label for="contactEmail" class="text-tiny font-bold uppercase" style="display:block; margin-bottom:0.5rem; letter-spacing:0.05em;">İş E-poçtunuz *</label>
+                <input id="contactEmail" type="email" required class="w-full" style="padding:1rem; border-radius:0; border:none; border-bottom:1px solid var(--theme-border-strong); background:transparent; color:inherit; outline:none;" placeholder="ad@sirket.com" />
+              </div>
+              <div>
+                <label for="contactCompany" class="text-tiny font-bold uppercase" style="display:block; margin-bottom:0.5rem; letter-spacing:0.05em;">Şirkət / Təşkilat</label>
+                <input id="contactCompany" type="text" class="w-full" style="padding:1rem; border-radius:0; border:none; border-bottom:1px solid var(--theme-border-strong); background:transparent; color:inherit; outline:none;" placeholder="Şirkətinizin adı" />
+              </div>
+              <div>
+                <label for="contactMessage" class="text-tiny font-bold uppercase" style="display:block; margin-bottom:0.5rem; letter-spacing:0.05em;">Sizə necə kömək edə bilərik?</label>
+                <textarea id="contactMessage" rows="4" required class="w-full" style="padding:1rem; border-radius:0; border:none; border-bottom:1px solid var(--theme-border-strong); background:transparent; color:inherit; outline:none; resize:none;" placeholder="Layihəniz, hədəfləriniz və ya vaxt çərçivəniz barədə qeyd edin..."></textarea>
+              </div>
+              <button type="submit" class="btn-pill btn-pill-magenta" style="margin-top: 1.5rem; align-self: flex-start;" data-btn-hover>
+                <span>Mesajı Göndər</span>
+              </button>
+            </form>
+            <div id="contactSuccessMsg" style="display: none; padding: 3rem 0;">
+              <h3 class="text-display-md font-bold color-magenta" style="margin-bottom: 1rem; line-height:1.1;">Müraciətiniz Qəbul Olundu!</h3>
+              <p class="text-body-lead">Təşəkkür edirik. Əməkdaşlıq komandamız 24 saat ərzində sizinlə əlaqə saxlayacaq.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ======================================================================
+         VIEW 2: İŞLƏRİMİZ (WORK PAGE) — Huge.com style
+         ====================================================================== -->
+    <div data-page-view="work" class="page-view" style="display:none;">
+      <!-- Hero header -->
+      <section style="padding: calc(var(--header-height) + 5rem) var(--page-margin) 3rem; background: var(--theme-bg); color: var(--theme-text-primary);">
+        <span class="text-tiny font-bold color-magenta uppercase tracking-wide" style="letter-spacing:0.12em;">Portfelimiz</span>
+        <h1 style="font-size: clamp(4rem, 12vw, 11rem); font-weight: 700; line-height: 0.85; letter-spacing: -0.05em; margin-top: 1rem; margin-bottom: 2rem;">İşlərimiz<span class="color-magenta">.</span></h1>
+        <p style="font-size: clamp(1.1rem, 2vw, 1.5rem); font-weight: 600; max-width: 700px; color: var(--theme-text-secondary); line-height: 1.4;">
+          Təcrübələri yenidən təsəvvür edən, nəticələri sürətləndirən və tapdığımızdan daha yaxşı qoyan işlər.
+        </p>
+
+        <!-- Category Filters -->
+        <div class="flex items-center gap-3 flex-wrap" style="margin-top: 3rem;">
+          <button class="btn-pill btn-pill-outline btn-pill-magenta is-active" data-work-filter="all">Bütün İşlər</button>
+          <button class="btn-pill btn-pill-outline" data-work-filter="AI">AI və Platformalar</button>
+          <button class="btn-pill btn-pill-outline" data-work-filter="Brend">Brend Strategiyası</button>
+          <button class="btn-pill btn-pill-outline" data-work-filter="Kompozisiya">E-ticarət</button>
+          <button class="btn-pill btn-pill-outline" data-work-filter="Müştəri Təcrübəsi">Müştəri Təcrübəsi</button>
+        </div>
+      </section>
+
+      <!-- Logo wall strip -->
+      <section style="padding: 0 var(--page-margin) 3rem; overflow: hidden;">
+        <div style="display: flex; gap: 3rem; align-items: center; opacity: 0.5; flex-wrap: wrap;">
+          <img src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt3d44e42f259e0241/6a8ef31f8814aa40d789b067/mcdonalds.svg" alt="McDonald's" style="height: 28px; object-fit: contain; filter: grayscale(1);" />
+          <img src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt60dcaa824a8f5b35/6a8ef33c1eb9e500972c605c/google.svg" alt="Google" style="height: 28px; object-fit: contain; filter: grayscale(1);" />
+          <img src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt5128afbbed6a5c03/6a7f094cafd7dbe48552b5a9/nbc.svg" alt="NBC" style="height: 28px; object-fit: contain; filter: grayscale(1);" />
+          <img src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt6b1a6ac451742f15/6a7f1dda1f7b5a8072791015/nike.svg" alt="Nike" style="height: 28px; object-fit: contain; filter: grayscale(1);" />
+          <img src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/bltf37588a9bce18298/6a8ebf2949d429003da4f58f/Aon_Corporation_logo_1.svg" alt="Aon" style="height: 28px; object-fit: contain; filter: grayscale(1);" />
+          <img src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt627a1e6b813a9b44/6a8ef348893681f9633dc03b/hublot.svg" alt="Hublot" style="height: 28px; object-fit: contain; filter: grayscale(1);" />
+          <img src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt0e542406d535b67d/6a8ef32eecdaa75a2d0504a2/the-ring.svg" alt="Ring" style="height: 28px; object-fit: contain; filter: grayscale(1);" />
+        </div>
+      </section>
+
+      <!-- Full-height case study cards stack -->
+      <section id="fullWorkGrid" style="display: flex; flex-direction: column; gap: 1.25rem; padding: 0 var(--page-margin) 6rem;">
+        <!-- Populated by app.js renderWorkGrid() -->
+      </section>
+    </div>
+
+
+    <!-- ======================================================================
+         VIEW 3: HƏLLƏR (SOLUTIONS PAGE)
+         ====================================================================== -->
+    <div data-page-view="solutions" class="page-view" style="display:none;">
+      <section style="padding: calc(var(--header-height) + 5rem) var(--page-margin) 8rem; background: var(--theme-bg); color: var(--theme-text-primary); min-height: 100vh;">
+        <span class="text-tiny font-bold color-magenta uppercase tracking-wide" style="letter-spacing:0.12em;">Xidmətlər</span>
+        <h1 class="text-display-giant font-bold" style="margin: 1rem 0 1.5rem; max-width: 900px;">Həllərimiz<span class="color-magenta">.</span></h1>
+        <p class="text-body-lead" style="max-width: 700px; margin-bottom: 5rem; color: var(--theme-text-secondary);">
+          AI Əsaslı. Sistemli. Ekspertlərin İdarəçiliyində. İdeyaları real təsirə çevirən qabiliyyətlər.
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2rem;" id="solutionsCardsGrid">
+          <!-- Populated by app.js renderSolutionsSection() -->
+        </div>
+      </section>
+    </div>
+
+    <!-- ======================================================================
+         VIEW 4: YANAŞMA (APPROACH PAGE)
+         ====================================================================== -->
+    <div data-page-view="approach" class="page-view" style="display:none;">
+      <section style="padding: calc(var(--header-height) + 5rem) var(--page-margin) 8rem; background: var(--theme-bg); color: var(--theme-text-primary); min-height: 100vh;">
+        <span class="text-tiny font-bold color-magenta uppercase tracking-wide" style="letter-spacing:0.12em;">Metodologiya</span>
+        <h1 class="text-display-giant font-bold" style="margin: 1rem 0 1.5rem; max-width: 900px;">Yanaşma<span class="color-magenta">.</span></h1>
+        <p class="text-body-lead" style="max-width: 700px; margin-bottom: 5rem; color: var(--theme-text-secondary);">
+          Biz düşünülmüş bir proses, güclü bir komanda və ölçülə bilən nəticələrə inanırıq. İşimiz — strategiyadan icraya qədər hər mərhələdə əhəmiyyət kəsb edir.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 0;">
+          <div class="grid grid-cols-2 gap-12" style="padding: 4rem 0; border-top: 1px solid var(--theme-border-subtle); align-items: center;">
+            <div>
+              <span class="text-tiny font-bold color-magenta" style="display:block; margin-bottom:1rem;">01 — Kəşfiyyat</span>
+              <h2 class="text-display-lg font-bold" style="margin-bottom:1.5rem;">Problemi dərindən anlayırıq.</h2>
+              <p class="text-body" style="color: var(--theme-text-secondary);">Layihəyə başlamazdan əvvəl auditoriya araşdırması, bazarın analizi, rəqib mühitinin qiymətləndirilməsi keçiririk. Bu mərhələ ən vacib mərhələdir.</p>
+            </div>
+            <div style="background: var(--theme-card-bg); border-radius: var(--radius-md); aspect-ratio: 4/3; display:flex; align-items:center; justify-content:center;">
+              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand-magenta)" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-12" style="padding: 4rem 0; border-top: 1px solid var(--theme-border-subtle); align-items: center;">
+            <div style="background: var(--theme-card-bg); border-radius: var(--radius-md); aspect-ratio: 4/3; display:flex; align-items:center; justify-content:center;">
+              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand-magenta)" stroke-width="1.5"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </div>
+            <div>
+              <span class="text-tiny font-bold color-magenta" style="display:block; margin-bottom:1rem;">02 — Strategiya</span>
+              <h2 class="text-display-lg font-bold" style="margin-bottom:1.5rem;">Vizyon yaradırıq.</h2>
+              <p class="text-body" style="color: var(--theme-text-secondary);">Faktlara əsaslanan dərin strategiyanı hazırlayaraq, brendin uzunmüddətli inkişafını planlaşdırırıq. Hər qərar data ilə dəstəklənir.</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-12" style="padding: 4rem 0; border-top: 1px solid var(--theme-border-subtle); align-items: center;">
+            <div>
+              <span class="text-tiny font-bold color-magenta" style="display:block; margin-bottom:1rem;">03 — Dizayn və İcra</span>
+              <h2 class="text-display-lg font-bold" style="margin-bottom:1.5rem;">Həyata keçiririk.</h2>
+              <p class="text-body" style="color: var(--theme-text-secondary);">Strategiyanı vizual ünsürlərə, məhsullara, rəqəmsal təcrübələrə çeviririk. Hər piksel diqqətlə düşünülmüşdür.</p>
+            </div>
+            <div style="background: var(--theme-card-bg); border-radius: var(--radius-md); aspect-ratio: 4/3; display:flex; align-items:center; justify-content:center;">
+              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand-magenta)" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-12" style="padding: 4rem 0; border-top: 1px solid var(--theme-border-subtle); border-bottom: 1px solid var(--theme-border-subtle); align-items: center;">
+            <div style="background: var(--theme-card-bg); border-radius: var(--radius-md); aspect-ratio: 4/3; display:flex; align-items:center; justify-content:center;">
+              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand-magenta)" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div>
+              <span class="text-tiny font-bold color-magenta" style="display:block; margin-bottom:1rem;">04 — Ölçmə</span>
+              <h2 class="text-display-lg font-bold" style="margin-bottom:1.5rem;">Nəticəni ölçürük.</h2>
+              <p class="text-body" style="color: var(--theme-text-secondary);">Hər layihənin təsirini izləyirik — KPI-lar, NPS, dönüşüm nisbətləri. Nəticə yaxşılaşdırmaq üçün daim optimallaşdırırıq.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ======================================================================
+         VIEW 5: HAQQIMIZDA (COMPANY PAGE)
+         ====================================================================== -->
+    <div data-page-view="company" class="page-view" style="display:none;">
+      <section style="padding: calc(var(--header-height) + 5rem) var(--page-margin) 8rem; background: var(--theme-bg); color: var(--theme-text-primary); min-height: 100vh;">
+        <span class="text-tiny font-bold color-magenta uppercase tracking-wide" style="letter-spacing:0.12em;">Biz kimik</span>
+        <h1 class="text-display-giant font-bold" style="margin: 1rem 0 1.5rem; max-width: 900px;">Haqqımızda<span class="color-magenta">.</span></h1>
+        <p class="text-body-lead" style="max-width: 800px; margin-bottom: 5rem; color: var(--theme-text-secondary);">
+          Brandfull — insanlar, bizneslər və gələcək üçün əhəmiyyətli işlər yaradan qlobal bir yaradıcılıq şirkətidir.
+        </p>
+
+        <div class="grid grid-cols-2 gap-8" style="margin-bottom: 6rem;">
+          <div style="background: #000000; color: #ffffff; border-radius: var(--radius-md); padding: 3rem;">
+            <span class="text-tiny font-bold color-magenta" style="display:block; margin-bottom:1rem; letter-spacing:.1em; text-transform:uppercase;">Missiyamız</span>
+            <h2 class="text-h2 font-bold" style="line-height:1.2; margin-bottom:1.5rem;">İnsanlar üçün əhəmiyyətli olan işlər yaratmaq.</h2>
+            <p style="color: rgba(255,255,255,0.7); line-height:1.7;">Hər layihədə insanın həyatına toxunan, brendlərə dəyər qatan və ölçülə bilən nəticə verən işlər yaradırıq.</p>
+          </div>
+          <div style="background: var(--color-brand-magenta); color: #ffffff; border-radius: var(--radius-md); padding: 3rem;">
+            <span class="text-tiny font-bold" style="display:block; margin-bottom:1rem; letter-spacing:.1em; text-transform:uppercase; opacity:.8;">Vizyonumuz</span>
+            <h2 class="text-h2 font-bold" style="line-height:1.2; margin-bottom:1.5rem;">Gələcəyin ən güvənilir yaradıcılıq tərəfdaşı olmaq.</h2>
+            <p style="color: rgba(255,255,255,0.85); line-height:1.7;">İnnovasiya, etika və estetikanın kəsişdiyi yerdə dünya brendlərinin rəqəmsal transformasiyasına liderlik etmək.</p>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-4 gap-8" style="margin-bottom: 6rem; padding: 4rem 0; border-top: 1px solid var(--theme-border-strong); border-bottom: 1px solid var(--theme-border-strong);">
+          <div>
+            <div class="text-display-giant font-bold color-magenta" style="font-size: clamp(3rem, 6vw, 5rem); line-height:1;">12+</div>
+            <p class="text-body-lead font-bold uppercase" style="margin-top:1rem; color:var(--theme-text-secondary); letter-spacing:0.05em;">İl Təcrübə</p>
+          </div>
+          <div>
+          <div>
+            <div class="text-display-giant font-bold color-magenta" style="font-size: clamp(3rem, 6vw, 5rem); line-height:1;">200+</div>
+            <p class="text-body-lead font-bold uppercase" style="margin-top:1rem; color:var(--theme-text-secondary); letter-spacing:0.05em;">Layihə</p>
+          </div>
+          <div>
+            <div class="text-display-giant font-bold color-magenta" style="font-size: clamp(3rem, 6vw, 5rem); line-height:1;">40+</div>
+            <p class="text-body-lead font-bold uppercase" style="margin-top:1rem; color:var(--theme-text-secondary); letter-spacing:0.05em;">Mütəxəssis</p>
+          </div>
+          <div>
+            <div class="text-display-giant font-bold color-magenta" style="font-size: clamp(3rem, 6vw, 5rem); line-height:1;">98%</div>
+            <p class="text-body-lead font-bold uppercase" style="margin-top:1rem; color:var(--theme-text-secondary); letter-spacing:0.05em;">Məmnuniyyət</p>
+          </div>
+        </div>
+
+        <!-- Team / Offices -->
+        <h2 class="text-display-lg font-bold" style="margin-bottom: 2rem;">Ofislərimiz<span class="color-magenta">.</span></h2>
+        <div id="officesGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem;">
+          <!-- Populated by app.js -->
+        </div>
+
+        <!-- Timeline -->
+        <h2 class="text-display-lg font-bold" style="margin: 6rem 0 2rem;">Tariximiz<span class="color-magenta">.</span></h2>
+        <div id="companyTimeline" style="display: flex; flex-direction: column; gap: 0;">
+          <!-- Populated by app.js -->
+        </div>
+      </section>
+    </div>
+
+    <!-- ======================================================================
+         VIEW 6: FİKİRLƏR (IDEAS / BLOG PAGE)
+         ====================================================================== -->
+    <div data-page-view="ideas" class="page-view" style="display:none;">
+      <section style="padding: calc(var(--header-height) + 5rem) var(--page-margin) 8rem; background: var(--theme-bg); color: var(--theme-text-primary); min-height: 100vh;">
+        <span class="text-tiny font-bold color-magenta uppercase tracking-wide" style="letter-spacing:0.12em;">Məqalələr</span>
+        <h1 class="text-display-giant font-bold" style="margin: 1rem 0 1.5rem; max-width: 900px;">Fikirlər<span class="color-magenta">.</span></h1>
+        <p class="text-body-lead" style="max-width: 700px; margin-bottom: 4rem; color: var(--theme-text-secondary);">
+          Brend, texnologiya, dizayn və gələcək haqqında düşüncələrimiz.
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 2rem;" id="fullIdeasGrid">
+          <!-- Populated by app.js renderIdeasGrid() -->
+        </div>
+      </section>
+    </div>
+
+    <!-- ======================================================================
+         VIEW 7: KARYERA (CAREERS PAGE)
+         ====================================================================== -->
+    <div data-page-view="careers" class="page-view" style="display:none;">
+      <section style="padding: calc(var(--header-height) + 5rem) var(--page-margin) 8rem; background: var(--theme-bg); color: var(--theme-text-primary); min-height: 100vh;">
+        <span class="text-tiny font-bold color-magenta uppercase tracking-wide" style="letter-spacing:0.12em;">Komandamıza qoşulun</span>
+        <h1 class="text-display-giant font-bold" style="margin: 1rem 0 1.5rem; max-width: 900px;">Karyera<span class="color-magenta">.</span></h1>
+        <p class="text-body-lead" style="max-width: 700px; margin-bottom: 5rem; color: var(--theme-text-secondary);">
+          Brandfull-da işləmək — böyük brendlər üçün dərin bir iş etmək deməkdir. Yaradıcı, cəsarətli və meraqlı insanları axtarırıq.
+        </p>
+
+        <!-- Open Roles -->
+        <div style="margin-bottom: 5rem;">
+          <h2 class="text-h2 font-bold" style="margin-bottom: 2rem;">Açıq Vəzifələr</h2>
+          <div id="jobsGrid" style="display: flex; flex-direction: column; gap: 1px; background: var(--theme-border-subtle);">
+            <!-- Populated dynamically via app.js -->
+          </div>
+        </div>
+
+        <!-- Why Brandfull -->
+        <h2 class="text-h2 font-bold" style="margin-bottom: 2rem;">Niyə Brandfull?</h2>
+        <div class="grid grid-cols-3 gap-8">
+          <div style="padding: 2.5rem; background: var(--theme-card-bg); border-radius: var(--radius-md); border: 1px solid var(--theme-card-border);">
+            <div style="font-size:2.5rem; margin-bottom:1rem;">✦</div>
+            <h3 class="text-h3 font-bold" style="margin-bottom:.75rem; color:var(--color-brand-magenta);">Dərin İş</h3>
+            <p class="text-body-sm" style="color:var(--theme-text-secondary);">Dünya brendlərinin ən vacib problemlərini həll edirsiniz. Hər layihə portfelinizə dəyər qatır.</p>
+          </div>
+          <div style="padding: 2.5rem; background: var(--theme-card-bg); border-radius: var(--radius-md); border: 1px solid var(--theme-card-border);">
+            <div style="font-size:2.5rem; margin-bottom:1rem;">◆</div>
+            <h3 class="text-h3 font-bold" style="margin-bottom:.75rem; color:var(--color-brand-magenta);">Çevik Mühit</h3>
+            <p class="text-body-sm" style="color:var(--theme-text-secondary);">Uzaqdan iş imkanı, çevik iş saatları, autonomiya. Ən yaxşı işinizi ən yaxşı mühitdə görün.</p>
+          </div>
+          <div style="padding: 2.5rem; background: var(--theme-card-bg); border-radius: var(--radius-md); border: 1px solid var(--theme-card-border);">
+            <div style="font-size:2.5rem; margin-bottom:1rem;">◈</div>
+            <h3 class="text-h3 font-bold" style="margin-bottom:.75rem; color:var(--color-brand-magenta);">İnkişaf Dəstəyi</h3>
+            <p class="text-body-sm" style="color:var(--theme-text-secondary);">Konfrans, kurs, sertifikat xərcləri şirkət tərəfindən ödənilir. Öyrənmək bizim mədəniyyətimizdir.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- ========================================================================
+       4. GLOBAL FOOTER ("Sağolun." / "Bye." - FRAME 00:41 - 00:44)
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="page-container">
+      <h2 class="footer-done-title">Bye<span class="color-magenta">.</span></h2>
+
+      <div class="footer-grid">
+        <!-- Primary Sitemaps -->
+        <div class="footer-links-col">
+          <a href="#work" data-route="work" class="footer-link-main">Work.</a>
+          <a href="#solutions" data-route="solutions" class="footer-link-main">Solutions.</a>
+          <a href="#approach" data-route="approach" class="footer-link-main">Approach.</a>
+          <a href="#company" data-route="company" class="footer-link-main">Company.</a>
+          <a href="#ideas" data-route="ideas" class="footer-link-main">Ideas.</a>
+          <a href="#careers" data-route="careers" class="footer-link-main">Careers.</a>
+        </div>
+
+        <!-- Secondary & Social Links -->
+        <div class="footer-links-col" id="footerSocialLinks">
+          <a href="#careers" data-route="careers" class="footer-link-sub">Join us.</a>
+          <a href="/contact" data-open-contact class="footer-link-sub">Contact us.</a>
+        </div>
+
+        <!-- Newsletter Box -->
+        <div class="newsletter-box">
+          <p class="newsletter-title">Get Huge in your DMs.</p>
+          <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="Work email" required />
+            <button type="submit" class="newsletter-submit-btn" aria-label="Bülletenə abunə ol">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </form>
+          <p class="text-tiny" style="color: #ffffff; font-weight: 500;">
+            We respect your inbox. <a href="/privacy" style="text-decoration: underline; color:#ffffff;">See our privacy policy.</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p id="footerCopyrightText">Copyright © 2026 Brandfull. All rights reserved.</p>
+        <div class="flex items-center gap-6">
+          <a href="/privacy" style="color: #ffffff;">Privacy.</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <!-- Cookie Consent Floating Banner -->
+  <div class="cookie-banner-wrap" id="cookieConsentBanner" aria-live="polite" role="region" aria-label="Kuki Razılığı">
+    <div class="cookie-banner-content">
+      <div class="cookie-brand-logo">Brandfull</div>
+      <p class="cookie-banner-text">
+        "Bütün Kukiləri Qəbul Et" düyməsinə klikləməklə, sayt naviqasiyasını təkmilləşdirmək, saytdan istifadəni təhlil etmək və marketinq fəaliyyətlərimizə dəstək olmaq məqsədilə kukilərin cihazınızda saxlanmasına razılıq verirsiniz.
+      </p>
+    </div>
+    <div class="cookie-banner-actions">
+      <button class="btn-cookie-outline" id="btnCookieSettings">Kuki Tənzimləmələri</button>
+      <button class="btn-cookie-solid" id="btnCookieReject">Hamısını Rədd Et</button>
+      <button class="btn-cookie-solid" id="btnCookieAccept">Bütün Kukiləri Qəbul Et</button>
+      <button class="btn-cookie-close" id="btnCookieClose" aria-label="Bağla">✕</button>
+    </div>
+  </div>
+
+  <!-- Cookie Settings Modal -->
+  <div class="modal-backdrop" id="cookieSettingsModal">
+    <div class="modal-content" style="background:var(--theme-bg); color:var(--theme-text-primary); padding:3rem; max-width:640px;">
+      <button class="modal-close-btn" id="closeCookieSettingsBtn" aria-label="Bağla" style="top:1.5rem; right:1.5rem; color:var(--theme-text-primary); background:var(--theme-pill-bg);">✕</button>
+      <h3 class="text-h2 font-bold" style="margin-bottom:0.75rem;">Kuki Tərcihləri</h3>
+      <p class="text-body" style="margin-bottom:2rem;">Saytımızın düzgün və rahat işləməsi üçün hansı kuki kateqoriyalarına icazə verdiyinizi seçə bilərsiniz.</p>
+
+      <div class="flex flex-col gap-4" style="margin-bottom:2rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:1.25rem; background:var(--theme-card-bg); border-radius:var(--radius-sm); border:1px solid var(--theme-border-subtle);">
+          <div>
+            <strong style="font-size:1.05rem;">Zəruri Kukilər</strong>
+            <p class="text-body-sm">Saytın əsas funksiyaları və təhlükəsizlik üçün mütləqdir.</p>
+          </div>
+          <span class="text-tiny font-bold color-magenta">Həmişə Aktiv</span>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:1.25rem; background:var(--theme-card-bg); border-radius:var(--radius-sm); border:1px solid var(--theme-border-subtle);">
+          <div>
+            <strong style="font-size:1.05rem;">Analitika və Performans</strong>
+            <p class="text-body-sm">Ziyarətçilərin saytdan necə istifadə etdiyini anlamağa kömək edir.</p>
+          </div>
+          <input type="checkbox" checked style="width:1.5rem; height:1.5rem; accent-color:var(--color-brand-magenta);" />
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:1.25rem; background:var(--theme-card-bg); border-radius:var(--radius-sm); border:1px solid var(--theme-border-subtle);">
+          <div>
+            <strong style="font-size:1.05rem;">Fərdiləşdirmə və Marketinq</strong>
+            <p class="text-body-sm">Sizə uyğun təklif və məzmun göstərilməsini təmin edir.</p>
+          </div>
+          <input type="checkbox" checked style="width:1.5rem; height:1.5rem; accent-color:var(--color-brand-magenta);" />
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:1rem;">
+        <button class="btn-pill btn-pill-outline" id="btnSaveCookieSettings">Seçimləri Yadda Saxla</button>
+        <button class="btn-pill btn-pill-magenta" id="btnAcceptAllInModal">Hamısını Qəbul Et</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Showreel Lightbox Video Modal -->
+  <div class="modal-backdrop" id="videoModal">
+    <div class="modal-content">
+      <button class="modal-close-btn" id="closeVideoModalBtn" aria-label="Video Şounu Bağla">✕</button>
+      <video id="modalVideo" controls style="width:100%; aspect-ratio:16/9; display:block;">
+        <source src="Showreel.mp4" type="video/mp4" />
+      </video>
+    </div>
+  </div>
+
+  <!-- Job Application Modal -->
+  <div class="modal-backdrop" id="jobApplicationModal">
+    <div class="modal-content" style="background:var(--theme-bg); color:var(--theme-text-primary); padding:3rem; max-width:580px; max-height:85vh; overflow-y:auto;">
+      <button class="modal-close-btn" id="closeJobApplicationBtn" aria-label="Bağla" style="top:1.5rem; right:1.5rem; color:var(--theme-text-primary); background:var(--theme-pill-bg);">✕</button>
+
+      <span class="text-tiny font-bold color-magenta uppercase" style="letter-spacing:0.1em;">Karyera Müraciəti</span>
+      <h3 class="text-h2 font-bold" style="margin: 0.5rem 0 0.25rem;" id="jobApplicationTitle">Vəzifə Adı</h3>
+      <p class="text-body-sm" style="color:var(--theme-text-muted); margin-bottom:2rem;" id="jobApplicationMeta">Tam Ştat · Bakı</p>
+
+      <form id="jobApplicationForm" class="flex flex-col gap-4" novalidate>
+        <input type="hidden" id="jobAppJobId" value="" />
+        <div>
+          <label for="jobAppName" class="text-tiny font-bold" style="display:block; margin-bottom:0.4rem;">AD VƏ SOYADINIZ *</label>
+          <input type="text" id="jobAppName" required class="w-full" style="padding:0.75rem; border-radius:var(--radius-sm); border:1px solid var(--theme-border-subtle); background:transparent; color:inherit;" placeholder="Adınız Soyadınız" />
+        </div>
+        <div>
+          <label for="jobAppEmail" class="text-tiny font-bold" style="display:block; margin-bottom:0.4rem;">E-POÇT *</label>
+          <input type="email" id="jobAppEmail" required class="w-full" style="padding:0.75rem; border-radius:var(--radius-sm); border:1px solid var(--theme-border-subtle); background:transparent; color:inherit;" placeholder="ad@domain.com" />
+        </div>
+        <div>
+          <label for="jobAppPhone" class="text-tiny font-bold" style="display:block; margin-bottom:0.4rem;">TELEFON</label>
+          <input type="tel" id="jobAppPhone" class="w-full" style="padding:0.75rem; border-radius:var(--radius-sm); border:1px solid var(--theme-border-subtle); background:transparent; color:inherit;" placeholder="+994 XX XXX XX XX" />
+        </div>
+        <div>
+          <label for="jobAppMessage" class="text-tiny font-bold" style="display:block; margin-bottom:0.4rem;">MESAJINIZ</label>
+          <textarea id="jobAppMessage" rows="3" class="w-full" style="padding:0.75rem; border-radius:var(--radius-sm); border:1px solid var(--theme-border-subtle); background:transparent; color:inherit;" placeholder="Təcrübəniz, bacarıqlarınız və motivasiyanız barədə qısa məlumat..."></textarea>
+        </div>
+        <div>
+          <label for="jobAppCv" class="text-tiny font-bold" style="display:block; margin-bottom:0.4rem;">CV FAYLI (PDF, DOC, DOCX - Maks. 10MB) *</label>
+          <input type="file" id="jobAppCv" accept=".pdf,.doc,.docx" required class="w-full" style="padding:0.75rem; border-radius:var(--radius-sm); border:1px solid var(--theme-border-subtle); background:transparent; color:inherit;" />
+        </div>
+        <div id="jobAppError" style="display:none; padding:0.75rem; border-radius:var(--radius-sm); background:rgba(220,38,38,0.1); border:1px solid rgba(220,38,38,0.3); color:#dc2626;">
+          <p class="text-body-sm font-bold">Xəta baş verdi. Zəhmət olmasa yenidən cəhd edin.</p>
+        </div>
+        <button type="submit" class="btn-pill btn-pill-magenta" data-btn-hover style="margin-top: 0.5rem;">
+          <span>Müraciəti Göndər</span>
+        </button>
+      </form>
+
+      <div id="jobAppSuccess" style="display:none; padding:2rem 0; text-align:center;">
+        <h3 class="text-h3 font-bold color-magenta" style="margin-bottom:0.5rem;">Müraciətiniz Qeydə Alındı!</h3>
+        <p class="text-body">Təşəkkür edirik. İnsan Resursları komandamız müraciətinizi nəzərdən keçirəcək və sizinlə əlaqə saxlayacaq.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project Detail Drawer -->
+  <div class="drawer-backdrop" id="projectDrawerBackdrop"></div>
+  <aside class="project-drawer" id="projectDrawer" aria-label="Layihə Təfərrüatları">
+    <button class="modal-close-btn" id="closeProjectDrawerBtn" aria-label="Layihə Panelini Bağla" style="top:1.5rem; right:1.5rem; color:var(--theme-text-primary); background:var(--theme-pill-bg);">✕</button>
+    <div id="projectDrawerContent">
+      <!-- Populated dynamically via app.js -->
+    </div>
+  </aside>
+
+  <!-- Article Reader Modal -->
+  <div class="modal-backdrop" id="articleReaderModal">
+    <div class="modal-content" style="background:var(--theme-bg); color:var(--theme-text-primary); padding:3rem; max-height:85vh; overflow-y:auto;">
+      <button class="modal-close-btn" id="closeArticleReaderBtn" aria-label="Bağla" style="top:1.5rem; right:1.5rem; color:var(--theme-text-primary); background:var(--theme-pill-bg);">✕</button>
+      <div id="articleReaderContent">
+        <!-- Populated dynamically via app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Legal & Privacy Modal -->
+  <div class="modal-backdrop" id="legalModal">
+    <div class="modal-content" style="background:var(--theme-bg); color:var(--theme-text-primary); padding:3rem; max-height:85vh; overflow-y:auto;">
+      <button class="modal-close-btn" id="closeLegalModalBtn" aria-label="Bağla" style="top:1.5rem; right:1.5rem; color:var(--theme-text-primary); background:var(--theme-pill-bg);">✕</button>
+      <h2 class="text-display-lg" style="margin-bottom:1rem;">Məxfilik və Şərtlər</h2>
+      <p class="text-body" style="margin-bottom:1rem;">Brandfull olaraq istifadəçilərimizin və tərəfdaşlarımızın fərdi məlumatlarının qorunmasına ən yüksək səviyyədə diqqət yetiririk.</p>
+      <p class="text-body">Müəllif hüquqları və rəqəmsal aktivlər Brandfull şirkətinə məxsusdur.</p>
+    </div>
+  </div>
+
+  <!-- Interactive Contact Drawer -->
+  <div class="drawer-backdrop" id="contactDrawerBackdrop"></div>
+  <aside class="project-drawer" id="contactDrawer" aria-label="Əlaqə Paneli">
+    <button class="modal-close-btn" id="closeContactDrawerBtn" aria-label="Əlaqə Panelini Bağla" style="top:1.5rem; right:1.5rem; color:var(--theme-text-primary); background:var(--theme-pill-bg);">✕</button>
+    <div class="flex flex-col gap-6" style="padding-top: 1rem;">
+      <span class="text-tiny font-bold color-magenta uppercase">Bizimlə Danışın</span>
+      <h2 class="text-display-lg">Növbəti layihəniz barədə bizə məlumat verin.</h2>
+      <p class="text-body">İstər süni intellekt əsaslı məhsul innovasiyası, istər tam brend transformasiyası, istərsə də kompozisiya e-ticarətinin genişləndirilməsi olsun — biz hazırıq.</p>
+
+      <form id="drawerInquiryForm" class="flex flex-col gap-4">
+        <div>
+          <label class="text-tiny font-bold" style="display:block; margin-bottom:0.4rem;">AD VƏ SOYAD *</label>
+          <input type="text" required class="w-full" style="padding:0.75rem; border-radius:var(--radius-sm); border:1px solid var(--theme-border-subtle); background:transparent; color:inherit;" placeholder="Adınız" />
+        </div>
+        <div>
+          <label class="text-tiny font-bold" style="display:block; margin-bottom:0.4rem;">İŞ E-POÇTU *</label>
+          <input type="email" required class="w-full" style="padding:0.75rem; border-radius:var(--radius-sm); border:1px solid var(--theme-border-subtle); background:transparent; color:inherit;" placeholder="ad@sirket.com" />
+        </div>
+        <div>
+          <label class="text-tiny font-bold" style="display:block; margin-bottom:0.4rem;">XİDMƏT SAHƏSİ</label>
+          <select class="w-full" style="padding:0.75rem; border-radius:var(--radius-sm); border:1px solid var(--theme-border-subtle); background:var(--theme-card-bg); color:inherit;">
+            <option>Süni İntellekt və Platformalar</option>
+            <option>Brend Strategiyası və Dizayn</option>
+            <option>Marketinq və Kontent</option>
+            <option>Kompozisiya E-ticarəti</option>
+            <option>Müştəri Təcrübəsi (CX)</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-tiny font-bold" style="display:block; margin-bottom:0.4rem;">MESAJINIZ</label>
+          <textarea rows="3" class="w-full" style="padding:0.75rem; border-radius:var(--radius-sm); border:1px solid var(--theme-border-subtle); background:transparent; color:inherit;" placeholder="Qurmaq istədiyiniz layihə barədə qısa məlumat verin..."></textarea>
+        </div>
+        <button type="submit" class="btn-pill btn-pill-magenta" data-btn-hover style="margin-top: 0.5rem;">
+          <span>Müraciəti Göndər</span>
+        </button>
+      </form>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       6. SCRIPTS
+       ======================================================================== -->
+  <script src="js/data.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/media-player.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- ========================================================================
+       AI CHAT ASSISTANT WIDGET
+       ======================================================================== -->
+  <button id="aiChatToggle" class="ai-chat-toggle" aria-label="Open AI Assistant">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+    <span style="font-weight:600; font-family:'Plus Jakarta Sans',sans-serif;">Köməkçi</span>
+  </button>
+
+  <div id="aiChatWindow" class="ai-chat-window">
+    <div class="ai-chat-header">
+      <div>
+        <h3 style="font-size: 1.1rem; font-weight: 700; margin: 0; display:flex; align-items:center; gap:0.5rem;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          Brandfull Assistant
+        </h3>
+        <p style="font-size: 0.8rem; margin: 0; opacity: 0.8;">Süni İntellekt Köməkçisi</p>
+      </div>
+      <button id="aiChatClose" style="background:transparent; border:none; color:white; font-size:1.5rem; cursor:pointer;">&times;</button>
+    </div>
+    
+    <div id="aiChatMessages" class="ai-chat-messages">
+      <div class="ai-message ai-message-system">
+        Salam. Mən Brandfull Assistantəm. Xidmətlərimiz, layihələrimiz və əməkdaşlıq imkanlarımız haqqında suallarınızı cavablandıra bilərəm.
+      </div>
+    </div>
+    
+    <div class="ai-chat-input-area">
+      <input type="text" id="aiChatInput" placeholder="Sualınızı yazın..." />
+      <button id="aiChatSend" aria-label="Send Message">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+      </button>
+    </div>
+  </div>
+
+  <style>
+    /* AI Chat CSS */
+    .ai-chat-toggle {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--color-brand-magenta);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(255, 0, 144, 0.4);
+      z-index: 9999;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .ai-chat-toggle:hover {
+      transform: translateY(-5px);
+    }
+    
+    .ai-chat-window {
+      position: fixed;
+      bottom: 6rem;
+      right: 2rem;
+      width: 360px;
+      max-width: calc(100vw - 4rem);
+      height: 500px;
+      max-height: calc(100vh - 8rem);
+      background: var(--theme-bg);
+      border: 1px solid var(--theme-border-strong);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      z-index: 10000;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(20px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+    }
+    .ai-chat-window.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .ai-chat-header {
+      background: #000;
+      color: #fff;
+      padding: 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--color-brand-magenta);
+    }
+
+    .ai-chat-messages {
+      flex: 1;
+      padding: 1.25rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      background: var(--theme-bg);
+    }
+
+    .ai-message {
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      max-width: 85%;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      word-wrap: break-word;
+    }
+    .ai-message-system {
+      background: var(--theme-card-bg);
+      color: var(--theme-text-primary);
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+      border: 1px solid var(--theme-border-subtle);
+    }
+    .ai-message-user {
+      background: var(--color-brand-magenta);
+      color: #fff;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+
+    .ai-chat-input-area {
+      padding: 1rem;
+      border-top: 1px solid var(--theme-border-subtle);
+      display: flex;
+      gap: 0.5rem;
+      background: var(--theme-card-bg);
+    }
+    #aiChatInput {
+      flex: 1;
+      background: var(--theme-bg);
+      border: 1px solid var(--theme-border-strong);
+      color: var(--theme-text-primary);
+      padding: 0.75rem 1rem;
+      border-radius: 50px;
+      outline: none;
+      font-family: inherit;
+    }
+    #aiChatInput:focus {
+      border-color: var(--color-brand-magenta);
+    }
+    #aiChatSend {
+      background: var(--color-brand-magenta);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    
+    .ai-lead-card {
+      background: var(--theme-card-bg);
+      border: 1px solid var(--color-brand-magenta);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+    }
+    .ai-lead-btn {
+      background: var(--color-brand-magenta);
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      width: 100%;
+      margin-top: 0.75rem;
+    }
+    .ai-typing {
+      font-size: 0.85rem;
+      color: var(--theme-text-secondary);
+      align-self: flex-start;
+      display: none;
+      margin-top: -0.5rem;
+    }
+
+    @media (max-width: 600px) {
+      .ai-chat-window {
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        max-width: 100%;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+      }
+      .ai-chat-toggle {
+        bottom: 1.5rem;
+        right: 1.5rem;
+      }
+    }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById('aiChatToggle');
+      const windowEl = document.getElementById('aiChatWindow');
+      const close = document.getElementById('aiChatClose');
+      const input = document.getElementById('aiChatInput');
+      const sendBtn = document.getElementById('aiChatSend');
+      const messagesContainer = document.getElementById('aiChatMessages');
+      
+      let conversation = [];
+      let isWaiting = false;
+      let lastExtractedLead = null;
+
+      toggle.addEventListener('click', () => {
+        windowEl.classList.add('active');
+        toggle.style.display = 'none';
+        input.focus();
+      });
+
+      close.addEventListener('click', () => {
+        windowEl.classList.remove('active');
+        toggle.style.display = 'flex';
+      });
+      
+      const appendMessage = (text, type) => {
+        const div = document.createElement('div');
+        div.className = `ai-message ai-message-${type}`;
+        div.textContent = text;
+        messagesContainer.appendChild(div);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      };
+      
+      const appendTyping = () => {
+        const div = document.createElement('div');
+        div.id = 'aiTypingIndicator';
+        div.className = 'ai-typing';
+        div.textContent = 'Yazır...';
+        div.style.display = 'block';
+        messagesContainer.appendChild(div);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      };
+      
+      const removeTyping = () => {
+        const el = document.getElementById('aiTypingIndicator');
+        if (el) el.remove();
+      };
+
+      const appendLeadCard = (leadData) => {
+        const card = document.createElement('div');
+        card.className = 'ai-lead-card';
+        card.innerHTML = `
+          <div style="font-weight:bold; margin-bottom:0.5rem;">Məlumatlarınız komandamıza göndərilsin?</div>
+          <div style="opacity:0.8;">
+            Ad: ${leadData.name || '-'}<br>
+            Email: ${leadData.email || '-'}<br>
+            Şirkət: ${leadData.company || '-'}<br>
+            İstək: ${leadData.message || '-'}
+          </div>
+          <button class="ai-lead-btn" id="aiSubmitLeadBtn">Bəli, Göndər</button>
+        `;
+        messagesContainer.appendChild(card);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        
+        document.getElementById('aiSubmitLeadBtn').addEventListener('click', async () => {
+          const btn = document.getElementById('aiSubmitLeadBtn');
+          btn.disabled = true;
+          btn.textContent = 'Göndərilir...';
+          
+          try {
+            const res = await fetch(`${API_BASE}/inquiries`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                name: leadData.name || 'AI Lead',
+                email: leadData.email,
+                phone: leadData.phone || '',
+                company: leadData.company || '',
+                service: 'AI Assistant',
+                message: leadData.message || 'Ümumi müraciət'
+              })
+            });
+            const data = await res.json();
+            if (data.success) {
+              card.innerHTML = `<div style="color:#10b981; font-weight:bold;">Təşəkkür edirik! Müraciətiniz uğurla göndərildi. Komandamız sizinlə tezliklə əlaqə saxlayacaq.</div>`;
+            } else {
+              card.innerHTML = `<div style="color:#ef4444; font-weight:bold;">Xəta: ${data.error?.message || 'Gözlənilməz xəta'}</div>`;
+            }
+          } catch (err) {
+            card.innerHTML = `<div style="color:#ef4444; font-weight:bold;">Şəbəkə xətası baş verdi.</div>`;
+          }
+        });
+      };
+
+      const sendMessage = async () => {
+        const text = input.value.trim();
+        if (!text || isWaiting) return;
+        
+        input.value = '';
+        appendMessage(text, 'user');
+        
+        appendTyping();
+        isWaiting = true;
+        
+        try {
+          const res = await fetch(`${API_BASE}/ai/chat`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: text, conversation })
+          });
+          
+          const data = await res.json();
+          removeTyping();
+          isWaiting = false;
+          
+          if (data.success && data.data) {
+            appendMessage(data.data.message, 'system');
+            
+            // Push to conversation
+            conversation.push({ role: 'user', content: text });
+            conversation.push({ role: 'assistant', content: data.data.message });
+            
+            // Keep last 10
+            if (conversation.length > 10) {
+              conversation = conversation.slice(conversation.length - 10);
+            }
+            
+            if (data.data.leadReady && data.data.extractedLead && data.data.extractedLead.email) {
+              appendLeadCard(data.data.extractedLead);
+            }
+          } else {
+            appendMessage(data.error?.message || "Sistem xətası baş verdi.", 'system');
+          }
+        } catch (err) {
+          removeTyping();
+          isWaiting = false;
+          appendMessage("Şəbəkə xətası baş verdi. Lütfən birazdan yenidən cəhd edin.", 'system');
+        }
+      };
+
+      sendBtn.addEventListener('click', sendMessage);
+      input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendMessage();
+      });
+    });
+  </script>
+
+</body>
+</html>

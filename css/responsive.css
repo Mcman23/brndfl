@@ -1,0 +1,197 @@
+/* ==========================================================================
+   HUGE INC. RESPONSIVE & MOBILE MENU STYLESHEET
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. MOBILE NAVIGATION DRAWER
+   -------------------------------------------------------------------------- */
+.mobile-nav-toggle {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.4rem;
+  border-radius: var(--radius-full);
+  background-color: var(--theme-text-primary);
+  color: var(--theme-text-inverse);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 55;
+  transition: transform var(--transition-fast);
+}
+
+.mobile-nav-toggle:active {
+  transform: scale(0.95);
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--theme-bg);
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--page-margin);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition: opacity var(--transition-normal), transform var(--transition-normal);
+}
+
+.mobile-menu-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.mobile-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+}
+
+.mobile-menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem 0;
+}
+
+.mobile-menu-link {
+  font-size: clamp(2rem, 6.5vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--theme-text-primary);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.mobile-menu-link:hover, .mobile-menu-link.is-active {
+  color: var(--color-brand-magenta);
+  transform: translateX(8px);
+}
+
+.mobile-menu-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.mobile-menu-slogan {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-brand-magenta);
+}
+
+/* --------------------------------------------------------------------------
+   2. MEDIA QUERIES & BREAKPOINTS
+   -------------------------------------------------------------------------- */
+
+/* Large Tablets & Below (<= 1024px) */
+@media (max-width: 1024px) {
+  .primary-nav {
+    display: none;
+  }
+
+  .mobile-nav-toggle {
+    display: inline-flex;
+  }
+
+  .work-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .work-card.span-12,
+  .work-card.span-8,
+  .work-card.span-7,
+  .work-card.span-6,
+  .work-card.span-5,
+  .work-card.span-4 {
+    grid-column: span 1;
+  }
+
+  .solution-item {
+    grid-template-columns: auto 1fr;
+    gap: 1.25rem;
+  }
+
+  .solution-desc {
+    grid-column: span 2;
+  }
+
+  .solution-arrow {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .approach-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .stats-strip {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ideas-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  /* Responsive Grid Utilities for Table/Tablet sizes */
+  .grid-cols-3, .grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Mobile Devices (<= 768px) */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 4rem;
+  }
+
+  .hero-section {
+    padding-top: calc(var(--header-height) + 1.5rem);
+  }
+
+  .work-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ideas-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-strip {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .showreel-container {
+    aspect-ratio: 4 / 3;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  /* Responsive Grid Utilities for Mobile size */
+  .grid-cols-2, .grid-cols-3, .grid-cols-4 {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}

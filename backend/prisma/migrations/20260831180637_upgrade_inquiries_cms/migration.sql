@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "Inquiry" ADD COLUMN     "assignedTo" TEXT,
+ADD COLUMN     "internalNote" TEXT,
+ADD COLUMN     "phone" TEXT,
+ADD COLUMN     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ALTER COLUMN "status" SET DEFAULT 'NEW';

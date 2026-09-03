@@ -1,0 +1,214 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  // Vercel serverless muhiti ucun (AWS Lambda / RHEL) elave edildi.
+  // Bu olmadan: "Prisma Client could not locate the Query Engine" xetasi.
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+model Project {
+  id          String   @id
+  client      String
+  title       String
+  slug        String   @unique
+  category    String
+  tag         String
+  image       String
+  clientLogo  String   @default("")
+  span        String   @default("span-6")
+  featured    Boolean  @default(false)
+  year        String
+  headline    String   @default("")
+  overview    String   @db.Text
+  challenge   String   @db.Text
+  solution    String   @db.Text
+  impact      Json     // Array of { metric: string, label: string }
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // New CMS fields
+  clientId    String?
+  clientRel   Client?  @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  gallery     Json     @default("[]")
+  metaTitle   String   @default("")
+  metaDesc    String   @default("")
+  order       Int      @default(0)
+  published   Boolean  @default(false)
+}
+
+model Client {
+  id          String    @id @default(uuid())
+  name        String
+  slug        String    @unique
+  logoUrl     String?
+  websiteUrl  String    @default("")
+  description String    @default("") @db.Text
+  active      Boolean   @default(true)
+  order       Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  projects    Project[]
+}
+
+model Media {
+  id           String   @id @default(uuid())
+  filename     String
+  originalName String
+  mimeType     String
+  size         Int
+  url          String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+
+model Solution {
+  id           String   @id
+  num          String
+  title        String
+  slug         String   @unique
+  tagline      String
+  desc         String   @db.Text
+  deliverables String[]
+  
+  // CMS fields
+  features     String[]
+  benefits     String[]
+  process      String[]
+  cta          String   @default("")
+  metaTitle    String   @default("")
+  metaDesc     String   @default("")
+  published    Boolean  @default(false)
+  image        String   @default("")
+  order        Int      @default(0)
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Article {
+  id          String   @id
+  tag         String
+  date        String
+  title       String
+  slug        String   @unique
+  author      String
+  readTime    String
+  excerpt     String   @db.Text
+  content     String   @default("") @db.Text
+  published   Boolean  @default(true)
+  image       String   @default("")
+  featured    Boolean  @default(false)
+  metaTitle   String   @default("")
+  metaDesc    String   @default("")
+  publishedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Job {
+  id           String        @id
+  title        String
+  slug         String        @unique
+  type         String        // employmentType
+  location     String
+  department   String
+  description  String        @default("") @db.Text
+  requirements Json          @default("[]") // array of strings
+  active       Boolean       @default(true)
+  order        Int           @default(0)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  applications Application[]
+}
+
+model Inquiry {
+  id           String   @id @default(uuid())
+  name         String
+  email        String
+  phone        String?
+  company      String   @default("-")
+  service      String   @default("Ümumi Əlaqə")
+  message      String   @db.Text
+  status       String   @default("NEW")
+  priority     String   @default("Normal")
+  internalNote String?  @db.Text
+  assignedTo   String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now()) @updatedAt
+}
+
+model Subscriber {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  status    String   @default("Active")
+  createdAt DateTime @default(now())
+}
+
+model Application {
+  id             String   @id @default(uuid())
+  jobId          String?
+  job            Job?     @relation(fields: [jobId], references: [id], onDelete: SetNull)
+  name           String
+  email          String
+  phone          String   @default("")
+  message        String   @default("") @db.Text
+  cvUrl          String?
+  cvOriginalName String?
+  cvMimeType     String?
+  cvSize         Int?
+  status         String   @default("Yeni")
+  createdAt      DateTime @default(now())
+}
+
+model AdminUser {
+  id           String     @id @default(uuid())
+  email        String     @unique
+  passwordHash String
+  name         String
+  role         String     @default("EDITOR") // SUPER_ADMIN, EDITOR
+  active       Boolean    @default(true)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  lastLoginAt  DateTime?
+  auditLogs    AuditLog[]
+}
+
+model AuditLog {
+  id          String     @id @default(uuid())
+  adminUserId String?
+  adminUser   AdminUser? @relation(fields: [adminUserId], references: [id], onDelete: SetNull)
+  action      String     // e.g., LOGIN, CREATE_PROJECT
+  entity      String     // e.g., Project, Job
+  entityId    String?
+  metadata    Json?
+  timestamp   DateTime   @default(now())
+}
+
+
+model SiteSettings {
+  id                String   @id @default("singleton")
+  heroTag           String   @default("Salam.")
+  heroHeadline      String   @default("İnsanlar üçün əhəmiyyət kəsb edən işlər yaradırıq.")
+  heroSubtitle      String   @default("Hər kəs nəsə yarada bilər...")
+  showreelVideoUrl  String   @default("")
+  showreelPosterUrl String   @default("")
+  contactEmail      String   @default("business@brandfull.com")
+  contactPhone      String   @default("")
+  contactAddress    String   @default("Nizami küç. 142, Landmark Plaza, Bakı")
+  workingHours      String   @default("Bazar ertəsi — Cümə, 09:00 — 18:00")
+  socialInstagram   String   @default("")
+  socialFacebook    String   @default("")
+  socialLinkedIn    String   @default("")
+  socialYouTube     String   @default("")
+  socialTikTok      String   @default("")
+  socialVimeo       String   @default("")
+  copyrightText     String   @default("Copyright © 2026 Brandfull. All rights reserved.")
+  footerLinks       Json     @default("[{\"label\":\"Privacy.\",\"url\":\"/privacy\"}]")
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}

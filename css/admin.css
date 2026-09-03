@@ -1,0 +1,1999 @@
+/* ==========================================================================
+   BRANDFULL ULTRA-CONVENIENT ADMIN PANEL - STYLESHEET
+   ========================================================================== */
+
+:root {
+  --adm-bg: #F7F7F9;
+  --adm-sidebar: #FFFFFF;
+  --adm-card: #FFFFFF;
+  --adm-card-hover: #FAFAFA;
+  --adm-border: #E5E7EB;
+  --adm-border-active: rgba(255, 0, 144, 0.4);
+  --adm-text: #1F2937; /* Dark charcoal */
+  --adm-text-muted: #6B7280; /* Soft gray */
+  --adm-magenta: #ff0090;
+  --adm-magenta-hover: #e0007e;
+  --adm-magenta-glow: rgba(255, 0, 144, 0.15);
+  --adm-green: #10b981;
+  --adm-blue: #0ea5e9;
+  --adm-radius: 12px;
+  --adm-radius-sm: 6px;
+  --adm-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.02);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body.admin-body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--adm-bg);
+  color: var(--adm-text);
+  min-height: 100vh;
+  display: flex;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --------------------------------------------------------------------------
+   1. 1-CLICK EASY LOGIN SCREEN
+   -------------------------------------------------------------------------- */
+.admin-login-wrap {
+  position: fixed;
+  inset: 0;
+  background: #F7F7F9;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.admin-login-card {
+  width: 100%;
+  max-width: 460px;
+  background-color: #FFFFFF;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius);
+  padding: 3.5rem 3rem;
+  box-shadow: var(--adm-shadow);
+  text-align: center;
+}
+
+.login-brand-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: var(--adm-text);
+  margin-bottom: 0.5rem;
+}
+
+.login-brand-title span {
+  color: var(--adm-magenta);
+}
+
+/* --------------------------------------------------------------------------
+   2. DASHBOARD LAYOUT & NAVIGATION
+   -------------------------------------------------------------------------- */
+.admin-layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.admin-sidebar {
+  width: 300px;
+  background-color: var(--adm-sidebar);
+  border-right: 1px solid var(--adm-border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem 1.25rem;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 50;
+}
+
+.sidebar-brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  background: rgba(255, 0, 144, 0.12);
+  border: 1px solid rgba(255, 0, 144, 0.25);
+  border-radius: 9999px;
+  color: var(--adm-magenta);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.5rem;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 2rem;
+}
+
+.sidebar-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1rem;
+  border-radius: var(--adm-radius-sm);
+  color: var(--adm-text-muted);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.sidebar-btn svg {
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+
+.sidebar-btn:hover {
+  background-color: var(--adm-card);
+  color: var(--adm-text);
+  transform: translateX(4px);
+}
+
+.sidebar-btn.is-active {
+  background-color: var(--adm-magenta);
+  color: var(--adm-text);
+  font-weight: 700;
+  box-shadow: 0 4px 16px var(--adm-magenta-glow);
+}
+
+.sidebar-btn.is-active svg {
+  transform: scale(1.1);
+}
+
+.sidebar-badge {
+  margin-left: auto;
+  padding: 0.15rem 0.55rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  background-color: var(--adm-text);
+  color: var(--adm-magenta);
+}
+
+/* Main Area */
+.admin-main {
+  flex: 1;
+  margin-left: 300px;
+  padding: 2.5rem 3.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  max-width: 1600px;
+}
+
+/* Header */
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--adm-border);
+}
+
+.admin-header-title {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--adm-text);
+}
+
+/* --------------------------------------------------------------------------
+   3. VISUAL METRICS CARDS
+   -------------------------------------------------------------------------- */
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.metric-box {
+  background-color: var(--adm-card);
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius);
+  padding: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+}
+
+.metric-box:hover {
+  transform: translateY(-4px);
+  border-color: var(--adm-border-active);
+}
+
+.metric-info p {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--adm-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.4rem;
+}
+
+.metric-info h3 {
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.metric-icon-wrap {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: rgba(255, 0, 144, 0.1);
+  color: var(--adm-magenta);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --------------------------------------------------------------------------
+   4. VISUAL CARDS GRID (Easier than raw tables)
+   -------------------------------------------------------------------------- */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.adm-item-card {
+  background-color: var(--adm-card);
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.adm-item-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--adm-border-active);
+  box-shadow: var(--adm-shadow);
+}
+
+.adm-card-thumb {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background-color: #000;
+}
+
+.adm-card-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.adm-card-tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  background: #F3F4F6;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--adm-text-muted);
+  text-transform: uppercase;
+}
+
+.adm-card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--adm-text);
+}
+
+.adm-card-desc {
+  font-size: 0.875rem;
+  color: var(--adm-text-muted);
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.adm-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid var(--adm-border);
+}
+
+/* --------------------------------------------------------------------------
+   5. BUTTONS & TOGGLES
+   -------------------------------------------------------------------------- */
+.adm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.4rem;
+  border-radius: var(--adm-radius-sm);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.adm-btn-primary {
+  background-color: var(--adm-magenta);
+  color: var(--adm-text);
+}
+
+.adm-btn-primary:hover {
+  background-color: var(--adm-magenta-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px var(--adm-magenta-glow);
+}
+
+.adm-btn-secondary {
+  background-color: var(--adm-card);
+  color: var(--adm-text);
+  border-color: var(--adm-border);
+}
+
+.adm-btn-secondary:hover {
+  background-color: var(--adm-card-hover);
+}
+
+.adm-btn-danger {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.adm-btn-danger:hover {
+  background-color: rgba(239, 68, 68, 0.25);
+}
+
+/* Visibility Switch Toggle */
+.switch-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.switch-input {
+  appearance: none;
+  width: 2.75rem;
+  height: 1.5rem;
+  background-color: #332d29;
+  border-radius: 9999px;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.2s ease;
+}
+
+.switch-input::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background-color: var(--adm-text);
+  transition: transform 0.2s ease;
+}
+
+.switch-input:checked {
+  background-color: var(--adm-magenta);
+}
+
+.switch-input:checked::after {
+  transform: translateX(1.25rem);
+}
+
+/* --------------------------------------------------------------------------
+   6. PRESET IMAGE GALLERY PICKER (Zero Effort Media)
+   -------------------------------------------------------------------------- */
+.media-presets-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.preset-thumb-btn {
+  border: 2px solid transparent;
+  border-radius: var(--adm-radius-sm);
+  overflow: hidden;
+  cursor: pointer;
+  background: #000;
+  padding: 0;
+  transition: all 0.15s ease;
+  aspect-ratio: 16 / 10;
+}
+
+.preset-thumb-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.preset-thumb-btn:hover, .preset-thumb-btn.is-selected {
+  border-color: var(--adm-magenta);
+  transform: scale(1.05);
+}
+
+/* --------------------------------------------------------------------------
+   7. SPLIT-SCREEN LIVE PREVIEW TAB
+   -------------------------------------------------------------------------- */
+.preview-container {
+  width: 100%;
+  height: calc(100vh - 12rem);
+  background-color: #000000;
+  border-radius: var(--adm-radius);
+  border: 1px solid var(--adm-border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--adm-card);
+  border-bottom: 1px solid var(--adm-border);
+}
+
+.preview-iframe {
+  width: 100%;
+  flex: 1;
+  border: none;
+  background-color: var(--adm-text);
+}
+
+/* --------------------------------------------------------------------------
+   8. FORM CONTROLS & MODALS
+   -------------------------------------------------------------------------- */
+.form-panel {
+  background-color: var(--adm-card);
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius);
+  padding: 2.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-bottom: 1.35rem;
+}
+
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--adm-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.form-input, .form-textarea, .form-select {
+  width: 100%;
+  padding: 0.9rem 1.15rem;
+  background-color: #0c0a09;
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius-sm);
+  color: var(--adm-text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+  border-color: var(--adm-magenta);
+  box-shadow: 0 0 0 3px var(--adm-magenta-glow);
+}
+
+/* Modals */
+.adm-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.adm-modal-backdrop.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.adm-modal-content {
+  width: 100%;
+  max-width: 720px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background-color: var(--adm-card);
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius);
+  padding: 2.5rem;
+  box-shadow: var(--adm-shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Toast */
+.toast-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 600;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.toast {
+  padding: 1rem 1.5rem;
+  border-radius: var(--adm-radius-sm);
+  background-color: #1a1816;
+  border-left: 4px solid var(--adm-magenta);
+  color: var(--adm-text);
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: var(--adm-shadow);
+  animation: toastSlide 0.3s ease-out;
+}
+
+@keyframes toastSlide {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* ==========================================================================
+   PHASE 2 DASHBOARD SPECIFIC STYLES
+   ========================================================================== */
+
+/* Skeleton Loader */
+@keyframes skeleton-loading {
+  0% { background-color: hsl(200, 20%, 80%); }
+  100% { background-color: hsl(200, 20%, 95%); }
+}
+.skeleton {
+  animation: skeleton-loading 1s linear infinite alternate;
+  border-radius: var(--adm-radius-sm);
+}
+
+/* Metric Cards */
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.metric-card {
+  background: var(--adm-card);
+  padding: 1.5rem;
+  border-radius: var(--adm-radius);
+  border: 1px solid var(--adm-border);
+  box-shadow: var(--adm-shadow);
+  display: flex;
+  flex-direction: column;
+}
+.metric-card-title {
+  font-size: 0.85rem;
+  color: var(--adm-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.metric-card-value {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--adm-text);
+}
+.metric-card-sub {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--adm-text-muted);
+}
+
+/* AI Command Center */
+.ai-cmd-center {
+  background: linear-gradient(145deg, #ffffff, #fafafa);
+  border: 1px solid var(--adm-magenta);
+  box-shadow: 0 4px 15px var(--adm-magenta-glow);
+  padding: 2rem;
+  border-radius: var(--adm-radius);
+  margin-bottom: 2rem;
+}
+.ai-cmd-input-wrapper {
+  display: flex;
+  gap: 1rem;
+}
+.ai-cmd-input {
+  flex: 1;
+  font-size: 1.1rem;
+  padding: 1rem 1.5rem;
+  border: 2px solid var(--adm-border);
+  border-radius: var(--adm-radius-sm);
+  transition: all 0.2s;
+}
+.ai-cmd-input:focus {
+  outline: none;
+  border-color: var(--adm-magenta);
+}
+.ai-cmd-btn {
+  padding: 0 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* Quick Actions */
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.quick-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: var(--adm-card);
+  border: 1px dashed var(--adm-border);
+  border-radius: var(--adm-radius);
+  color: var(--adm-magenta);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.quick-action-btn:hover {
+  background: var(--adm-magenta-glow);
+  border-color: var(--adm-magenta);
+}
+
+/* Search Dropdown */
+.search-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--adm-card);
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius-sm);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  z-index: 1000;
+  max-height: 400px;
+  overflow-y: auto;
+  display: none;
+}
+.search-dropdown.active {
+  display: block;
+}
+.search-item {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--adm-border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.search-item:last-child {
+  border-bottom: none;
+}
+.search-item:hover {
+  background: var(--adm-card-hover);
+}
+.search-item-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  object-fit: cover;
+  background: #eee;
+}
+.search-item-content {
+  flex: 1;
+}
+.search-item-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.search-item-sub {
+  font-size: 0.75rem;
+  color: var(--adm-text-muted);
+}
+.search-item-badge {
+  font-size: 0.65rem;
+  padding: 0.1rem 0.4rem;
+  background: var(--adm-bg);
+  border: 1px solid var(--adm-border);
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   PHASE 3 CMS STYLES (Lists, Toolbars, Modals)
+   ========================================================================== */
+
+/* Toolbar */
+.adm-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.adm-toolbar-left {
+  display: flex;
+  gap: 1rem;
+  flex: 1;
+  min-width: 300px;
+}
+.adm-toolbar-right {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Empty State */
+.adm-empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--adm-card);
+  border: 1px dashed var(--adm-border);
+  border-radius: var(--adm-radius);
+  color: var(--adm-text-muted);
+}
+.adm-empty-state-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--adm-text);
+  margin-bottom: 0.5rem;
+}
+
+/* Table */
+.adm-table-wrapper {
+  background: var(--adm-card);
+  border-radius: var(--adm-radius);
+  border: 1px solid var(--adm-border);
+  overflow-x: auto;
+}
+.adm-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.adm-table th {
+  background: var(--adm-bg);
+  padding: 1rem;
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--adm-text-muted);
+  border-bottom: 1px solid var(--adm-border);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.adm-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--adm-border);
+  vertical-align: middle;
+}
+.adm-table tbody tr:hover {
+  background: var(--adm-card-hover);
+}
+
+/* Modal Sections */
+.adm-modal-section {
+  background: var(--adm-bg);
+  padding: 1.5rem;
+  border-radius: var(--adm-radius-sm);
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--adm-border);
+}
+.adm-modal-section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--adm-text);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.adm-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+.adm-form-grid-full {
+  grid-column: span 2;
+}
+
+@media (max-width: 768px) {
+  .adm-toolbar-left {
+    flex-direction: column;
+    min-width: 100%;
+  }
+  .adm-toolbar-right {
+    width: 100%;
+  }
+  .adm-toolbar-right .adm-btn {
+    width: 100%;
+  }
+  .adm-form-grid {
+    grid-template-columns: 1fr;
+  }
+  .adm-form-grid-full {
+    grid-column: span 1;
+  }
+}
+
+/* ==========================================================================
+   PHASE 4 MEDIA & BRAND ASSETS
+   ========================================================================== */
+
+/* Media Grid */
+.adm-media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+.adm-media-card {
+  background: var(--adm-card);
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+.adm-media-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.adm-media-preview {
+  height: 140px;
+  background: #f1f1f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.adm-media-preview img,
+.adm-media-preview video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.adm-media-preview-placeholder {
+  color: #999;
+  font-size: 2rem;
+}
+.adm-media-info {
+  padding: 1rem;
+  flex: 1;
+}
+.adm-media-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--adm-text);
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.adm-media-meta {
+  font-size: 0.8rem;
+  color: var(--adm-text-muted);
+}
+.adm-media-actions {
+  display: flex;
+  border-top: 1px solid var(--adm-border);
+}
+.adm-media-action-btn {
+  flex: 1;
+  padding: 0.75rem;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--adm-text);
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--adm-border);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.adm-media-action-btn:last-child {
+  border-right: none;
+}
+.adm-media-action-btn:hover {
+  background: var(--adm-card-hover);
+}
+.adm-media-action-btn.danger {
+  color: var(--adm-danger);
+}
+
+/* Asset Selection Blocks (Project/Client) */
+.adm-asset-selection {
+  border: 1px dashed var(--adm-border);
+  border-radius: var(--adm-radius-sm);
+  padding: 1rem;
+  text-align: center;
+  position: relative;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: var(--adm-bg);
+}
+.adm-asset-selection img {
+  max-height: 150px;
+  max-width: 100%;
+  border-radius: 4px;
+}
+.adm-asset-selection-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255,255,255,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+  border-radius: var(--adm-radius-sm);
+}
+.adm-asset-selection:hover .adm-asset-selection-overlay {
+  opacity: 1;
+}
+
+/* Gallery Block */
+.adm-gallery-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 1rem;
+}
+.adm-gallery-item {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--adm-border);
+}
+.adm-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.adm-gallery-item-remove {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Upload Dropzone */
+.adm-dropzone {
+  border: 2px dashed var(--adm-magenta);
+  padding: 3rem 2rem;
+  text-align: center;
+  border-radius: var(--adm-radius);
+  background: rgba(255,0,144,0.02);
+  transition: background 0.2s;
+  cursor: pointer;
+}
+.adm-dropzone:hover {
+  background: rgba(255,0,144,0.05);
+}
+.adm-dropzone input[type="file"] {
+  display: none;
+}
+
+/* Picker Checkbox Overlay */
+.adm-picker-item {
+  cursor: pointer;
+}
+.adm-picker-checkbox {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  width: 24px;
+  height: 24px;
+  background: #fff;
+  border: 2px solid var(--adm-border);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.adm-picker-item:hover .adm-picker-checkbox,
+.adm-picker-item.selected .adm-picker-checkbox {
+  opacity: 1;
+}
+.adm-picker-item.selected .adm-picker-checkbox {
+  background: var(--adm-magenta);
+  border-color: var(--adm-magenta);
+}
+.adm-picker-checkbox::after {
+  content: "";
+  display: none;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  margin-bottom: 2px;
+}
+.adm-picker-item.selected .adm-picker-checkbox::after {
+  display: block;
+}
+.adm-picker-item.selected {
+  border-color: var(--adm-magenta);
+  box-shadow: 0 0 0 2px var(--adm-magenta);
+}
+
+/* ==========================================================================
+   PHASE 5 SETTINGS CMS
+   ========================================================================== */
+
+.adm-settings-layout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.adm-settings-nav {
+  flex: 0 0 250px;
+  background: var(--adm-card);
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius);
+  overflow: hidden;
+}
+
+.adm-settings-nav-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 1rem 1.25rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--adm-border);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--adm-text);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.adm-settings-nav-btn:last-child {
+  border-bottom: none;
+}
+
+.adm-settings-nav-btn:hover {
+  background: var(--adm-card-hover);
+}
+
+.adm-settings-nav-btn.active {
+  background: rgba(255, 0, 144, 0.05);
+  color: var(--adm-magenta);
+  border-left: 4px solid var(--adm-magenta);
+  padding-left: calc(1.25rem - 4px);
+}
+
+.adm-settings-content {
+  flex: 1;
+  background: var(--adm-card);
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius);
+  padding: 2rem;
+}
+
+.adm-settings-pane {
+  display: none;
+}
+
+.adm-settings-pane.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+/* JSON Array Builder */
+.adm-json-builder {
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius);
+  background: var(--adm-bg);
+  padding: 1rem;
+}
+
+.adm-json-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.adm-json-item {
+  background: var(--adm-card);
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius-sm);
+  padding: 1rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.adm-json-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  color: var(--adm-magenta);
+}
+
+.adm-json-remove-btn {
+  background: rgba(255, 59, 48, 0.1);
+  color: var(--adm-danger);
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.adm-json-remove-btn:hover {
+  background: rgba(255, 59, 48, 0.2);
+}
+
+.adm-json-add-btn {
+  margin-top: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   PHASE 6 CLIENTS CMS
+   ========================================================================== */
+
+.adm-client-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.adm-client-card {
+  background: var(--adm-card);
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.adm-client-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+}
+
+.adm-client-logo-wrap {
+  width: 100%;
+  height: 140px;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid var(--adm-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.adm-client-logo-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.adm-client-logo-placeholder {
+  color: var(--adm-text-muted);
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.adm-client-info {
+  padding: 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.adm-client-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--adm-text);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.adm-client-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--adm-text-muted);
+}
+
+.adm-client-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.adm-client-actions {
+  display: flex;
+  border-top: 1px solid var(--adm-border);
+}
+
+.adm-client-action-btn {
+  flex: 1;
+  padding: 0.75rem;
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--adm-border);
+  color: var(--adm-text);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.adm-client-action-btn:last-child {
+  border-right: none;
+}
+
+.adm-client-action-btn:hover {
+  background: var(--adm-card-hover);
+}
+
+.adm-client-action-btn.delete:hover {
+  background: rgba(255, 59, 48, 0.1);
+  color: var(--adm-danger);
+}
+
+
+.adm-btn-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+/* ==========================================================================
+   STRUKTUR TAMAMLAMA BLOKU  (2026-09 fix)
+   --------------------------------------------------------------------------
+   Asagidaki siniflar admin.html-de istifade olunurdu, lakin CSS-de hec bir
+   tanimi YOX idi -> elementler stilsiz gorunurdu (modal tablarinin hamisi
+   eyni anda acilirdi, .btn duymeleri formatsiz idi ve s.).
+   FIXED: By Gsmv
+   ========================================================================== */
+
+/* --- Bolme (view) gorunurluyu --- */
+.admin-view { display: none; }
+
+/* --- Header sag terefi --- */
+.header-actions { display: flex; align-items: center; gap: 0.75rem; }
+.user-menu { position: relative; display: flex; align-items: center; gap: 0.5rem; }
+.user-btn {
+  height: 38px;
+  padding: 0 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--adm-card);
+  color: var(--adm-text);
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius-sm);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.user-btn:hover { background: var(--adm-card-hover); }
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  min-width: 200px;
+  background: var(--adm-card);
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius-sm);
+  box-shadow: var(--adm-shadow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: all 0.15s ease;
+  z-index: 300;
+  overflow: hidden;
+}
+.dropdown-menu.active { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 0.7rem 1rem;
+  background: transparent;
+  border: 0;
+  text-align: left;
+  color: var(--adm-text);
+  font-family: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+.dropdown-item:hover { background: var(--adm-card-hover); }
+.mobile-menu-btn {
+  display: none;
+  background: transparent;
+  border: 0;
+  color: var(--adm-text);
+  font-size: 1.35rem;
+  cursor: pointer;
+}
+@media (max-width: 900px) { .mobile-menu-btn { display: inline-block; } }
+
+/* --- Sehife basligi / alet zolagi --- */
+.adm-page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+.adm-page-title { font-size: 1.5rem; font-weight: 800; margin: 0; color: var(--adm-text); }
+.adm-text-muted { color: var(--adm-text-muted); }
+.adm-toolbar-search { flex: 1 1 220px; max-width: 300px; }
+.adm-toolbar-filters { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+
+/* --- MODAL TAB-LARI (en kritik: hamisi eyni anda gorunurdu) --- */
+.modal-tabs {
+  display: flex;
+  gap: 0.35rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--adm-border);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+.modal-tabs::-webkit-scrollbar { height: 5px; }
+.modal-tabs::-webkit-scrollbar-thumb { background: var(--adm-border); border-radius: 3px; }
+.modal-tab-btn {
+  padding: 0.55rem 0.95rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--adm-radius-sm);
+  color: var(--adm-text-muted);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+.modal-tab-btn:hover { color: var(--adm-text); background: var(--adm-card-hover); }
+.modal-tab-btn.active {
+  color: var(--adm-magenta);
+  background: var(--adm-magenta-glow);
+  border-color: var(--adm-border-active);
+}
+.modal-tab-content { display: none; }
+.modal-tab-content.active { display: block; }
+
+/* --- Modal daxili strukturu --- */
+.modal-content {
+  width: 100%;
+  background: var(--adm-card);
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius);
+  box-shadow: var(--adm-shadow);
+  overflow: hidden;
+}
+.adm-modal-header, .modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--adm-border);
+}
+.adm-modal-header h2, .adm-modal-header h3,
+.modal-header h2, .modal-header h3 { margin: 0; font-size: 1.2rem; font-weight: 800; color: var(--adm-text); }
+.adm-modal-body, .modal-body { padding: 1.5rem; }
+.modal-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid var(--adm-border);
+}
+.adm-modal-close, .close-modal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  background: transparent;
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius-sm);
+  color: var(--adm-text-muted);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.adm-modal-close:hover, .close-modal:hover { color: var(--adm-text); background: var(--adm-card-hover); }
+
+/* --- .btn ailesi (Tetbiq Et / Imtina Et duymeleri stilsiz idi) --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  height: 40px;
+  padding: 0 1.1rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1;
+  border: 1px solid transparent;
+  border-radius: var(--adm-radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+.btn-primary { background: var(--adm-magenta); border-color: var(--adm-magenta); color: #fff; }
+.btn-primary:hover { background: var(--adm-magenta-hover); border-color: var(--adm-magenta-hover); }
+.btn-outline { background: transparent; border-color: var(--adm-border); color: var(--adm-text); }
+.btn-outline:hover { border-color: var(--adm-border-active); background: var(--adm-card-hover); }
+
+/* --- Form elementleri --- */
+.adm-form { display: flex; flex-direction: column; gap: 1rem; }
+.adm-form-group { margin-bottom: 1rem; }
+.adm-form-group > label, .adm-form label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--adm-text-muted);
+}
+.adm-input, .adm-select, .adm-textarea, .form-control {
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  background: #fff;
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius-sm);
+  color: var(--adm-text);
+  font-family: inherit;
+  font-size: 0.875rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.adm-input::placeholder, .adm-textarea::placeholder, .form-control::placeholder { color: var(--adm-text-muted); }
+.adm-input:focus, .adm-select:focus, .adm-textarea:focus, .form-control:focus {
+  outline: none;
+  border-color: var(--adm-magenta);
+  box-shadow: 0 0 0 3px var(--adm-magenta-glow);
+}
+.adm-textarea { min-height: 110px; resize: vertical; }
+.adm-select, select.form-control {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding-right: 2.2rem;
+  text-overflow: ellipsis;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B7280' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+}
+.form-help { display: block; margin-top: 0.3rem; font-size: 0.75rem; color: var(--adm-text-muted); }
+.form-actions { display: flex; gap: 0.75rem; }
+
+/* --- Toggle --- */
+.adm-toggle { position: relative; display: inline-block; width: 44px; height: 24px; vertical-align: middle; }
+.adm-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+.adm-toggle-slider {
+  position: absolute; inset: 0; cursor: pointer;
+  background: #D1D5DB; border-radius: 999px; transition: background 0.2s ease;
+}
+.adm-toggle-slider::before {
+  content: ""; position: absolute; width: 18px; height: 18px; left: 3px; top: 3px;
+  background: #fff; border-radius: 50%; transition: transform 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.adm-toggle input:checked + .adm-toggle-slider { background: var(--adm-magenta); }
+.adm-toggle input:checked + .adm-toggle-slider::before { transform: translateX(20px); }
+
+/* --- Kart / badge / grid --- */
+.adm-card {
+  background: var(--adm-card);
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius);
+  box-shadow: var(--adm-shadow);
+  padding: 1.25rem;
+}
+.adm-badge {
+  display: inline-flex; align-items: center;
+  padding: 0.22rem 0.6rem; border-radius: 999px;
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.02em;
+  background: var(--adm-bg); color: var(--adm-text-muted);
+  border: 1px solid var(--adm-border);
+}
+.media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem; }
+
+/* --- Bos vəziyyət / spinner --- */
+.empty-state {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 3rem 1.5rem; color: var(--adm-text-muted);
+}
+.empty-state h3 { margin-bottom: 0.4rem; color: var(--adm-text); font-size: 1rem; }
+.empty-state p { font-size: 0.875rem; max-width: 380px; }
+.spinner {
+  display: inline-block; width: 26px; height: 26px;
+  border: 3px solid var(--adm-border); border-top-color: var(--adm-magenta);
+  border-radius: 50%; animation: admSpin 0.8s linear infinite;
+}
+@keyframes admSpin { to { transform: rotate(360deg); } }
+
+/* --- Bildiris (toast) konteyneri --- */
+#toastContainer {
+  position: fixed; right: 1.25rem; bottom: 1.25rem;
+  display: flex; flex-direction: column; gap: 0.6rem; z-index: 2000;
+}
+#toastContainer .toast {
+  padding: 0.8rem 1.1rem;
+  background: var(--adm-card);
+  border: 1px solid var(--adm-border);
+  border-left: 3px solid var(--adm-magenta);
+  border-radius: var(--adm-radius-sm);
+  box-shadow: var(--adm-shadow);
+  color: var(--adm-text);
+  font-size: 0.85rem; font-weight: 600;
+  transition: opacity 0.3s ease;
+}
+
+/* --- Sorgu detal modalindaki melumat sahələri --- */
+.inqName, .inqEmail, .inqPhone, .inqCompany, .inqDate, .inqMessage { color: var(--adm-text); }
+.inqMessage { white-space: pre-wrap; line-height: 1.55; }
+
+/* --------------------------------------------------------------------------
+   GORUNMEYEN MEtN FIXI
+   .form-input / .form-textarea / .form-select qaydasinda (setir ~510)
+   background-color: #0c0a09 (qara) qalmisdi, color ise var(--adm-text)
+   yeni #1F2937 (tund) -> yazilan metn qara fonda tund renkde, yeni GORUNMUR.
+   Bu panelin qalan hissesi ise ag (light) temadadir.
+   Asagida YALNIZ fon aga cevrilir; metn rengi ve diger her sey toxunulmur.
+   Geri qaytarmaq ucun bu 5 setri silmek kifayetdir.
+   -------------------------------------------------------------------------- */
+.form-input,
+.form-textarea,
+.form-select {
+  background-color: #FFFFFF;
+}
+
+/* --------------------------------------------------------------------------
+   SECTION SAVE BAR — "Tetbiq Et / Imtina Et" paneli
+   Her bolmenin ALTINDA, yalniz deyisiklik olduqda gorunur.
+   FIXED: By Gsmv 
+   -------------------------------------------------------------------------- */
+.adm-save-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 120;
+  margin-top: 2rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+  pointer-events: none;
+}
+.adm-save-bar.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.adm-save-bar-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1.25rem;
+  background: var(--adm-card);
+  border: 1px solid var(--adm-border);
+  border-top: 2px solid var(--adm-magenta);
+  border-radius: var(--adm-radius);
+  box-shadow: 0 -6px 20px -8px rgba(0, 0, 0, 0.18);
+}
+.adm-save-bar-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--adm-text);
+}
+.adm-save-bar-dot {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 8px;
+  border-radius: 50%;
+  background: var(--adm-magenta);
+  animation: admSaveBarPulse 1.6s ease-in-out infinite;
+}
+@keyframes admSaveBarPulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.35; }
+}
+.adm-save-bar-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-left: auto;
+}
+.adm-save-bar-actions .adm-btn { min-width: 110px; justify-content: center; }
+
+@media (max-width: 640px) {
+  .adm-save-bar-inner { flex-direction: column; align-items: stretch; }
+  .adm-save-bar-actions { margin-left: 0; }
+  .adm-save-bar-actions .adm-btn { flex: 1; }
+}
+
+/* ==========================================================================
+   PART 4 — AXTARIS QUTUSU + TAM RESPONSIVLIK  (2026-09)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   AXTARIS QUTUSU
+   FIX: Admin panel problemleri By Gsmv Tərəfindən aradan qaldırılmışdır
+   -------------------------------------------------------------------------- */
+.adm-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+.adm-toolbar-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1 1 240px;
+  min-width: 200px;
+  max-width: 340px;
+}
+.adm-toolbar-search > svg {
+  position: absolute;
+  left: 0.85rem;
+  width: 17px;
+  height: 17px;
+  color: var(--adm-text-muted);
+  pointer-events: none;
+  flex: 0 0 auto;
+}
+.adm-toolbar-search > input {
+  width: 100%;
+  height: 42px;
+  padding: 0 0.9rem 0 2.5rem;
+  background: #FFFFFF;
+  border: 1px solid var(--adm-border);
+  border-radius: var(--adm-radius-sm);
+  color: var(--adm-text);
+  font-family: inherit;
+  font-size: 0.875rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.adm-toolbar-search > input::placeholder { color: var(--adm-text-muted); }
+.adm-toolbar-search > input:focus {
+  outline: none;
+  border-color: var(--adm-magenta);
+  box-shadow: 0 0 0 3px var(--adm-magenta-glow);
+}
+
+/* Alet zolagindaki butun elementler eyni hundurlukde */
+.adm-toolbar .adm-select,
+.adm-toolbar .adm-input,
+.adm-toolbar .form-select,
+.adm-toolbar .form-input,
+.adm-toolbar .adm-btn,
+.adm-toolbar .btn {
+  height: 42px;
+  min-height: 42px;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+.adm-toolbar .adm-select,
+.adm-toolbar .form-select { min-width: 160px; }
+.adm-toolbar-filters { flex: 1 1 auto; }
+
+/* --------------------------------------------------------------------------
+   RESPONSIVLIK — butun cihaz olculeri
+   -------------------------------------------------------------------------- */
+
+/* Sekiller / cedveller hec vaxt ekrandan tasmasin */
+img, video, canvas, iframe { max-width: 100%; }
+.admin-main table { width: 100%; }
+.table-scroll, .inbox-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* ---- Boyuk masaustu (<=1400px) ---- */
+@media (max-width: 1400px) {
+  .admin-main { padding: 2rem 2.25rem; gap: 2rem; }
+  .cards-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+}
+
+/* ---- Kicik masaustu / boyuk planset (<=1200px) ---- */
+@media (max-width: 1200px) {
+  .admin-sidebar { width: 250px; }
+  .admin-main { margin-left: 250px; padding: 1.75rem; }
+  .adm-media-grid { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
+  .adm-settings-layout { grid-template-columns: 200px 1fr; gap: 1.5rem; }
+}
+
+/* ---- Planset (<=980px): yan menyu gizlenir, suzulerek acilir ---- */
+@media (max-width: 980px) {
+  .admin-sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    z-index: 400;
+    width: 280px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.18);
+  }
+  .admin-sidebar.open { transform: translateX(0); }
+
+  .admin-main { margin-left: 0; padding: 1.25rem; gap: 1.5rem; }
+  .mobile-menu-btn { display: inline-flex !important; align-items: center; }
+
+  .admin-header {
+    position: sticky;
+    top: 0;
+    z-index: 150;
+    background: var(--adm-bg);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .adm-settings-layout { grid-template-columns: 1fr; }
+  .adm-settings-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--adm-border);
+  }
+  .adm-settings-nav-btn { white-space: nowrap; flex: 0 0 auto; }
+
+  .adm-modal-content { max-width: 100% !important; margin: 0 0.5rem; }
+  .cards-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+}
+
+/* Yan menyu aciq olanda arxa fon (overlay) */
+.adm-sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 350;
+}
+.adm-sidebar-overlay.is-active { display: block; }
+@media (min-width: 981px) { .adm-sidebar-overlay { display: none !important; } }
+
+/* ---- Telefon (<=680px) ---- */
+@media (max-width: 680px) {
+  .admin-main { padding: 1rem 0.9rem; gap: 1.25rem; }
+  .adm-page-title, .admin-header-title { font-size: 1.25rem; }
+
+  .cards-grid { grid-template-columns: 1fr; }
+  .adm-media-grid, .media-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+
+  /* Alet zolagi tam ene yayilir */
+  .adm-toolbar { flex-direction: column; align-items: stretch; }
+  .adm-toolbar-search { max-width: 100%; min-width: 0; }
+  .adm-toolbar-filters { width: 100%; }
+  .adm-toolbar-filters > * { flex: 1 1 140px; min-width: 0; }
+  .adm-toolbar .adm-btn, .adm-toolbar .btn { width: 100%; }
+
+  /* Sehife basligi */
+  .adm-page-header { flex-direction: column; align-items: stretch; }
+  .adm-page-header .adm-btn, .adm-page-header .btn { width: 100%; justify-content: center; }
+
+  /* Modal tam ekran */
+  .adm-modal-backdrop { padding: 0; align-items: stretch; }
+  .adm-modal-content {
+    margin: 0;
+    max-height: 100vh;
+    height: 100%;
+    border-radius: 0;
+    overflow-y: auto;
+  }
+  .adm-modal-header { position: sticky; top: 0; background: var(--adm-card); z-index: 5; }
+
+  /* Modal daxilindeki iki sutunlu gridler tek sutun olur */
+  .adm-modal-content [style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+
+  /* Modal alt duymeleri tam ene */
+  .adm-modal-content form > div:last-child > .adm-btn { flex: 1; justify-content: center; }
+
+  /* Cedveller yan-yana surusur */
+  table { display: block; overflow-x: auto; white-space: nowrap; }
+
+  /* Header */
+  .admin-header .user-btn span:not(.adm-badge) { display: none; }
+  .admin-header .user-btn { padding: 0 0.6rem; }
+  .header-actions { gap: 0.4rem; }
+
+  /* Saxlama paneli */
+  .adm-save-bar-inner { flex-direction: column; align-items: stretch; gap: 0.75rem; }
+  .adm-save-bar-actions { margin-left: 0; }
+  .adm-save-bar-actions .adm-btn { flex: 1; }
+}
+
+/* ---- Kicik telefon (<=400px) ---- */
+@media (max-width: 400px) {
+  .admin-main { padding: 0.85rem 0.7rem; }
+  .adm-toolbar-filters > * { flex: 1 1 100%; }
+  .modal-tab-btn { font-size: 0.78rem; padding: 0.45rem 0.7rem; }
+}
+
+/* ---- Alcaq ekran (landscape telefon) ---- */
+@media (max-height: 500px) and (orientation: landscape) {
+  .adm-modal-content { max-height: 100vh; overflow-y: auto; }
+  .admin-sidebar { padding: 1rem; }
+}
+
+/* ---- Cap ---- */
+@media print {
+  .admin-sidebar, .admin-header, .adm-toolbar, .adm-save-bar { display: none !important; }
+  .admin-main { margin-left: 0; padding: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   FIX: Admin panel problemleri By Gsmv Tərəfindən aradan qaldırılmışdır.
+   -------------------------------------------------------------------------- */
+.adm-toolbar-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+.adm-toolbar .adm-select,
+.adm-toolbar .form-select,
+.adm-toolbar .adm-input,
+.adm-toolbar .form-input,
+.adm-toolbar-filters > .adm-select,
+.adm-toolbar-filters > .form-select {
+  width: auto;
+  flex: 0 1 auto;
+  min-width: 150px;
+  max-width: 220px;
+}
+.adm-toolbar .adm-btn,
+.adm-toolbar .btn { flex: 0 0 auto; width: auto; }
+
+/* Telefon rejiminde yene tam en alsinlar */
+@media (max-width: 680px) {
+  .adm-toolbar .adm-select,
+  .adm-toolbar .form-select,
+  .adm-toolbar .adm-input,
+  .adm-toolbar .form-input {
+    flex: 1 1 140px;
+    max-width: none;
+    min-width: 0;
+  }
+  .adm-toolbar .adm-btn,
+  .adm-toolbar .btn { width: 100%; }
+}
+
+/* --------------------------------------------------------------------------
+   FIX: Admin panel problemleri By Gsmv Tərəfindən aradan qaldırılmışdır
+   -------------------------------------------------------------------------- */
+.adm-modal-content > * { flex-shrink: 0; }
+
+.adm-modal-content .modal-tabs,
+.adm-modal-content .adm-modal-header,
+.adm-modal-content > div:first-child {
+  flex: 0 0 auto;
+  min-height: auto;
+}
+
+/* Tab zolagı */
+.modal-tabs {
+  flex: 0 0 auto !important;
+  min-height: 46px;
+  align-items: center;
+}
+.modal-tab-btn { flex: 0 0 auto; }
+
+/* Baslik metni kesilmesin */
+.adm-modal-content > div:first-child h2,
+.adm-modal-content > div:first-child h3,
+.adm-modal-header h2,
+.adm-modal-header h3 {
+  overflow: visible;
+  white-space: normal;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Responsive*/
+.adm-modal-content > form { flex: 1 1 auto; min-height: 0; }
+.modal-tab-content.active { min-height: 0; }

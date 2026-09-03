@@ -1,0 +1,501 @@
+/* ==========================================================================
+   HUGE / BRANDFULL 1:1 VIDEO REPLICA - ALL STYLES & SECTIONS
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. SECTION 1: DARK OPENING HERO (00:00 - 00:06)
+   -------------------------------------------------------------------------- */
+.hero-dark-opening {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: #000000;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 var(--page-margin) 3rem;
+  overflow: hidden;
+}
+
+.hero-dark-center-visual {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.inflatable-3d-letter {
+  width: 55%;
+  max-width: 650px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 80px rgba(255, 0, 144, 0.5));
+  animation: float-slow 7s ease-in-out infinite alternate;
+}
+
+@keyframes float-slow {
+  0% { transform: translateY(0px) scale(1) rotate(-1deg); }
+  50% { transform: translateY(-16px) scale(1.02) rotate(1deg); }
+  100% { transform: translateY(8px) scale(0.99) rotate(-0.5deg); }
+}
+
+.hero-dark-bottom-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.hero-hello-title {
+  font-size: clamp(5rem, 12vw, 12rem);
+  font-weight: 800;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  color: #ffffff;
+}
+
+.hero-hello-subtitle {
+  font-size: clamp(1.1rem, 1.8vw, 1.6rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 1rem;
+  max-width: 600px;
+}
+
+/* Scroll-down pill: hidden by default, appears on hero hover */
+.scroll-down-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 1.35rem;
+  border-radius: var(--radius-full);
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 0.9rem;
+  font-weight: 700;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  overflow: hidden;
+  max-width: 180px;
+  white-space: nowrap;
+}
+
+.hero-dark-opening:hover .scroll-down-badge {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-down-badge .scroll-text-track {
+  display: inline-block;
+  animation: scroll-left-text 4s linear infinite;
+}
+
+@keyframes scroll-left-text {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes bounce-scroll {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-8px); }
+  60% { transform: translateY(-4px); }
+}
+
+/* --------------------------------------------------------------------------
+   2. SECTION 2: KINETIC MORPHING STATEMENT (00:07 - 00:09)
+   -------------------------------------------------------------------------- */
+.kinetic-statement-section {
+  background-color: #ffffff;
+  color: #0d0b0a;
+  padding: clamp(5rem, 10vw, 10rem) var(--page-margin);
+  display: flex;
+  align-items: center;
+}
+
+.kinetic-statement-text {
+  font-size: clamp(2.8rem, 6.5vw, 6.8rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  max-width: 1500px;
+}
+
+.word-scroller {
+  display: inline-flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 1.1em;
+  vertical-align: bottom;
+  color: var(--color-brand-magenta);
+}
+
+.scrolling-words {
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-4.4em);
+  animation: scrollWordsDown 8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+.scrolling-words .word {
+  height: 1.1em;
+  line-height: 1.1em;
+  white-space: nowrap;
+}
+
+@keyframes scrollWordsDown {
+  0%, 15% { transform: translateY(-4.4em); }
+  25%, 40% { transform: translateY(-3.3em); }
+  50%, 65% { transform: translateY(-2.2em); }
+  75%, 90% { transform: translateY(-1.1em); }
+  100% { transform: translateY(0); }
+}
+
+/* --------------------------------------------------------------------------
+   3. SECTION 3: SPLIT HERO WITH STICKERS (00:10 - 00:15)
+   -------------------------------------------------------------------------- */
+.hero-split-wrap {
+  background-color: #ffffff;
+  padding: clamp(3rem, 6vw, 7rem) var(--page-margin);
+  position: relative;
+}
+
+.hero-split-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.85fr;
+  gap: clamp(3rem, 6vw, 7rem);
+  align-items: start;
+}
+
+.hero-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.hero-nav-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-weight: 700;
+  color: var(--theme-text-primary);
+  text-decoration: none;
+  transition: transform 0.25s ease, color 0.25s ease;
+  width: fit-content;
+}
+
+.hero-nav-item:hover {
+  transform: translateX(10px);
+  color: var(--color-brand-magenta);
+}
+
+.hero-nav-arrow {
+  transition: transform 0.25s ease;
+}
+
+.hero-nav-item:hover .hero-nav-arrow {
+  transform: translateX(5px);
+}
+
+/* --------------------------------------------------------------------------
+   4. SECTION 4: 8-BOX CLIENT LOGO GRID (00:16 - 00:17)
+   -------------------------------------------------------------------------- */
+.client-logo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  padding: 2rem var(--page-margin) clamp(4rem, 8vw, 8rem);
+  background-color: #ffffff;
+}
+
+.client-logo-box {
+  background-color: #f7f4ee;
+  border-radius: var(--radius-md);
+  aspect-ratio: 1.15 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem;
+  transition: transform var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+  cursor: pointer;
+}
+
+.client-logo-box:hover {
+  background-color: #ffffff;
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+}
+
+.client-logo-box img {
+  max-height: 3.5rem;
+  max-width: 80%;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.8;
+  transition: filter var(--transition-fast), opacity var(--transition-fast);
+}
+
+.client-logo-box:hover img {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   5. SECTION 5: "OUR WORK" DARK SHOWCASE (00:18 - 00:26)
+   -------------------------------------------------------------------------- */
+.showcase-dark-section {
+  background-color: #0d0b0a;
+  color: #ffffff;
+  padding: clamp(4rem, 8vw, 9rem) var(--page-margin);
+}
+
+.showcase-dark-title {
+  font-size: clamp(3.5rem, 8.5vw, 9rem);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  margin-bottom: 4rem;
+  color: #ffffff;
+}
+
+.showcase-feature-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: #1a1816;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 3rem;
+  transition: transform 0.4s var(--motion-ease);
+}
+
+.showcase-feature-card:hover {
+  transform: translateY(-8px);
+}
+
+.showcase-card-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.showcase-card-caption {
+  padding: 2rem 2.5rem;
+  background: linear-gradient(to top, rgba(13, 11, 10, 0.95), rgba(13, 11, 10, 0.6));
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* --------------------------------------------------------------------------
+   6. SECTION 6: TILTED CARDS GRID (00:27 - 00:31)
+   -------------------------------------------------------------------------- */
+.tilted-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+  margin-top: 3.5rem;
+}
+
+.tilted-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: #1a1816;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.4s var(--motion-ease);
+  cursor: pointer;
+}
+
+.tilted-card:hover {
+  transform: translateY(-10px) scale(1.02);
+}
+
+.tilted-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+/* --------------------------------------------------------------------------
+   7. SECTION 7: STACKING SOLUTIONS ACCORDION (00:32 - 00:38)
+   -------------------------------------------------------------------------- */
+.solutions-stack-section {
+  background-color: #0d0b0a;
+  color: #ffffff;
+  padding: clamp(5rem, 10vw, 10rem) var(--page-margin);
+}
+
+.stack-card-item {
+  position: sticky;
+  top: 100px;
+  background-color: #ffffff;
+  color: #0d0b0a;
+  border-radius: var(--radius-lg);
+  padding: clamp(3rem, 5vw, 5rem);
+  margin-bottom: 2rem;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 380px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.stack-card-item:hover {
+  transform: translateY(-6px);
+}
+
+.stack-num {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--color-brand-magenta);
+}
+
+.stack-title {
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin: 1rem 0;
+}
+
+.stack-tagline {
+  font-size: 1.35rem;
+  color: #433f3c;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   8. SECTION 8: SPLIT WORK & CONTACT CARDS (00:39 - 00:40)
+   -------------------------------------------------------------------------- */
+.dual-action-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  padding: clamp(3rem, 6vw, 6rem) var(--page-margin);
+  background-color: #ffffff;
+}
+
+.dual-action-card {
+  padding: clamp(3rem, 6vw, 5.5rem);
+  border-radius: var(--radius-lg);
+  background-color: #f7f4ee;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 360px;
+  text-decoration: none;
+  color: #0d0b0a;
+  transition: all 0.3s var(--motion-ease);
+  cursor: pointer;
+}
+
+.dual-action-card:hover {
+  background-color: #0d0b0a;
+  color: #ffffff;
+  transform: translateY(-8px);
+}
+
+.dual-action-card:hover .color-magenta {
+  color: #ffffff;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .client-logo-grid { grid-template-columns: repeat(2, 1fr); }
+  .tilted-grid { grid-template-columns: 1fr; }
+  .dual-action-grid { grid-template-columns: 1fr; }
+  .hero-split-grid { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
+   9. HUGE INC STYLE WORK PORTFOLIO
+   ========================================================================== */
+.huge-work-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.huge-work-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: clamp(500px, 75vh, 900px);
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  background-color: var(--color-base-dark-card);
+  text-decoration: none;
+}
+
+.huge-work-card-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.huge-work-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.huge-work-card:hover .huge-work-card-img {
+  transform: scale(1.05);
+}
+
+.huge-work-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0) 100%);
+  pointer-events: none;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.huge-work-card:hover .huge-work-card-overlay {
+  opacity: 0.95;
+}
+
+.huge-work-card-content {
+  position: relative;
+  z-index: 2;
+  padding: clamp(2rem, 4vw, 4rem);
+  color: #ffffff;
+}
+
+.huge-work-client {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.25rem;
+}
+
+.huge-work-title {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.25;
+  color: rgba(255, 255, 255, 0.7);
+}

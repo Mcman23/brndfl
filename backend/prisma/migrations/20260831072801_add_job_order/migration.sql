@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Job" ADD COLUMN     "order" INTEGER NOT NULL DEFAULT 0;

@@ -1,0 +1,1782 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brandfull — İdarəetmə Paneli (Admin) 2.0</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-weight='900' fill='%23ff0090'>B</text></svg>" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body class="admin-body">
+
+  <!-- ========================================================================
+       1. SECURE LOGIN SCREEN
+       ======================================================================== -->
+  <div class="admin-login-wrap" id="adminLoginWrap">
+    <div class="admin-login-card">
+      <div class="login-brand-title">Brandfull<span>.</span></div>
+      <p style="color:var(--adm-text-muted); font-size:1.05rem; margin-bottom: 2rem;">CMS İdarəetmə Paneli 2.0</p>
+
+      <form id="adminLoginForm" style="display:flex; flex-direction:column; gap:1rem; width:100%; text-align:left;">
+        <div class="form-group">
+          <label class="form-label" for="loginEmail" style="color:var(--adm-text-muted); font-size:0.75rem; font-weight:700;">E-POÇT</label>
+          <input type="email" id="loginEmail" class="form-input" style="background:var(--adm-sidebar); color:var(--adm-text); border:1px solid var(--adm-border); padding:0.75rem;" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="loginPassword" style="color:var(--adm-text-muted); font-size:0.75rem; font-weight:700;">ŞİFRƏ</label>
+          <input type="password" id="loginPassword" class="form-input" style="background:var(--adm-sidebar); color:var(--adm-text); border:1px solid var(--adm-border); padding:0.75rem;" required />
+        </div>
+        <button type="submit" class="adm-btn adm-btn-primary" style="width: 100%; justify-content: center; padding: 1rem; margin-top:0.5rem; font-size: 1rem; border-radius: var(--adm-radius-sm);">
+          Daxil Ol 🚀
+        </button>
+      </form>
+
+      <div style="margin-top: 2rem;">
+        <a href="index.html" style="color:var(--adm-text-muted); font-size:0.9rem; text-decoration:underline;">← Canlı Sayta Baxış</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       2. DASHBOARD MAIN LAYOUT
+       ======================================================================== -->
+  <div class="admin-layout" id="adminLayout" style="display: none;">
+    
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar" style="overflow-y: auto;">
+      <div>
+        <div class="login-brand-title" style="font-size: 1.85rem; text-align: left;">Brandfull<span>.</span></div>
+        <span class="sidebar-brand-badge">CMS Rebuild 2.0 ⚙️</span>
+
+        <nav class="sidebar-nav">
+          <button class="sidebar-btn is-active" data-tab="dashboard">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            İcmal (Dashboard)
+          </button>
+
+          <div style="font-size: 0.7rem; font-weight: 800; color: var(--adm-text-muted); letter-spacing: 0.1em; padding: 0.75rem 1rem 0.25rem 1rem; text-transform: uppercase;">Portfel (Work)</div>
+          <button class="sidebar-btn" data-tab="projects">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            Layihələr
+          </button>
+          <button class="sidebar-btn" data-tab="clients">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            Müştərilər (Clients)
+          </button>
+          <button class="sidebar-btn" data-tab="media">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Media Kitabxanası
+          </button>
+
+          <div style="font-size: 0.7rem; font-weight: 800; color: var(--adm-text-muted); letter-spacing: 0.1em; padding: 0.75rem 1rem 0.25rem 1rem; text-transform: uppercase;">Struktur</div>
+          <button class="sidebar-btn" data-tab="solutions">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            Həllər & Xidmətlər
+          </button>
+          <button class="sidebar-btn" data-tab="articles">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Məqalələr (Ideas)
+          </button>
+
+          <div style="font-size: 0.7rem; font-weight: 800; color: var(--adm-text-muted); letter-spacing: 0.1em; padding: 0.75rem 1rem 0.25rem 1rem; text-transform: uppercase;">Müraciətlər</div>
+          <button class="sidebar-btn" data-tab="jobs">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            Vakansiyalar
+          </button>
+          <button class="sidebar-btn" data-tab="applications">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            İş Müraciətləri
+            <span class="sidebar-badge" id="appBadge" style="display:none;">0</span>
+          </button>
+          <button class="sidebar-btn" data-tab="inbox">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Gələn Mesajlar
+            <span class="sidebar-badge" id="inboxBadge" style="display:none;">0</span>
+          </button>
+          <button class="sidebar-btn" data-tab="subscribers">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/></svg>
+            Bülleten Abunəçiləri
+          </button>
+
+          <div style="font-size: 0.7rem; font-weight: 800; color: var(--adm-text-muted); letter-spacing: 0.1em; padding: 0.75rem 1rem 0.25rem 1rem; text-transform: uppercase;">Sistem</div>
+          <button class="sidebar-btn" data-tab="users" id="sidebarUsersTab" style="display:none;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            İnzibatçılar
+          </button>
+          <button class="sidebar-btn" data-tab="auditLogs">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Audit Girişləri
+          </button>
+                    <button class="sidebar-btn" data-tab="operations" style="color: #6a5acd;">
+            <i class="fi fi-rr-magic-wand"></i> AI Ops Assistant
+          </button>
+          <button class="sidebar-btn" data-tab="settings">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Mətnlər & Hero
+          </button>
+          <button class="sidebar-btn" data-tab="preview" style="color:var(--adm-magenta);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            Canlı Sayt Önizləməsi 👁️
+          </button>
+        </nav>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 2rem;">
+        <a href="index.html" target="_blank" class="adm-btn adm-btn-secondary" style="width: 100%; justify-content: center;">
+          Canlı Sayta Keç ↗
+        </a>
+        <button onclick="AdminApp.logout()" class="adm-btn adm-btn-danger" style="width: 100%; justify-content: center;">
+          Çıxış
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="admin-main">
+      
+      <!-- TOP HEADER -->
+      <header class="admin-header">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <button class="mobile-menu-btn" onclick="document.getElementById('adminSidebar').classList.add('open')">☰</button>
+        <h2 class="admin-header-title" id="pageTitle">Panel</h2>
+      </div>
+      
+      <div class="header-actions">
+        
+
+        <!-- Admin Profile -->
+        <div class="user-menu">
+          <button class="user-btn" onclick="document.getElementById('userDropdownMenu').classList.toggle('active')">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            <span id="headerAdminEmail">Admin</span>
+          </button>
+          <div class="dropdown-menu" id="userDropdownMenu">
+            <div style="padding: 8px 12px; font-size:0.75rem; color:var(--adm-text-muted); border-bottom:1px solid var(--adm-border); margin-bottom:4px;">
+              Super Admin
+            </div>
+            <button class="dropdown-item" onclick="AdminApp.logout()">Çıxış</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+      <!-- VIEW 1: İCMAL (DASHBOARD) -->
+      <div id="view-dashboard" class="admin-view">
+        
+        <!-- NEEDS ATTENTION -->
+        <div id="dashboardNeedsAttention" style="display: none; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem;">
+          <h4 style="font-size:1.15rem; font-weight:800; color:var(--adm-magenta); margin:0;">DİQQƏT TƏLƏB EDƏN MƏSƏLƏLƏR</h4>
+          <div id="dashboardAttentionContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- TOP STATISTICS -->
+        <div class="metrics-row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem;">
+          <div class="metric-box" onclick="AdminApp.switchTab('inbox')" style="cursor:pointer;">
+            <div class="metric-info">
+              <p>Yeni müraciətlər</p>
+              <h3 id="metricNewInquiries">0</h3>
+            </div>
+            <div class="metric-icon-wrap" style="background:rgba(255,0,144,0.12); color:var(--adm-magenta);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          </div>
+          <div class="metric-box" onclick="AdminApp.switchTab('applications')" style="cursor:pointer;">
+            <div class="metric-info">
+              <p>Yeni applications</p>
+              <h3 id="metricNewApps">0</h3>
+            </div>
+            <div class="metric-icon-wrap" style="background:rgba(52,199,89,0.12); color:var(--adm-success);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+          </div>
+          <div class="metric-box" onclick="AdminApp.switchTab('projects')" style="cursor:pointer;">
+            <div class="metric-info">
+              <p>Qaralama layihələr</p>
+              <h3 id="metricDraftProjects">0</h3>
+            </div>
+            <div class="metric-icon-wrap" style="background:rgba(255,149,0,0.12); color:var(--adm-warning);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
+          </div>
+          <div class="metric-box" onclick="AdminApp.switchTab('articles')" style="cursor:pointer;">
+            <div class="metric-info">
+              <p>Dərc olunmuş məqalələr</p>
+              <h3 id="metricPublishedArticles">0</h3>
+            </div>
+            <div class="metric-icon-wrap" style="background:rgba(0,122,255,0.12); color:var(--adm-cyan);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          </div>
+          <div class="metric-box" onclick="AdminApp.switchTab('jobs')" style="cursor:pointer;">
+            <div class="metric-info">
+              <p>Aktiv vakansiyalar</p>
+              <h3 id="metricActiveJobs">0</h3>
+            </div>
+            <div class="metric-icon-wrap" style="background:rgba(142,142,147,0.12); color:var(--adm-text);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+          
+          <!-- RECENT INQUIRIES -->
+          <div style="background-color:var(--adm-card); border:1px solid var(--adm-border); border-radius:var(--adm-radius); padding:2rem; display:flex; flex-direction:column;">
+            <h4 style="font-size:1.15rem; font-weight:800; margin-bottom:1.5rem;">SON MÜRACİƏTLƏR</h4>
+            <div id="dashboardRecentInbox" style="display:flex; flex-direction:column; gap:0.75rem; flex:1;">
+              <!-- JS -->
+            </div>
+            <button class="adm-btn adm-btn-secondary" style="margin-top:1.5rem; width:100%;" onclick="AdminApp.switchTab('inbox')">Bütün müraciətlərə bax</button>
+          </div>
+
+          <!-- RECENT APPLICATIONS -->
+          <div style="background-color:var(--adm-card); border:1px solid var(--adm-border); border-radius:var(--adm-radius); padding:2rem; display:flex; flex-direction:column;">
+            <h4 style="font-size:1.15rem; font-weight:800; margin-bottom:1.5rem;">SON APPLICATION-LAR</h4>
+            <div id="dashboardRecentApps" style="display:flex; flex-direction:column; gap:0.75rem; flex:1;">
+              <!-- JS -->
+            </div>
+            <button class="adm-btn adm-btn-secondary" style="margin-top:1.5rem; width:100%;" onclick="AdminApp.switchTab('applications')">Bütün müraciətlərə bax</button>
+          </div>
+
+          <!-- RECENT CHANGES -->
+          <div style="background-color:var(--adm-card); border:1px solid var(--adm-border); border-radius:var(--adm-radius); padding:2rem; display:flex; flex-direction:column;">
+            <h4 style="font-size:1.15rem; font-weight:800; margin-bottom:1.5rem;">SON DƏYİŞİKLİKLƏR</h4>
+            <div id="dashboardRecentChanges" style="display:flex; flex-direction:column; gap:0.75rem; flex:1;">
+              <!-- JS -->
+            </div>
+          </div>
+
+          <!-- QUICK ACTIONS -->
+          <div style="background-color:var(--adm-card); border:1px solid var(--adm-border); border-radius:var(--adm-radius); padding:2rem; display:flex; flex-direction:column;">
+            <h4 style="font-size:1.15rem; font-weight:800; margin-bottom:1.5rem;">SÜRƏTLİ ƏMƏLİYYATLAR</h4>
+            <div style="display:flex; flex-direction:column; gap:1rem;">
+              <button class="adm-btn adm-btn-primary" onclick="AdminApp.openProjectModal()" style="justify-content:center;">+ Yeni layihə</button>
+              <button class="adm-btn adm-btn-secondary" onclick="AdminApp.openSolutionModal()" style="justify-content:center;">+ Yeni həll (solution)</button>
+              <button class="adm-btn adm-btn-secondary" onclick="AdminApp.openArticleModal()" style="justify-content:center;">+ Yeni məqalə</button>
+              <button class="adm-btn adm-btn-secondary" onclick="AdminApp.openJobModal()" style="justify-content:center;">+ Yeni vakansiya</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <!-- VIEW 2: LAYİHƏLƏR (PROJECTS) -->
+      <div id="view-projects" class="admin-view" style="display: none;">
+        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; margin-bottom: 2rem;">
+          <div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:center; flex:1;">
+            <input type="text" id="projectSearch" class="form-input" style="max-width:220px; margin-bottom:0;" placeholder="Layihə axtar..." oninput="AdminApp.renderProjects()" />
+            
+            <select id="projectClientFilter" class="form-select" style="max-width:160px; margin-bottom:0;" onchange="AdminApp.renderProjects()">
+              <option value="ALL">Bütün Müştərilər</option>
+            </select>
+
+            <select id="projectStatusFilter" class="form-select" style="max-width:160px; margin-bottom:0;" onchange="AdminApp.renderProjects()">
+              <option value="ALL">Bütün Statuslar</option>
+              <option value="PUBLISHED">Dərc olunub</option>
+              <option value="DRAFT">Qaralama</option>
+            </select>
+
+            <select id="projectFeaturedFilter" class="form-select" style="max-width:160px; margin-bottom:0;" onchange="AdminApp.renderProjects()">
+              <option value="ALL">Bütün Tiplər</option>
+              <option value="FEATURED">Seçilmişlər (Featured)</option>
+              <option value="NORMAL">Normal</option>
+            </select>
+
+            <select id="projectSortOrder" class="form-select" style="max-width:160px; margin-bottom:0;" onchange="AdminApp.renderProjects()">
+              <option value="ORDER_ASC">Sıralama (Kiçikdən böyüyə)</option>
+              <option value="ORDER_DESC">Sıralama (Böyükdən kiçiyə)</option>
+              <option value="ALPHA_ASC">Əlifba sırası (A-Z)</option>
+            </select>
+          </div>
+          <button class="adm-btn adm-btn-primary" onclick="AdminApp.openProjectModal()">+ Yeni Layihə</button>
+        </div>
+        <div class="cards-grid" id="projectsGrid"></div>
+      </div>
+            <!-- VIEW 3: MÜŞTƏRİLƏR (CLIENTS) -->
+      <div id="view-clients" class="admin-view">
+        <div class="adm-page-header">
+          <div>
+            <h1 class="adm-page-title">Müştərilər (Clients)</h1>
+            <p class="adm-text-muted">Müştəriləri, brend loqolarını və əlaqəli məlumatları idarə edin.</p>
+          </div>
+          <button class="adm-btn adm-btn-primary" onclick="AdminApp.openClientModal()">+ Yeni müştəri</button>
+        </div>
+        
+        <div class="adm-toolbar">
+          <div class="adm-toolbar-search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="clientSearch" placeholder="Müştəri adı ilə axtar..." oninput="AdminApp.filterClients()" />
+          </div>
+          <div class="adm-toolbar-filters">
+            <select id="clientStatusFilter" class="adm-select" onchange="AdminApp.filterClients()">
+              <option value="all">Bütün Statuslar</option>
+              <option value="active">Aktiv</option>
+              <option value="inactive">Passiv</option>
+            </select>
+            <select id="clientLogoFilter" class="adm-select" onchange="AdminApp.filterClients()">
+              <option value="all">Bütün Loqolar</option>
+              <option value="has_logo">Loqo Var</option>
+              <option value="no_logo">Loqo Yoxdur</option>
+            </select>
+            <select id="clientSort" class="adm-select" onchange="AdminApp.filterClients()">
+              <option value="newest">Ən yenilər</option>
+              <option value="oldest">Ən köhnələr</option>
+              <option value="az">A-Z</option>
+              <option value="za">Z-A</option>
+            </select>
+            <button class="adm-btn adm-btn-secondary" onclick="AdminApp.renderClients()">Yenilə</button>
+          </div>
+        </div>
+
+        <div id="clientsGrid" class="adm-client-grid">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <div id="view-media" class="admin-view" style="display: none;">
+        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; margin-bottom: 2rem; border-bottom: 1px solid var(--adm-border); padding-bottom: 1.5rem;">
+          <div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:center; flex:1;">
+            <input type="text" id="mediaSearch" class="form-input" style="max-width:250px; margin-bottom:0;" placeholder="Media axtar..." oninput="AdminApp.renderMedia()" />
+            
+            <select id="mediaMimeFilter" class="form-select" style="max-width:160px; margin-bottom:0;" onchange="AdminApp.renderMedia()">
+              <option value="ALL">Bütün fayllar</option>
+              <option value="IMAGE">Şəkillər (JPG/PNG/WEBP)</option>
+              <option value="SVG">SVG Qrafikası</option>
+              <option value="VIDEO">Videolar (Vimeo)</option>
+              <option value="OTHER">Digər</option>
+            </select>
+          </div>
+          <div style="display:flex; gap:0.5rem;">
+            <label class="adm-btn adm-btn-primary" style="cursor:pointer; display:inline-flex; align-items:center; gap:0.5rem;">
+              + Şəkil Yüklə
+              <input type="file" id="mediaLibraryFileInput" accept="image/*, image/svg+xml" style="display:none;" onchange="AdminApp.handleMediaLibraryUpload(event)" />
+            </label>
+            <button type="button" class="adm-btn adm-btn-secondary" onclick="AdminApp.promptVimeoUpload()">+ Vimeo əlavə et</button>
+          </div>
+        </div>
+        
+        <div class="media-grid" id="mediaLibraryGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.5rem;">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+      <!-- VIEW 5: HƏLLƏR VƏ XİDMƏTLƏR (SOLUTIONS) -->
+      <div id="view-solutions" class="admin-view" style="display: none;">
+        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; margin-bottom: 2rem;">
+          <div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:center; flex:1;">
+            <input type="text" id="solutionSearch" class="form-input" style="max-width:250px; margin-bottom:0;" placeholder="Həll axtar..." oninput="AdminApp.renderSolutions()" />
+            <select id="solutionStatusFilter" class="form-select" style="max-width:180px; margin-bottom:0;" onchange="AdminApp.renderSolutions()">
+              <option value="ALL">Bütün Statuslar</option>
+              <option value="PUBLISHED">Dərc olunan</option>
+              <option value="DRAFT">Qaralama</option>
+            </select>
+            <select id="solutionSortOrder" class="form-select" style="max-width:180px; margin-bottom:0;" onchange="AdminApp.renderSolutions()">
+              <option value="ORDER_ASC">Sıra (Kiçikdən böyüyə)</option>
+              <option value="ORDER_DESC">Sıra (Böyükdən kiçiyə)</option>
+              <option value="ALPHA_ASC">Əlifba sırası (A-Z)</option>
+            </select>
+          </div>
+          <button class="adm-btn adm-btn-primary" onclick="AdminApp.openSolutionModal()">+ Yeni Xidmət</button>
+        </div>
+        <div class="cards-grid" id="solutionsGrid"></div>
+      </div>
+      <!-- VIEW 6: FİKİRLƏR VƏ MƏQALƏLƏR (ARTICLES) -->
+      <div id="view-articles" class="admin-view" style="display: none;">
+        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; margin-bottom: 2rem;">
+          <div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:center; flex:1;">
+            <input type="text" id="articleSearch" class="form-input" style="max-width:250px; margin-bottom:0;" placeholder="Məqalə axtar..." oninput="AdminApp.renderArticles()" />
+            
+            <select id="articleStatusFilter" class="form-select" style="max-width:160px; margin-bottom:0;" onchange="AdminApp.renderArticles()">
+              <option value="ALL">Bütün Statuslar</option>
+              <option value="PUBLISHED">Dərc olunan</option>
+              <option value="DRAFT">Qaralama</option>
+            </select>
+
+            <select id="articleFeaturedFilter" class="form-select" style="max-width:160px; margin-bottom:0;" onchange="AdminApp.renderArticles()">
+              <option value="ALL">Bütün Seçilmişlər</option>
+              <option value="FEATURED">Seçilmişlər (Featured)</option>
+              <option value="NORMAL">Normal</option>
+            </select>
+
+            <select id="articleCategoryFilter" class="form-select" style="max-width:180px; margin-bottom:0;" onchange="AdminApp.renderArticles()">
+              <option value="ALL">Bütün Kateqoriyalar</option>
+            </select>
+          </div>
+          <button class="adm-btn adm-btn-primary" onclick="AdminApp.openArticleModal()">+ Yeni Məqalə</button>
+        </div>
+        <div class="cards-grid" id="articlesGrid"></div>
+      </div>
+      <!-- VIEW 7: VAKANSİYALAR (JOBS) -->
+      <div id="view-jobs" class="admin-view" style="display: none;">
+        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; margin-bottom: 2rem;">
+          <div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:center; flex:1;">
+            <input type="text" id="jobSearch" class="form-input" style="max-width:250px; margin-bottom:0;" placeholder="Vakansiya axtar..." oninput="AdminApp.renderJobs()" />
+            
+            <select id="jobStatusFilter" class="form-select" style="max-width:160px; margin-bottom:0;" onchange="AdminApp.renderJobs()">
+              <option value="ALL">Bütün Statuslar</option>
+              <option value="ACTIVE">Aktiv</option>
+              <option value="INACTIVE">Deaktiv</option>
+            </select>
+
+            <select id="jobDeptFilter" class="form-select" style="max-width:160px; margin-bottom:0;" onchange="AdminApp.renderJobs()">
+              <option value="ALL">Bütün Departamentlər</option>
+            </select>
+
+            <select id="jobTypeFilter" class="form-select" style="max-width:160px; margin-bottom:0;" onchange="AdminApp.renderJobs()">
+              <option value="ALL">Bütün Məşğulluqlar</option>
+              <option value="Full-time">Full-time</option>
+              <option value="Part-time">Part-time</option>
+              <option value="Contract">Contract</option>
+              <option value="Internship">Internship</option>
+              <option value="Freelance">Freelance</option>
+            </select>
+          </div>
+          <button class="adm-btn adm-btn-primary" onclick="AdminApp.openJobModal()">+ Yeni Vakansiya</button>
+        </div>
+        <div class="cards-grid" id="jobsGrid"></div>
+      </div>
+      <!-- VIEW 8: İŞ MÜRACİƏTLƏRİ (APPLICATIONS) -->
+            <!-- VIEW 5: İŞ MÜRACİƏTLƏRİ (APPLICATIONS) -->
+      <div id="view-applications" class="admin-view">
+        <div class="adm-page-header">
+          <div>
+            <h1 class="adm-page-title">İş Müraciətləri</h1>
+            <p class="adm-text-muted">Vakansiyalara daxil olan namizəd müraciətlərini idarə edin.</p>
+          </div>
+        </div>
+        
+        <div class="adm-toolbar">
+          <div class="adm-toolbar-search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="applicationSearch" placeholder="Axtar..." oninput="AdminApp.filterApplications()" />
+          </div>
+          <div class="adm-toolbar-filters">
+            <select id="applicationJobFilter" class="adm-select" onchange="AdminApp.filterApplications()">
+              <option value="all">Bütün Vakansiyalar</option>
+              <!-- Populated by JS -->
+            </select>
+            <select id="applicationStatusFilter" class="adm-select" onchange="AdminApp.filterApplications()">
+              <option value="all">Bütün Statuslar</option>
+              <option value="New">Yeni (New)</option>
+              <option value="Reviewing">Baxılır (Reviewing)</option>
+              <option value="Shortlisted">Seçilib (Shortlisted)</option>
+              <option value="Rejected">Rədd edilib (Rejected)</option>
+              <option value="Hired">İşə qəbul (Hired)</option>
+            </select>
+            <select id="applicationSort" class="adm-select" onchange="AdminApp.filterApplications()">
+              <option value="newest">Ən yenilər</option>
+              <option value="oldest">Ən köhnələr</option>
+            </select>
+            <button class="adm-btn adm-btn-secondary" onclick="AdminApp.renderApplications()">Yenilə</button>
+          </div>
+        </div>
+
+        <div class="adm-card" style="padding:0; overflow-x:auto;">
+          <table class="adm-table">
+            <thead>
+              <tr>
+                <th>Namizəd</th>
+                <th>Əlaqə</th>
+                <th>Vakansiya</th>
+                <th>Status</th>
+                <th>Tarix</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="applicationsList">
+              <!-- Rendered by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- VIEW: GELEN MESAJLAR (INBOX) -->
+      <div id="view-inbox" class="admin-view" style="display: none;">
+        <div class="adm-page-header">
+          <div class="adm-toolbar-filters">
+            <input type="text" id="inqSearchInput" class="adm-input" style="min-width:240px;" placeholder="Ad, e-poct ve ya mesaj axtar..." oninput="AdminApp.renderInquiries()" />
+            <select id="inqStatusFilter" class="adm-select" style="min-width:180px;" onchange="AdminApp.renderInquiries()">
+              <option value="all">Butun statuslar</option>
+              <option value="NEW">Yeni (NEW)</option>
+              <option value="IN_PROGRESS">Islenir</option>
+              <option value="CONTACTED">Elaqe saxlanilib</option>
+              <option value="CLOSED">Baglanib</option>
+            </select>
+          </div>
+        </div>
+        <div id="inboxList"></div>
+      </div>
+
+      <!-- VIEW: AI OPS ASSISTANT (OPERATIONS) -->
+      <div id="view-operations" class="admin-view" style="display: none;">
+        <div class="adm-card" style="margin-bottom:1.5rem;">
+          <label class="adm-form-group" style="display:block; margin-bottom:0.5rem; font-size:0.78rem; font-weight:700; color:var(--adm-text-muted);">EMRINIZI YAZIN</label>
+          <div style="display:flex; gap:0.75rem; align-items:flex-start;">
+            <textarea id="aiOpsCommand" class="adm-textarea" style="flex:1; min-height:80px;" placeholder="Meselen: Dercsiz qalan layiheleri ve cavabsiz muracietleri tap..."></textarea>
+            <button class="btn btn-primary" style="height:80px;" onclick="AIOperationsManager.analyze()">Analiz Et</button>
+          </div>
+        </div>
+
+        <div id="aiOpsLoading" style="display:none; text-align:center; padding:2.5rem;">
+          <div class="spinner"></div>
+          <p style="margin-top:1rem; color:var(--adm-text-muted);">Analiz aparilir, lutfen gozleyin...</p>
+        </div>
+
+        <div id="aiOpsResults" style="display:none; flex-direction:column; gap:1.5rem;">
+          <div class="adm-card">
+            <h4 style="margin:0 0 0.5rem; font-weight:800;">Xulase</h4>
+            <p id="aiOpsSummaryText" style="margin:0; color:var(--adm-text-muted);"></p>
+          </div>
+          <div>
+            <h4 style="margin:0 0 0.75rem; font-weight:800;">Tapilan Meseleler</h4>
+            <div id="aiOpsIssuesGrid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1rem;"></div>
+          </div>
+          <div>
+            <h4 style="margin:0 0 0.75rem; font-weight:800;">Tovsiyeler</h4>
+            <div id="aiOpsRecommendationsList" style="display:flex; flex-direction:column; gap:0.75rem;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="view-subscribers" class="admin-view" style="display: none;">
+        <div style="display:flex; justify-content:flex-end; margin-bottom: 1.5rem;">
+          <button class="adm-btn adm-btn-secondary" onclick="AdminApp.copyAllSubscribers()">📋 Bütün E-poçtları Kopyala</button>
+        </div>
+        <div id="subscribersList"></div>
+      </div>
+
+      <!-- VIEW 11: AUDIT LOGS -->
+      <div id="view-auditLogs" class="admin-view" style="display: none;">
+        <div id="auditLogsList"></div>
+      </div>
+
+      <!-- VIEW 12: SAYT MƏTNLƏRİ (SETTINGS) -->
+            <!-- VIEW 10: SETTINGS -->
+      <div id="view-settings" class="admin-view">
+        <div class="adm-page-header">
+          <h1 class="adm-page-title">Website Settings</h1>
+          <p class="adm-text-muted">Saytın bütün ümumi məlumatlarını, əlaqə və footer hissələrini idarə edin.</p>
+        </div>
+        
+        <div class="adm-settings-layout">
+          <aside class="adm-settings-nav">
+            <button class="adm-settings-nav-btn active" data-settings-tab="general" onclick="AdminApp.switchSettingsTab('general')">Ümumi (General)</button>
+            <button class="adm-settings-nav-btn" data-settings-tab="contact" onclick="AdminApp.switchSettingsTab('contact')">Əlaqə (Contact)</button>
+            <button class="adm-settings-nav-btn" data-settings-tab="offices" onclick="AdminApp.switchSettingsTab('offices')">Ofislər (Offices)</button>
+            <button class="adm-settings-nav-btn" data-settings-tab="social" onclick="AdminApp.switchSettingsTab('social')">Sosial Şəbəkələr</button>
+            <button class="adm-settings-nav-btn" data-settings-tab="footer" onclick="AdminApp.switchSettingsTab('footer')">Footer & Linklər</button>
+          </aside>
+          
+          <main class="adm-settings-content">
+            <form id="settingsForm" class="adm-form" onsubmit="event.preventDefault(); AdminApp.saveSettings();">
+              
+              <!-- GENERAL PANE -->
+              <div id="settings-pane-general" class="adm-settings-pane active">
+                <h3 style="margin-bottom: 1.5rem; color: var(--adm-magenta);">Ümumi Tənzimləmələr</h3>
+                <div class="adm-form-group">
+                  <label>Hero Tag (məs: Salam.)</label>
+                  <input type="text" class="adm-input" id="setHeroTag" name="heroTag" />
+                </div>
+                <div class="adm-form-group">
+                  <label>Hero Headline</label>
+                  <input type="text" class="adm-input" id="setHeroHeadline" name="heroHeadline" />
+                </div>
+                <div class="adm-form-group">
+                  <label>Hero Subtitle</label>
+                  <textarea class="adm-textarea" id="setHeroSubtitle" name="heroSubtitle" rows="2"></textarea>
+                </div>
+                <hr style="border:0; border-top:1px solid var(--adm-border); margin: 2rem 0;" />
+                <h4 style="margin-bottom: 1rem; color: var(--adm-text);">Showreel</h4>
+                
+                <div class="adm-form-group">
+                  <label>Showreel Video URL</label>
+                  <input type="hidden" name="showreelVideoUrl" id="setShowreelVideoUrl" />
+                  <div class="adm-asset-selection" id="showreelVideoSelection" style="min-height: 80px;">
+                    <div style="color:var(--adm-text-muted); margin-bottom:0.5rem;">Video seçilməyib</div>
+                    <button type="button" class="adm-btn adm-btn-secondary" onclick="AdminApp.openMediaPickerFor('setShowreelVideoUrl', 'showreelVideoSelection', false)">Vimeo / Video Seç</button>
+                  </div>
+                </div>
+                <div class="adm-form-group">
+                  <label>Showreel Poster (Cover)</label>
+                  <input type="hidden" name="showreelPosterUrl" id="setShowreelPosterUrl" />
+                  <div class="adm-asset-selection" id="showreelPosterSelection" style="min-height: 80px;">
+                    <div style="color:var(--adm-text-muted); margin-bottom:0.5rem;">Poster seçilməyib</div>
+                    <button type="button" class="adm-btn adm-btn-secondary" onclick="AdminApp.openMediaPickerFor('setShowreelPosterUrl', 'showreelPosterSelection', false)">Poster Seç</button>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- CONTACT PANE -->
+              <div id="settings-pane-contact" class="adm-settings-pane">
+                <h3 style="margin-bottom: 1.5rem; color: var(--adm-magenta);">Əsas Əlaqə Məlumatları</h3>
+                <div class="adm-form-group">
+                  <label>E-poçt (Email)</label>
+                  <input type="email" class="adm-input" id="setContactEmail" name="contactEmail" />
+                </div>
+                <div class="adm-form-group">
+                  <label>Telefon</label>
+                  <input type="text" class="adm-input" id="setContactPhone" name="contactPhone" />
+                </div>
+                <div class="adm-form-group">
+                  <label>Əsas Ünvan (Address)</label>
+                  <textarea class="adm-textarea" id="setContactAddress" name="contactAddress" rows="2"></textarea>
+                </div>
+                <div class="adm-form-group">
+                  <label>İş Saatları (Working Hours)</label>
+                  <input type="text" class="adm-input" id="setWorkingHours" name="workingHours" />
+                </div>
+              </div>
+              
+              <!-- OFFICES PANE -->
+              <div id="settings-pane-offices" class="adm-settings-pane">
+                <h3 style="margin-bottom: 1.5rem; color: var(--adm-magenta);">Ofislər & Filiallar</h3>
+                <p style="font-size:0.9rem; color:var(--adm-text-muted); margin-bottom: 1rem;">Saytda nümayiş etdiriləcək bütün ofis və filialları idarə edin.</p>
+                <div class="adm-json-builder" id="officesBuilder">
+                  <div class="adm-json-list" id="officesList">
+                    <!-- JS Rendered -->
+                  </div>
+                  <button type="button" class="adm-btn adm-btn-secondary adm-json-add-btn" onclick="AdminApp.addOfficeItem()">+ Ofis Əlavə Et</button>
+                </div>
+              </div>
+              
+              <!-- SOCIAL PANE -->
+              <div id="settings-pane-social" class="adm-settings-pane">
+                <h3 style="margin-bottom: 1.5rem; color: var(--adm-magenta);">Sosial Şəbəkələr</h3>
+                <div class="adm-form-group">
+                  <label>Instagram URL</label>
+                  <input type="url" class="adm-input" id="setSocialInstagram" name="socialInstagram" />
+                </div>
+                <div class="adm-form-group">
+                  <label>Facebook URL</label>
+                  <input type="url" class="adm-input" id="setSocialFacebook" name="socialFacebook" />
+                </div>
+                <div class="adm-form-group">
+                  <label>LinkedIn URL</label>
+                  <input type="url" class="adm-input" id="setSocialLinkedIn" name="socialLinkedIn" />
+                </div>
+                <div class="adm-form-group">
+                  <label>YouTube URL</label>
+                  <input type="url" class="adm-input" id="setSocialYouTube" name="socialYouTube" />
+                </div>
+                <div class="adm-form-group">
+                  <label>TikTok URL</label>
+                  <input type="url" class="adm-input" id="setSocialTikTok" name="socialTikTok" />
+                </div>
+                <div class="adm-form-group">
+                  <label>Vimeo URL</label>
+                  <input type="url" class="adm-input" id="setSocialVimeo" name="socialVimeo" />
+                </div>
+              </div>
+              
+              <!-- FOOTER PANE -->
+              <div id="settings-pane-footer" class="adm-settings-pane">
+                <h3 style="margin-bottom: 1.5rem; color: var(--adm-magenta);">Footer & Linklər</h3>
+                <div class="adm-form-group">
+                  <label>Copyright Mətni</label>
+                  <input type="text" class="adm-input" id="setCopyrightText" name="copyrightText" />
+                </div>
+                <hr style="border:0; border-top:1px solid var(--adm-border); margin: 2rem 0;" />
+                <h4 style="margin-bottom: 1rem; color: var(--adm-text);">Footer Linkləri</h4>
+                <div class="adm-json-builder" id="footerLinksBuilder">
+                  <div class="adm-json-list" id="footerLinksList">
+                    <!-- JS Rendered -->
+                  </div>
+                  <button type="button" class="adm-btn adm-btn-secondary adm-json-add-btn" onclick="AdminApp.addFooterLinkItem()">+ Link Əlavə Et</button>
+                </div>
+              </div>
+              
+              <!-- SUBMIT: duymeler artiq bolmenin altindaki
+                   "deyisiklik paneli"nde gorunur (SectionSaveBar).
+                   Bu gizli duyme yalniz form submit-ini isletmek ucundur. -->
+              <button type="submit" id="saveSettingsBtn" style="display:none;" aria-hidden="true">Yadda Saxla</button>
+            </form>
+          </main>
+        </div>
+      </div>
+
+      <div id="view-preview" class="admin-view" style="display: none;">
+        <div class="preview-container">
+          <div class="preview-bar">
+            <span style="font-size:0.9rem; font-weight:700; color:var(--adm-text-muted);">CANLI SİNXRONİZASİYA</span>
+            <div style="display:flex; gap:0.75rem;">
+              <button class="adm-btn adm-btn-secondary" style="padding:0.4rem 0.85rem; font-size:0.8rem;" onclick="AdminApp.refreshPreview()">🔄 Yenilə</button>
+              <a href="index.html" target="_blank" class="adm-btn adm-btn-primary" style="padding:0.4rem 0.85rem; font-size:0.8rem;">Ayrı Pəncərədə Aç ↗</a>
+            </div>
+          </div>
+          <iframe id="livePreviewIframe" class="preview-iframe" src="index.html" style="width:100%; height:75vh; border:0;"></iframe>
+        </div>
+      </div>
+
+      <!-- VIEW 14: USERS (SUPER_ADMIN ONLY) -->
+      <div id="view-users" class="admin-view" style="display: none;">
+        <div style="display:flex; justify-content:flex-end; margin-bottom: 2rem;">
+          <button class="adm-btn adm-btn-primary" onclick="AdminApp.openUserModal()">+ Yeni İnzibatçı</button>
+        </div>
+        <div id="usersList"></div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ========================================================================
+       3. MODALS SECTION
+       ======================================================================== -->
+
+  <!-- Rebuilt Project Modal with Logical Tabs -->
+  <div class="adm-modal-backdrop" id="projectModal">
+    <div class="adm-modal-content" style="max-width: 900px; width: 95%;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem;">
+        <h3 id="projectModalTitle" style="font-size:1.5rem; font-weight:800;">Layihə Redaktoru</h3>
+        <div style="display:flex; gap:0.5rem; margin-left:auto; margin-right:1rem;">
+          <button id="projectAiFillBtn" class="adm-btn adm-btn-secondary" style="border-color:var(--color-brand-magenta); color:var(--color-brand-magenta); display:flex; align-items:center; gap:0.5rem;" type="button" onclick="AdminApp.openAIAssistant('project', 'generate')">✨ AI ilə doldur</button>
+          <button id="projectAiImproveBtn" class="adm-btn adm-btn-secondary" style="border-color:var(--color-brand-magenta); color:var(--color-brand-magenta); display:flex; align-items:center; gap:0.5rem;" type="button" onclick="AdminApp.openAIAssistant('project', 'improve')">✨ AI ilə yaxşılaşdır</button>
+        </div>
+        <button class="adm-btn adm-btn-secondary" style="padding:0.35rem 0.75rem;" onclick="AdminApp.closeModal('projectModal')">✕</button>
+      </div>
+
+      <div class="modal-tabs" style="overflow-x: auto; white-space: nowrap; display: flex; gap: 0.5rem; padding-bottom: 0.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--adm-border);">
+        <button class="modal-tab-btn active" onclick="AdminApp.switchModalTab(event, 'projTabGeneral')">Ümumi</button>
+        <button class="modal-tab-btn" onclick="AdminApp.switchModalTab(event, 'projTabContent')">Məzmun</button>
+        <button class="modal-tab-btn" onclick="AdminApp.switchModalTab(event, 'projTabCover')">Örtük Şəkli</button>
+        <button class="modal-tab-btn" onclick="AdminApp.switchModalTab(event, 'projTabGallery')">Qalereya</button>
+        <button class="modal-tab-btn" onclick="AdminApp.switchModalTab(event, 'projTabMetrics')">Nəticələr (Metrics)</button>
+        <button class="modal-tab-btn" onclick="AdminApp.switchModalTab(event, 'projTabPublishing')">Dərc Etmə</button>
+        <button class="modal-tab-btn" onclick="AdminApp.switchModalTab(event, 'projTabSEO')">SEO</button>
+        <button class="modal-tab-btn" onclick="AdminApp.switchModalTab(event, 'projTabPreview'); AdminApp.updateProjectLivePreview();">Önizləmə 👁️</button>
+      </div>
+
+      <form id="projectForm">
+        <input type="hidden" id="projEditId" />
+
+        <!-- Tab 1: General -->
+        <div id="projTabGeneral" class="modal-tab-content active">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label class="form-label">Layihə Başlığı *</label>
+              <input type="text" id="projTitle" class="form-input" placeholder="Məsələn: ABB Mobil Bank" required oninput="AdminApp.handleProjectTitleInput(event)" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Unikal ID-Key (Slug) *</label>
+              <input type="text" id="projSlugField" class="form-input" placeholder="abb-mobil-bank" required />
+            </div>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label class="form-label">ƏLAQƏLİ MÜŞTƏRİ</label>
+              <div style="display:flex; gap:0.5rem;">
+                <select id="projClientId" class="form-select" style="margin-bottom:0; flex:1;"></select>
+                <button type="button" class="adm-btn adm-btn-secondary" style="padding:0.5rem;" onclick="AdminApp.openInlineClientModal()" title="Yeni Müştəri Əlavə Et">+</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">İl</label>
+              <input type="text" id="projYear" class="form-input" placeholder="2025" />
+            </div>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label class="form-label">Kateqoriya</label>
+              <input type="text" id="projCategory" class="form-input" placeholder="Məsələn: Brand Strategy" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">KÖMƏKÇİ ETİKET (TAG)</label>
+              <input type="text" id="projTag" class="form-input" placeholder="Məsələn: Digital Product" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Content -->
+        <div id="projTabContent" class="modal-tab-content">
+          <div class="form-group">
+            <label class="form-label">QISA ŞÜAR / STRAPLINE (HEADLINE)</label>
+            <input type="text" id="projHeadline" class="form-input" placeholder="Məsələn: Rəqəmsal bankçılığın gələcəyini dizayn etdik." />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ümumi Məlumat *</label>
+            <textarea id="projOverview" class="form-textarea" rows="3" placeholder="Layihə haqqında ümumi məlumat..." required></textarea>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label class="form-label">Problem / Çağırış</label>
+              <textarea id="projChallenge" class="form-textarea" rows="4" placeholder="Müştərinin qarşısında duran əsas çətinliklər..."></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Həll Yolu</label>
+              <textarea id="projSolution" class="form-textarea" rows="4" placeholder="Bizim təklif etdiyimiz strateji və vizual həll yolları..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Cover Image -->
+        <div id="projTabCover" class="modal-tab-content">
+          <div class="form-group">
+            <label class="form-label">ƏSAS ÖRTÜK ŞƏKLİ (COVER IMAGE)</label>
+            <div style="display:flex; gap:0.5rem; margin-bottom:1rem;">
+              <input type="text" id="projImage" class="form-input" style="margin-bottom:0;" placeholder="Seçilmiş örtük şəkli URL-i" readonly />
+              <button type="button" class="adm-btn adm-btn-secondary" onclick="AdminApp.triggerMediaPicker('projImage')">Seç 🖼️</button>
+            </div>
+            <div id="projCoverPreviewContainer" style="display:none; text-align:center; background:rgba(255,255,255,0.05); padding:1.5rem; border-radius:6px; border:1px dashed var(--adm-border);">
+              <img id="projCoverPreview" src="" style="max-height:180px; max-width:100%; object-fit:contain; margin-bottom:1rem;" />
+              <div>
+                <button type="button" class="adm-btn adm-btn-danger" style="font-size:0.8rem; padding:0.35rem 0.75rem;" onclick="AdminApp.removeProjectCover()">Şəkli Sil</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: Gallery -->
+        <div id="projTabGallery" class="modal-tab-content">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+            <label class="form-label" style="margin-bottom:0; font-weight:800;">QALEREYA ŞƏKİLLƏRİ</label>
+            <button type="button" class="adm-btn adm-btn-secondary" style="padding:0.4rem 0.8rem; font-size:0.8rem;" onclick="AdminApp.triggerMediaPicker('projectGalleryAdd')">+ Qalereyaya Şəkil Əlavə Et</button>
+          </div>
+          <div id="projGalleryPreviewList" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap:1rem; min-height:120px; max-height:280px; overflow-y:auto; border:1px solid var(--adm-border); padding:1rem; border-radius:var(--adm-radius-sm);">
+            <!-- Dynamic thumbnails grid -->
+          </div>
+        </div>
+
+        <!-- Tab 5: Metrics -->
+        <div id="projTabMetrics" class="modal-tab-content">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+            <label class="form-label" style="margin-bottom:0; font-weight:800;">NƏTİCƏLƏR VƏ METRİKLƏR (RESULTS / IMPACT)</label>
+            <button type="button" class="adm-btn adm-btn-secondary" style="padding:0.4rem 0.8rem; font-size:0.8rem;" onclick="AdminApp.addProjectMetricRow()">+ Metrik Əlavə Et</button>
+          </div>
+          <div id="projMetricsContainer" style="display:flex; flex-direction:column; gap:0.75rem; max-height:260px; overflow-y:auto; border:1px solid var(--adm-border); padding:1rem; border-radius:var(--adm-radius-sm);">
+            <!-- Metrics rows -->
+          </div>
+        </div>
+
+        <!-- Tab 6: Publishing -->
+        <div id="projTabPublishing" class="modal-tab-content">
+          <div style="display:flex; flex-direction:column; gap:1.5rem;">
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <input type="checkbox" id="projPublished" />
+              <label class="form-label" for="projPublished" style="margin-bottom:0; font-weight:700;">Dərhal Dərc Edilsin (İctimai)</label>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <input type="checkbox" id="projFeatured" />
+              <label class="form-label" for="projFeatured" style="margin-bottom:0; font-weight:700;">Ön Səhifədə Seçilmiş Edin (Featured)</label>
+            </div>
+            <div class="form-group" style="max-width: 200px;">
+              <label class="form-label">DÜZÜLÜŞ SIRASI (ORDER)</label>
+              <input type="number" id="projOrder" class="form-input" value="0" />
+            </div>
+            <div class="form-group" style="max-width: 300px;">
+              <label class="form-label">VİZUAL ÖLÇÜ (SPAN LAYOUT)</label>
+              <select id="projSpan" class="form-select">
+                <option value="span-6">Yarım Ekran (span-6)</option>
+                <option value="span-7">Geniş Sütun (span-7)</option>
+                <option value="span-5">Dar Sütun (span-5)</option>
+                <option value="span-12">Tam Ekran (span-12)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 7: SEO -->
+        <div id="projTabSEO" class="modal-tab-content">
+          <div class="form-group">
+            <div style="display:flex; justify-content:space-between;">
+              <label class="form-label">SEO BAŞLIQ (META TITLE)</label>
+              <span id="projMetaTitleCount" style="font-size:0.75rem; color:var(--adm-text-muted);">0 / 60</span>
+            </div>
+            <input type="text" id="projMetaTitle" class="form-input" placeholder="ABB Bank Rəqəmsal Portfolio Dizaynı..." oninput="AdminApp.handleMetaTitleInput(event)" />
+          </div>
+            <div class="form-group">
+            <div style="display:flex; justify-content:space-between;">
+              <label class="form-label">SEO TƏSVİRİ (META DESCRIPTION)</label>
+              <span id="projMetaDescCount" style="font-size:0.75rem; color:var(--adm-text-muted);">0 / 160</span>
+            </div>
+            <textarea id="projMetaDesc" class="form-textarea" rows="4" placeholder="Brandfull komandasının ABB Mobil Bank layihəsi üçün yaratdığı vizual strategiya..." oninput="AdminApp.handleMetaDescInput(event)"></textarea>
+          </div>
+        </div>
+
+        <!-- Tab 8: Live Preview -->
+        <div id="projTabPreview" class="modal-tab-content">
+          <div style="background: rgba(0,0,0,0.5); padding:1.5rem; border-radius:6px; border:1px solid var(--adm-border); font-family: 'Inter', sans-serif;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:0.75rem;">
+              <div style="display:flex; align-items:center; gap:0.5rem;">
+                <span id="previewClientLogoImg" style="width:24px; height:24px; display:inline-block; background:rgba(255,255,255,0.1); border-radius:3px;"></span>
+                <span id="previewClientName" style="font-weight:700; color:#fff; font-size:0.9rem;">Müştəri Adı</span>
+              </div>
+              <span id="previewYear" style="color:var(--adm-text-muted); font-size:0.85rem;">202X</span>
+            </div>
+            <h1 id="previewTitle" style="font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.5rem; line-height:1.2;">Layihə Adı</h1>
+            <p id="previewHeadline" style="font-size:1.1rem; color:var(--adm-cyan); margin-bottom:1.5rem;">Qısa başlıq (headline)</p>
+            <div style="text-align:center; background:#111; padding:1rem; border-radius:4px; margin-bottom:1.5rem;">
+              <img id="previewCoverImg" src="" style="max-height:180px; max-width:100%; object-fit:contain;" />
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem; margin-top:1rem;">
+              <div>
+                <h5 style="color:var(--adm-text-muted); font-size:0.75rem; text-transform:uppercase; margin-bottom:0.25rem;">Problem</h5>
+                <p id="previewChallenge" style="font-size:0.85rem; color:#ccc; line-height:1.4; white-space:pre-line;">...</p>
+              </div>
+              <div>
+                <h5 style="color:var(--adm-text-muted); font-size:0.75rem; text-transform:uppercase; margin-bottom:0.25rem;">Həll Yolu</h5>
+                <p id="previewSolution" style="font-size:0.85rem; color:#ccc; line-height:1.4; white-space:pre-line;">...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:2rem; border-top:1px solid var(--adm-border); padding-top:1.5rem;">
+          <button type="button" class="adm-btn adm-btn-secondary" onclick="AdminApp.closeModal('projectModal')">Ləğv Et</button>
+          <button type="submit" class="adm-btn adm-btn-primary">Yadda Saxla 💾</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Solution Modal -->
+  <div class="adm-modal-backdrop" id="solutionModal">
+    <div class="adm-modal-content" style="max-width: 800px; width: 95%;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem;">
+        <h3 id="solutionModalTitle" style="font-size:1.5rem; font-weight:800;">Xidmət Redaktoru</h3>
+        <div style="display:flex; gap:0.5rem; margin-left:auto; margin-right:1rem;">
+          <button id="solutionAiFillBtn" class="adm-btn adm-btn-secondary" style="border-color:var(--color-brand-magenta); color:var(--color-brand-magenta); display:flex; align-items:center; gap:0.5rem;" type="button" onclick="AdminApp.openAIAssistant('solution', 'generate')">✨ AI ilə doldur</button>
+          <button id="solutionAiImproveBtn" class="adm-btn adm-btn-secondary" style="border-color:var(--color-brand-magenta); color:var(--color-brand-magenta); display:flex; align-items:center; gap:0.5rem;" type="button" onclick="AdminApp.openAIAssistant('solution', 'improve')">✨ AI ilə yaxşılaşdır</button>
+        </div>
+        <button class="adm-btn adm-btn-secondary" style="padding:0.35rem 0.75rem;" onclick="AdminApp.closeModal('solutionModal')">✕</button>
+      </div>
+
+      <div class="modal-tabs" style="overflow-x: auto; white-space: nowrap; display: flex; gap: 0.5rem; padding-bottom: 0.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--adm-border);">
+        <button class="modal-tab-btn active" onclick="AdminApp.switchModalTab(event, 'solTabGeneral')">Ümumi</button>
+        <button class="modal-tab-btn" onclick="AdminApp.switchModalTab(event, 'solTabContent')">Məzmun</button>
+        <button class="modal-tab-btn" onclick="AdminApp.switchModalTab(event, 'solTabMedia')">Media</button>
+        <button class="modal-tab-btn" onclick="AdminApp.switchModalTab(event, 'solTabPublishing')">Dərc Etmə</button>
+        <button class="modal-tab-btn" onclick="AdminApp.switchModalTab(event, 'solTabSEO')">SEO</button>
+      </div>
+
+      <form id="solutionForm">
+        <input type="hidden" id="solEditId" />
+        <div id="solTabGeneral" class="modal-tab-content active">
+          <div style="display:grid; grid-template-columns: 1fr 3fr; gap:1rem;">
+            <div class="form-group">
+              <label class="form-label">NÖMRƏ (№) *</label>
+              <input type="text" id="solNum" class="form-input" placeholder="01" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">XİDMƏT BAŞLIĞI *</label>
+              <input type="text" id="solTitle" class="form-input" placeholder="Brend Strategiyası" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">SLUG (UNİKAL ID-AÇAR) *</label>
+            <input type="text" id="solId" class="form-input" placeholder="Məsələn: brand-strategy" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">QISA ŞÜAR (TAGLINE) *</label>
+            <input type="text" id="solTagline" class="form-input" placeholder="Brend kimliyi yaradılması" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">TƏSVİR / ƏTRAFLI İZAH *</label>
+            <textarea id="solDesc" class="form-textarea" rows="4" required></textarea>
+          </div>
+        </div>
+
+        <!-- Tab 2: Content (Structured Lists) -->
+        <div id="solTabContent" class="modal-tab-content">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem; max-height:400px; overflow-y:auto; padding-right:0.5rem;">
+            
+            <!-- Features list constructor -->
+            <div class="form-group">
+              <label class="form-label">ÖZƏLLİKLƏR (FEATURES)</label>
+              <div style="display:flex; gap:0.5rem; margin-bottom:0.5rem;">
+                <input type="text" id="solFeatureInput" class="form-input" style="margin-bottom:0;" placeholder="Özəllik..." />
+                <button type="button" class="adm-btn adm-btn-secondary" onclick="AdminApp.addSolListItem('features', 'solFeatureInput')">+</button>
+              </div>
+              <div id="solFeaturesList" style="display:flex; flex-direction:column; gap:0.25rem;"></div>
+            </div>
+
+            <!-- Benefits list constructor -->
+            <div class="form-group">
+              <label class="form-label">FƏRQ VƏ ÜSTÜNLÜKLƏR (BENEFITS)</label>
+              <div style="display:flex; gap:0.5rem; margin-bottom:0.5rem;">
+                <input type="text" id="solBenefitInput" class="form-input" style="margin-bottom:0;" placeholder="Üstünlük..." />
+                <button type="button" class="adm-btn adm-btn-secondary" onclick="AdminApp.addSolListItem('benefits', 'solBenefitInput')">+</button>
+              </div>
+              <div id="solBenefitsList" style="display:flex; flex-direction:column; gap:0.25rem;"></div>
+            </div>
+
+            <!-- Process list constructor -->
+            <div class="form-group">
+              <label class="form-label">MƏRHƏLƏLƏR / PROSES (PROCESS)</label>
+              <div style="display:flex; gap:0.5rem; margin-bottom:0.5rem;">
+                <input type="text" id="solProcessInput" class="form-input" style="margin-bottom:0;" placeholder="Mərhələ..." />
+                <button type="button" class="adm-btn adm-btn-secondary" onclick="AdminApp.addSolListItem('process', 'solProcessInput')">+</button>
+              </div>
+              <div id="solProcessList" style="display:flex; flex-direction:column; gap:0.25rem;"></div>
+            </div>
+
+            <!-- Deliverables list constructor -->
+            <div class="form-group">
+              <label class="form-label">TƏHVİL VERİLƏNLƏR (DELIVERABLES)</label>
+              <div style="display:flex; gap:0.5rem; margin-bottom:0.5rem;">
+                <input type="text" id="solDeliverableInput" class="form-input" style="margin-bottom:0;" placeholder="Təhvil verilən..." />
+                <button type="button" class="adm-btn adm-btn-secondary" onclick="AdminApp.addSolListItem('deliverables', 'solDeliverableInput')">+</button>
+              </div>
+              <div id="solDeliverablesList" style="display:flex; flex-direction:column; gap:0.25rem;"></div>
+            </div>
+
+          </div>
+
+          <div class="form-group" style="margin-top:1rem;">
+            <label class="form-label">FƏALİYYƏTƏ ÇAĞIRIŞ (CTA)</label>
+            <input type="text" id="solCta" class="form-input" placeholder="Məsələn: Bizimlə əlaqə saxlayın və layihənizi müzakirə edin." />
+          </div>
+        </div>
+
+        <!-- Tab 3: Media -->
+        <div id="solTabMedia" class="modal-tab-content">
+          <div class="form-group">
+            <label class="form-label">XİDMƏT ÖRTÜK ŞƏKLİ (IMAGE) URL</label>
+            <div style="display:flex; gap:0.5rem;">
+              <input type="text" id="solImage" class="form-input" />
+              <button type="button" class="adm-btn adm-btn-secondary" onclick="AdminApp.openMediaPicker('solImage')">Seç</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: Publishing -->
+        <div id="solTabPublishing" class="modal-tab-content">
+          <div style="display:flex; flex-direction:column; gap:1.5rem;">
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <input type="checkbox" id="solPublished" />
+              <label class="form-label" for="solPublished" style="margin-bottom:0;">İctimai Səhifədə Dərc Edilsin (Published)</label>
+            </div>
+            <div class="form-group" style="max-width: 200px;">
+              <label class="form-label">DÜZÜLÜŞ SIRASI (ORDER)</label>
+              <input type="number" id="solOrder" class="form-input" value="0" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 5: SEO -->
+        <div id="solTabSEO" class="modal-tab-content">
+          <div class="form-group">
+            <label class="form-label">SEO META TITLE</label>
+            <input type="text" id="solMetaTitle" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">SEO META DESCRIPTION</label>
+            <textarea id="solMetaDesc" class="form-textarea" rows="3"></textarea>
+          </div>
+        </div>
+
+
+
+        <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:2rem; border-top:1px solid var(--adm-border); padding-top:1.5rem;">
+          <button type="button" class="adm-btn adm-btn-secondary" onclick="AdminApp.closeModal('solutionModal')">Ləğv Et</button>
+          <button type="submit" class="adm-btn adm-btn-primary">Yadda Saxla 💾</button>
+        </div>
+      </form>
+    </div>
+  </div>  <!-- Article Modal -->
+  <div class="adm-modal-backdrop" id="articleModal">
+    <div class="adm-modal-content" style="max-width: 800px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem;">
+        <h3 id="articleModalTitle" style="font-size:1.5rem; font-weight:800;">Məqalə / Fikir</h3>
+        <div style="display:flex; gap:0.5rem; margin-left:auto; margin-right:1rem;">
+          <button id="articleAiFillBtn" class="adm-btn adm-btn-secondary" style="border-color:var(--color-brand-magenta); color:var(--color-brand-magenta); display:flex; align-items:center; gap:0.5rem;" type="button" onclick="AdminApp.openAIAssistant('article', 'generate')">✨ AI ilə doldur</button>
+          <button id="articleAiImproveBtn" class="adm-btn adm-btn-secondary" style="border-color:var(--color-brand-magenta); color:var(--color-brand-magenta); display:flex; align-items:center; gap:0.5rem;" type="button" onclick="AdminApp.openAIAssistant('article', 'improve')">✨ AI ilə yaxşılaşdır</button>
+        </div>
+        <button class="adm-btn adm-btn-secondary" style="padding:0.35rem 0.75rem;" onclick="AdminApp.closeModal('articleModal')">✕</button>
+      </div>
+
+      <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="AdminApp.switchModalTab(event, 'artTabGeneral')">Ümumi</button>
+        <button class="modal-tab-btn" onclick="AdminApp.switchModalTab(event, 'artTabContent')">Məzmun</button>
+        <button class="modal-tab-btn" onclick="AdminApp.switchModalTab(event, 'artTabMedia')">Media</button>
+        <button class="modal-tab-btn" onclick="AdminApp.switchModalTab(event, 'artTabPublishing')">Dərc Etmə</button>
+        <button class="modal-tab-btn" onclick="AdminApp.switchModalTab(event, 'artTabSEO')">SEO</button>
+        <button class="modal-tab-btn" onclick="AdminApp.switchModalTab(event, 'artTabPreview'); AdminApp.updateArticlePreview();">Önizləmə 👁️</button>
+      </div>
+
+      <form id="articleForm">
+        <input type="hidden" id="artEditId" />
+
+        <!-- Tab 1: General -->
+        <div id="artTabGeneral" class="modal-tab-content active">
+          <div class="form-group">
+            <label class="form-label">MƏQALƏ BAŞLIĞI *</label>
+            <input type="text" id="artTitle" class="form-input" placeholder="Məsələn: Rəqəmsal Brendinq Trendləri" required oninput="AdminApp.handleArtTitleInput(event)" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">SLUG (UNİKAL ID-AÇAR) *</label>
+            <input type="text" id="artSlug" class="form-input" placeholder="Məsələn: reqemsal-brendinq-trendleri" required />
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label class="form-label">KATEQORİYA (TAG) *</label>
+              <input type="text" id="artTag" class="form-input" placeholder="Məsələn: Perspektiv" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">OXU MÜDDƏTİ</label>
+              <input type="text" id="artReadTime" class="form-input" placeholder="Məsələn: 5 dəq" />
+            </div>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label class="form-label">MÜƏLLİF</label>
+              <input type="text" id="artAuthor" class="form-input" placeholder="Admin" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">TARİX</label>
+              <input type="text" id="artDate" class="form-input" placeholder="30 Avqust 2026" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Content -->
+        <div id="artTabContent" class="modal-tab-content">
+          <div class="form-group">
+            <label class="form-label">QISA XÜLASƏ (EXCERPT) *</label>
+            <textarea id="artExcerpt" class="form-textarea" rows="2" placeholder="Sosial media və brendlərin rəqəmsallaşma yolları..." required></textarea>
+          </div>
+          
+          <div style="background:#26221f; border:1px solid var(--adm-border); border-radius:4px; padding:0.75rem; margin-bottom:1rem; font-size:0.75rem;">
+            <span style="font-weight:750; color:#fff; display:block; margin-bottom:0.25rem;">ℹ️ MƏTN FORMATLAMA DESTEK KODLARI:</span>
+            Siz mətndə standard HTML teqlərindən istifadə edə bilərsiniz:<br/>
+            <code>&lt;strong&gt;qalın&lt;/strong&gt;</code>, <code>&lt;em&gt;kursiv&lt;/em&gt;</code>, <code>&lt;h3&gt;Başlıq&lt;/h3&gt;</code>, <code>&lt;blockquote&gt;Sitat&lt;/blockquote&gt;</code>.
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">TAM MƏTN (CONTENT - HTML DƏSTƏKLİ) *</label>
+            <textarea id="artContentText" class="form-textarea" rows="8" placeholder="Brendlərin gələcəyi haqqında ətraflı məqalə..." required></textarea>
+          </div>
+        </div>
+
+        <!-- Tab 3: Media -->
+        <div id="artTabMedia" class="modal-tab-content">
+          <div class="form-group">
+            <label class="form-label">MƏQALƏ ÖRTÜK ŞƏKLİ (COVER IMAGE) URL</label>
+            <div style="display:flex; gap:0.5rem; margin-bottom:1rem;">
+              <input type="text" id="artImage" class="form-input" />
+              <button type="button" class="adm-btn adm-btn-secondary" onclick="AdminApp.openMediaPicker('artImage')">Seç</button>
+            </div>
+            <div id="artImagePreviewContainer" style="display:none; text-align:center; padding:1rem; background:var(--adm-sidebar); border:1px solid var(--adm-border); border-radius:4px;">
+              <img id="artImagePreview" style="max-height:150px; border-radius:4px;" />
+              <div style="margin-top:0.5rem;">
+                <button type="button" class="adm-btn adm-btn-danger" style="font-size:0.75rem; padding:0.25rem 0.5rem;" onclick="AdminApp.removeArticleImage()">Şəkli Sil</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: Publishing -->
+        <div id="artTabPublishing" class="modal-tab-content">
+          <div style="display:flex; flex-direction:column; gap:1.5rem;">
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <input type="checkbox" id="artPublished" checked />
+              <label class="form-label" for="artPublished" style="margin-bottom:0; font-weight:700;">İctimaiyyətə dərc edilsin (Published)</label>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <input type="checkbox" id="artFeatured" />
+              <label class="form-label" for="artFeatured" style="margin-bottom:0; font-weight:700;">Ön səhifədə seçilmiş məqalə (Featured)</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 5: SEO -->
+        <div id="artTabSEO" class="modal-tab-content">
+          <div class="form-group">
+            <label class="form-label">SEO META TITLE</label>
+            <input type="text" id="artMetaTitle" class="form-input" placeholder="Optimal uzunluq: 50-60 simvol" oninput="AdminApp.updateCharCounter('artMetaTitle', 'artMetaTitleCount', 60)" />
+            <span style="font-size:0.75rem; color:var(--adm-text-muted);" id="artMetaTitleCount">0 / 60 simvol (Tövsiyə olunur)</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">SEO META DESCRIPTION</label>
+            <textarea id="artMetaDesc" class="form-textarea" rows="3" placeholder="Optimal uzunluq: 150-160 simvol" oninput="AdminApp.updateCharCounter('artMetaDesc', 'artMetaDescCount', 160)"></textarea>
+            <span style="font-size:0.75rem; color:var(--adm-text-muted);" id="artMetaDescCount">0 / 160 simvol (Tövsiyə olunur)</span>
+          </div>
+        </div>
+
+        <!-- Tab 6: Live Preview inside Modal -->
+        <div id="artTabPreview" class="modal-tab-content">
+          <div style="border:1px solid var(--adm-border); border-radius:4px; padding:1.5rem; background:var(--adm-sidebar); max-height:400px; overflow-y:auto;">
+            <div id="artPreviewHeader" style="display:flex; justify-content:space-between; margin-bottom:1rem; font-size:0.8rem; color:var(--adm-text-muted);">
+              <!-- Tag / Date -->
+            </div>
+            <h2 id="artPreviewTitle" style="font-size:1.75rem; font-weight:900; margin-bottom:1rem; color:#fff;"></h2>
+            <div id="artPreviewAuthorBox" style="font-size:0.85rem; color:var(--adm-text-muted); margin-bottom:1.5rem; border-bottom:1px solid var(--adm-border); padding-bottom:0.75rem;">
+              <!-- Author -->
+            </div>
+            <div id="artPreviewExcerpt" style="font-weight:700; color:var(--adm-text-muted); margin-bottom:1.5rem; font-size:1.05rem;">
+              <!-- Excerpt -->
+            </div>
+            <div id="artPreviewCoverImage" style="text-align:center; margin-bottom:1.5rem; display:none;">
+              <!-- Image preview -->
+            </div>
+            <div id="artPreviewContent" style="line-height:1.6; font-size:0.95rem;">
+              <!-- Main body -->
+            </div>
+          </div>
+        </div>
+
+
+
+        <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:2rem; border-top:1px solid var(--adm-border); padding-top:1.5rem;">
+          <button type="button" class="adm-btn adm-btn-secondary" onclick="AdminApp.closeModal('articleModal')">Ləğv Et</button>
+          <button type="submit" class="adm-btn adm-btn-primary">Yadda Saxla 💾</button>
+        </div>
+      </form>
+    </div>
+</div>
+  <!-- Job Modal -->
+  <div class="adm-modal-backdrop" id="jobModal">
+    <div class="adm-modal-content" style="max-width: 700px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem;">
+        <h3 id="jobModalTitle" style="font-size:1.5rem; font-weight:800;">İş Elanı (Vakansiya)</h3>
+        <div style="display:flex; gap:0.5rem; margin-left:auto; margin-right:1rem;">
+          <button id="jobAiFillBtn" class="adm-btn adm-btn-secondary" style="border-color:var(--color-brand-magenta); color:var(--color-brand-magenta); display:flex; align-items:center; gap:0.5rem;" type="button" onclick="AdminApp.openAIAssistant('job', 'generate')">✨ AI ilə doldur</button>
+          <button id="jobAiImproveBtn" class="adm-btn adm-btn-secondary" style="border-color:var(--color-brand-magenta); color:var(--color-brand-magenta); display:flex; align-items:center; gap:0.5rem;" type="button" onclick="AdminApp.openAIAssistant('job', 'improve')">✨ AI ilə yaxşılaşdır</button>
+        </div>
+        <button class="adm-btn adm-btn-secondary" style="padding:0.35rem 0.75rem;" onclick="AdminApp.closeModal('jobModal')">✕</button>
+      </div>
+
+      <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="AdminApp.switchModalTab(event, 'jobTabGeneral')">Ümumi</button>
+        <button class="modal-tab-btn" onclick="AdminApp.switchModalTab(event, 'jobTabContent')">Məzmun</button>
+        <button class="modal-tab-btn" onclick="AdminApp.switchModalTab(event, 'jobTabPublishing')">Dərc Etmə</button>
+      </div>
+
+      <form id="jobForm">
+        <input type="hidden" id="jobEditId" />
+
+        <!-- Tab 1: General -->
+        <div id="jobTabGeneral" class="modal-tab-content active">
+          <div class="form-group">
+            <label class="form-label">VAKANSİYA BAŞLIĞI *</label>
+            <input type="text" id="jobTitle" class="form-input" placeholder="Senior UX/UI Designer" required oninput="AdminApp.handleJobTitleInput(event)" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">SLUG (UNİKAL ID-AÇAR) *</label>
+            <input type="text" id="jobId" class="form-input" placeholder="ux-ui-designer" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">DEPARTAMENT *</label>
+            <input type="text" id="jobDept" class="form-input" placeholder="Məsələn: Dizayn, Marketinq, Texnologiya" required />
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label class="form-label">İŞ YERİ (LOKASİYA) *</label>
+              <input type="text" id="jobLoc" class="form-input" placeholder="Məsələn: Bakı (Hibrid)" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">MƏŞĞULLUQ NÖVÜ *</label>
+              <select id="jobType" class="form-select" required>
+                <option value="Full-time">Full-time (Tam Ştat)</option>
+                <option value="Part-time">Part-time (Yarım Ştat)</option>
+                <option value="Contract">Contract (Müqaviləli)</option>
+                <option value="Internship">Internship (Təcrübəçi)</option>
+                <option value="Freelance">Freelance (Sərbəst)</option>
+                <option value="Other">Digər</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Content -->
+        <div id="jobTabContent" class="modal-tab-content">
+          <div class="form-group">
+            <label class="form-label">İŞİN TƏSVİRİ (DESCRIPTION) *</label>
+            <textarea id="jobDesc" class="form-textarea" rows="4" placeholder="Komandamız üçün Senior UX/UI dizayner axtarırıq..." required></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">NAMİZƏDƏ TƏLƏBLƏR (REQUIREMENTS - HƏR SƏTİRDƏ BİR DƏNƏ)</label>
+            <textarea id="jobReqs" class="form-textarea" rows="4" placeholder="Figma ilə peşəkar iş bacarığı&#10;Ən azı 3 il iş təcrübəsi"></textarea>
+          </div>
+        </div>
+
+        <!-- Tab 3: Publishing -->
+        <div id="jobTabPublishing" class="modal-tab-content">
+          <div style="display:flex; flex-direction:column; gap:1.5rem;">
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <input type="checkbox" id="jobActive" checked />
+              <label class="form-label" for="jobActive" style="margin-bottom:0; font-weight:700;">Aktiv / Açıq Elan (Active)</label>
+            </div>
+            <div class="form-group" style="max-width: 200px;">
+              <label class="form-label">SIRALAMA DEYƏRİ (ORDER)</label>
+              <input type="number" id="jobOrder" class="form-input" value="0" />
+            </div>
+          </div>
+        </div>
+
+
+
+        <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:2rem; border-top:1px solid var(--adm-border); padding-top:1.5rem;">
+          <button type="button" class="adm-btn adm-btn-secondary" onclick="AdminApp.closeModal('jobModal')">Ləğv Et</button>
+          <button type="submit" class="adm-btn adm-btn-primary">Yadda Saxla 💾</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- User Modal -->
+  <div class="adm-modal-backdrop" id="userModal">
+    <div class="adm-modal-content">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem;">
+        <h3 id="userModalTitle" style="font-size:1.5rem; font-weight:800;">İnzibatçı</h3>
+        <button class="adm-btn adm-btn-secondary" style="padding:0.35rem 0.75rem;" onclick="AdminApp.closeModal('userModal')">✕</button>
+      </div>
+      <form id="userForm">
+        <input type="hidden" id="userEditId" />
+        <div class="form-group">
+          <label class="form-label">AD VE SOYAD *</label>
+          <input type="text" id="userName" class="form-input" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">E-POÇT ÜNVANI *</label>
+          <input type="email" id="userEmail" class="form-input" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">ŞİFRƏ (TƏLƏB OLUNDUĞUNDA)</label>
+          <input type="password" id="userPassword" class="form-input" />
+        </div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+          <div class="form-group">
+            <label class="form-label">ROL *</label>
+            <select id="userRole" class="form-select">
+              <option value="EDITOR">EDITOR</option>
+              <option value="SUPER_ADMIN">SUPER_ADMIN</option>
+            </select>
+          </div>
+          <div class="form-group" style="display:flex; align-items:center; gap:0.5rem; margin-top:1.5rem;">
+            <input type="checkbox" id="userActive" checked />
+            <label class="form-label" for="userActive" style="margin-bottom:0;">Aktiv İstifadəçi</label>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:2rem;">
+          <button type="button" class="adm-btn adm-btn-secondary" onclick="AdminApp.closeModal('userModal')">Ləğv Et</button>
+          <button type="submit" class="adm-btn adm-btn-primary">Yadda Saxla 💾</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Generic Delete Confirmation Modal -->
+  <div class="adm-modal-backdrop" id="deleteConfirmModal" style="z-index:1000;">
+    <div class="adm-modal-content" style="max-width: 420px; text-align: center;">
+      <h3 style="font-size:1.35rem; font-weight:800; margin-bottom:1rem; color:#ef4444;">Fayl və ya Qeyd Silinsin?</h3>
+      <p id="deleteConfirmMessage" style="color:var(--adm-text-muted); margin-bottom:2rem; font-size:0.95rem;">Bu əməliyyat geri qaytarıla bilməz.</p>
+      <div style="display:flex; gap:1rem; justify-content:center;">
+        <button class="adm-btn adm-btn-secondary" onclick="AdminApp.closeModal('deleteConfirmModal')">İmtina Et</button>
+        <button class="adm-btn adm-btn-danger" id="deleteConfirmBtn">Sil 🗑️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail Inbox Modal -->
+  <div class="adm-modal-backdrop" id="inquiryDetailModal">
+    <div class="adm-modal-content" style="max-width: 700px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem;">
+        <h3 style="font-size:1.35rem; font-weight:800;">Müraciət Təfərrüatları</h3>
+        <button class="adm-btn adm-btn-secondary" style="padding:0.35rem 0.75rem;" onclick="AdminApp.closeModal('inquiryDetailModal')">✕</button>
+      </div>
+      
+      <form id="inquiryForm" onsubmit="AdminApp.saveInquiry(event)">
+        <input type="hidden" id="inqEditId" />
+        
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem; margin-bottom:1.5rem;">
+          <div>
+            <div style="color:var(--adm-text-muted); font-size:0.75rem; font-weight:700; margin-bottom:0.25rem;">GÖNDƏRƏN</div>
+            <div class="inqName" style="font-weight:700; font-size:1.1rem; color:#fff;">-</div>
+            <div class="inqEmail" style="color:var(--adm-cyan); font-size:0.9rem;">-</div>
+          </div>
+          <div>
+            <div style="color:var(--adm-text-muted); font-size:0.75rem; font-weight:700; margin-bottom:0.25rem;">ŞİRKƏT / ƏLAQƏ</div>
+            <div class="inqCompany" style="font-weight:700; color:#fff; font-size:0.95rem;">-</div>
+            <div class="inqPhone" style="color:#ccc; font-size:0.9rem;">-</div>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.03); border:1px solid var(--adm-border); padding:1rem; border-radius:6px; margin-bottom:1.5rem;">
+          <div style="color:var(--adm-text-muted); font-size:0.75rem; font-weight:700; margin-bottom:0.5rem; display:flex; justify-content:space-between;">
+            <span>MÖVZU / XİDMƏT: <span id="inqService" style="color:#fff;"></span></span>
+            <span class="inqDate"></span>
+          </div>
+          <div class="inqMessage" style="font-size:0.95rem; line-height:1.5; color:#eee; white-space:pre-wrap;">-</div>
+        </div>
+
+        <div style="border-top:1px solid var(--adm-border); padding-top:1.5rem; display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem;">
+          <div class="form-group">
+            <label class="form-label">STATUS</label>
+            <select id="inqStatus" class="form-input">
+              <option value="NEW">Yeni</option>
+              <option value="IN_PROGRESS">İşlənilir</option>
+              <option value="CONTACTED">Əlaqə saxlanılıb</option>
+              <option value="CLOSED">Bağlanıb</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">MƏSUL ŞƏXS (RESPONSIBLE ADMIN)</label>
+            <input type="text" id="inqAssignedTo" class="form-input" placeholder="Məsələn: Orxan" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">DAXİLİ QEYD (INTERNAL NOTE)</label>
+          <textarea id="inqInternalNote" class="form-textarea" rows="3" placeholder="Yalnız adminlər görür..."></textarea>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:2rem; border-top:1px solid var(--adm-border); padding-top:1.5rem;">
+          <button type="button" class="adm-btn adm-btn-secondary" onclick="AdminApp.closeModal('inquiryDetailModal')">Ləğv Et</button>
+          <button type="submit" class="adm-btn adm-btn-primary">Yadda Saxla 💾</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Detail Application Modal -->
+  <div class="adm-modal-backdrop" id="applicationDetailModal">
+    <div class="adm-modal-content" style="max-width: 500px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem;">
+        <h3 style="font-size:1.35rem; font-weight:800;">İş Müraciəti Təfərrüatı</h3>
+        <button class="adm-btn adm-btn-secondary" style="padding:0.35rem 0.75rem;" onclick="AdminApp.closeModal('applicationDetailModal')">✕</button>
+      </div>
+      <div id="appDetailBox" style="display:flex; flex-direction:column; gap:1rem; font-size:0.95rem;"></div>
+    </div>
+  </div>
+
+  <!-- Client Modal -->
+    <!-- CLIENT MODAL -->
+  <div class="adm-modal-backdrop" id="clientModal">
+    <div class="adm-modal-content" style="max-width: 600px;">
+      <div class="adm-modal-header">
+        <h3 id="clientModalTitle">Müştəri Redaktəsi</h3>
+        <button class="adm-modal-close" onclick="AdminApp.closeModal('clientModal')">✕</button>
+      </div>
+      <div class="adm-modal-body">
+        <form id="clientForm" onsubmit="event.preventDefault(); AdminApp.saveClient();">
+          <input type="hidden" id="clientId" />
+          <input type="hidden" id="clientEditId" />
+          
+          <h4 style="color:var(--adm-magenta); margin-bottom:1rem; margin-top:0.5rem;">Basic Information</h4>
+          
+          <div class="adm-form-group">
+            <label>Müştəri Adı <span style="color:var(--adm-danger);">*</span></label>
+            <input type="text" class="adm-input" id="clientName" required oninput="AdminApp.handleClientNameInput(event)" />
+          </div>
+          
+          <div class="adm-form-group">
+            <label>Unikal ID (Slug)</label>
+            <input type="text" class="adm-input" id="clientSlug" placeholder="avtomatik yaradilir" />
+          </div>
+          
+          <div class="adm-form-group">
+            <label>Vebsayt (URL)</label>
+            <input type="url" class="adm-input" id="clientWebsiteUrl" />
+          </div>
+          
+          <div class="adm-form-group">
+            <label>Haqqında (Description)</label>
+            <textarea class="adm-textarea" id="clientDesc" rows="3"></textarea>
+          </div>
+          
+          <hr style="border:0; border-top:1px solid var(--adm-border); margin: 2rem 0;" />
+          <h4 style="color:var(--adm-magenta); margin-bottom:1rem;">Brand Assets</h4>
+          
+          <div class="adm-form-group">
+            <label>Client Logo</label>
+            <input type="hidden" id="clientLogoUrl" />
+            
+            <div id="clientLogoPreviewBox" style="border:1px solid var(--adm-border); border-radius:var(--adm-radius-sm); padding:2rem; text-align:center; background:rgba(255,255,255,0.02); margin-bottom:1rem;">
+              <div id="clientLogoPreviewContainer" style="display:none;">
+                <img id="clientLogoPreview" src="" alt="Logo" style="max-width:160px; max-height:90px; object-fit:contain;" />
+              </div>
+            </div>
+            
+            <div style="display:flex; gap:1rem;">
+              <button type="button" class="adm-btn adm-btn-secondary" onclick="AdminApp.openMediaPickerFor('clientLogoUrl', 'clientLogoPreviewBox', true)">Logo Seç / Dəyişdir</button>
+              <button type="button" class="adm-btn adm-btn-danger" id="clientLogoRemoveBtn" style="display:none;" onclick="AdminApp.removeClientLogo()">Logonu Sil</button>
+            </div>
+          </div>
+          
+          <hr style="border:0; border-top:1px solid var(--adm-border); margin: 2rem 0;" />
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div>
+              <h4 style="color:var(--adm-magenta); margin-bottom:0.5rem;">Status</h4>
+              <p style="font-size:0.85rem; color:var(--adm-text-muted); margin-bottom:1rem;">Aktiv müştərilər saytda göstərilir.</p>
+              <label class="adm-toggle">
+                <input type="checkbox" id="clientActive" checked />
+                <span class="adm-toggle-slider"></span>
+              </label>
+
+              <div class="adm-form-group" style="margin-top:1.25rem; max-width:160px;">
+                <label>Sıralama</label>
+                <input type="number" class="adm-input" id="clientOrder" value="0" />
+              </div>
+            </div>
+            <div id="clientRelatedProjectsBox" style="display:none; text-align:right;">
+              <h4 style="color:var(--adm-magenta); margin-bottom:0.5rem;">Related Content</h4>
+              <div class="adm-badge" style="background:rgba(0,122,255,0.1); color:var(--adm-cyan);" id="clientProjectsCount">0 layihə</div>
+            </div>
+          </div>
+          
+          <div style="margin-top: 2rem; display: flex; justify-content: flex-end; gap: 1rem;">
+            <button type="button" class="adm-btn adm-btn-secondary" onclick="AdminApp.closeModal('clientModal')">İmtina Et</button>
+            <button type="submit" class="adm-btn adm-btn-primary" id="saveClientBtn">Yadda Saxla</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+    <!-- INQUIRY CRM MODAL -->
+  <div class="adm-modal-backdrop" id="inquiryModal">
+    <div class="adm-modal-content" style="max-width: 700px;">
+      <div class="adm-modal-header">
+        <h3 id="inquiryModalTitle">Müştəri Sorğusu</h3>
+        <button class="adm-modal-close" onclick="AdminApp.closeModal('inquiryModal')">✕</button>
+      </div>
+      <div class="adm-modal-body">
+        <div style="display:flex; gap:2rem; flex-wrap:wrap;">
+          
+          <div style="flex:1; min-width:300px;">
+            <h4 style="color:var(--adm-magenta); margin-bottom:1rem;">Contact Info</h4>
+            <div style="margin-bottom:0.5rem;"><strong>Ad:</strong> <span class="inqName"></span></div>
+            <div style="margin-bottom:0.5rem;"><strong>Email:</strong> <span class="inqEmail"></span></div>
+            <div style="margin-bottom:0.5rem;"><strong>Telefon:</strong> <span class="inqPhone"></span></div>
+            <div style="margin-bottom:0.5rem;"><strong>Şirkət:</strong> <span class="inqCompany"></span></div>
+            <div style="margin-bottom:1rem;"><strong>Tarix:</strong> <span class="inqDate"></span></div>
+            
+            <h4 style="color:var(--adm-magenta); margin-bottom:1rem;">Inquiry Message</h4>
+            <div style="margin-bottom:0.5rem;"><strong>Mövzu:</strong> <span id="inqSubject"></span></div>
+            <div style="padding:1rem; background:rgba(255,255,255,0.03); border:1px solid var(--adm-border); border-radius:var(--adm-radius-sm); white-space:pre-wrap; margin-bottom:1rem;" class="inqMessage"></div>
+          </div>
+          
+          <div style="flex:1; min-width:250px;">
+            <h4 style="color:var(--adm-magenta); margin-bottom:1rem;">Assignment & Status</h4>
+            <form id="inquiryForm2" onsubmit="event.preventDefault(); AdminApp.saveInquiry2();">
+              <input type="hidden" id="inqId" />
+              
+              <div class="adm-form-group">
+                <label>Status</label>
+                <select id="inqStatusInput" class="adm-select">
+                  <option value="NEW">Yeni</option>
+                  <option value="IN_PROGRESS">Baxılır</option>
+                  <option value="CONTACTED">Cavablandırılıb</option>
+                  <option value="CLOSED">Bağlanıb</option>
+                </select>
+              </div>
+              
+              <div class="adm-form-group">
+                <label>Priority</label>
+                <select id="inqPriorityInput" class="adm-select">
+                  <option value="Low">Low</option>
+                  <option value="Normal">Normal</option>
+                  <option value="High">High</option>
+                  <option value="Urgent">Urgent</option>
+                </select>
+              </div>
+              
+              <div class="adm-form-group">
+                <label>Responsible Admin</label>
+                <select id="inqAssigneeInput" class="adm-select">
+                  <option value="">-- Təyin edilməyib --</option>
+                  <!-- Populated by JS -->
+                </select>
+              </div>
+              
+              <div class="adm-form-group">
+                <label>Internal Note (Private)</label>
+                <textarea id="inqNoteInput" class="adm-textarea" rows="3" placeholder="Adminlər üçün daxili qeydlər..."></textarea>
+              </div>
+              
+              <div style="margin-top: 1.5rem; display: flex; flex-direction:column; gap: 0.5rem;">
+                <button type="submit" class="adm-btn adm-btn-primary" id="saveInqBtn" style="width:100%;">Yadda Saxla</button>
+                <button type="button" class="adm-btn adm-btn-danger" style="width:100%;" onclick="AdminApp.deleteCurrentInquiry()">Sil</button>
+              </div>
+            </form>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- APPLICATION CRM MODAL -->
+  <div class="adm-modal-backdrop" id="applicationModal">
+    <div class="adm-modal-content" style="max-width: 600px;">
+      <div class="adm-modal-header">
+        <h3 id="appModalTitle">İş Müraciəti</h3>
+        <button class="adm-modal-close" onclick="AdminApp.closeModal('applicationModal')">✕</button>
+      </div>
+      <div class="adm-modal-body">
+        
+        <h4 style="color:var(--adm-magenta); margin-bottom:1rem;">Candidate</h4>
+        <div style="margin-bottom:0.5rem;"><strong>Ad:</strong> <span id="appName"></span></div>
+        <div style="margin-bottom:0.5rem;"><strong>Email:</strong> <span id="appEmail"></span></div>
+        <div style="margin-bottom:0.5rem;"><strong>Telefon:</strong> <span id="appPhone"></span></div>
+        <div style="margin-bottom:0.5rem;"><strong>Tarix:</strong> <span id="appDate"></span></div>
+        
+        <hr style="border:0; border-top:1px solid var(--adm-border); margin: 1.5rem 0;" />
+        <h4 style="color:var(--adm-magenta); margin-bottom:1rem;">Application details</h4>
+        <div style="margin-bottom:0.5rem;"><strong>Vakansiya:</strong> <span id="appJobTitle"></span></div>
+        <div style="padding:1rem; background:rgba(255,255,255,0.03); border:1px solid var(--adm-border); border-radius:var(--adm-radius-sm); white-space:pre-wrap; margin-bottom:1.5rem;" id="appMessage"></div>
+        
+        <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+          <div style="flex:1; max-width:200px;">
+            <label style="display:block; margin-bottom:0.5rem; font-size:0.85rem;">Status Update</label>
+            <select id="appStatusInput" class="adm-select" onchange="AdminApp.updateApplicationStatus(this.value)">
+              <option value="New">Yeni (New)</option>
+              <option value="Reviewing">Baxılır (Reviewing)</option>
+              <option value="Shortlisted">Seçilib (Shortlisted)</option>
+              <option value="Rejected">Rədd edilib (Rejected)</option>
+              <option value="Hired">İşə qəbul (Hired)</option>
+            </select>
+          </div>
+          <div>
+            <button id="appDownloadCvBtn" class="adm-btn adm-btn-primary" style="display:none;" onclick="AdminApp.downloadCurrentCV()">CV-yə Bax (Download)</button>
+            <span id="appNoCvText" style="color:var(--adm-text-muted); font-size:0.85rem; display:none;">CV əlavə edilməyib</span>
+          </div>
+        </div>
+        
+        <div style="margin-top: 2rem; border-top:1px solid var(--adm-border); padding-top:1rem; text-align:right;">
+           <button type="button" class="adm-btn adm-btn-danger" onclick="AdminApp.deleteCurrentApplication()">Müraciəti Sil</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FIX (2026-09): Burada `aiAssistantModal` modalinin YALNIZ footer-i qalmisdi
+       (modalin ozu silinib), ustelik 3 artiq bagli div tegi var idi.
+       Netice: "Imtina Et" ve "Tetbiq Et" duymeleri birbasa <body>-ye dusub
+       sehifenin sag kenarinda 3500px hundurluyunde dik zolaq kimi gorunurdu
+       ve butun DOM ic-ice quruluşunu pozurdu. Orfan blok tam silindi.
+       AI paneli artiq #aiContentManagerModal-dir (asagida). -->
+
+<script>
+    // Close dropdowns globally
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.lang-selector')) {
+        document.getElementById('langMenu')?.classList.remove('active');
+      }
+      if (!e.target.closest('.user-menu')) {
+        document.getElementById('userDropdownMenu')?.classList.remove('active');
+      }
+    });
+  </script>
+
+  <!-- MEDIA PICKER DIALOG (FIX 2026-09: JS-de tam hazir idi, lakin HTML-de
+       modal umumiyyetle YOX idi -> butun "Sec" duymeleri "Cannot read
+       properties of null" xetasi verib hec ne etmirdi.) -->
+  <div class="adm-modal-backdrop" id="mediaPickerDialog" style="z-index:950;">
+    <div class="adm-modal-content" style="max-width: 900px; width: 95%;">
+      <div class="adm-modal-header">
+        <h3>Media Kitabxanasindan Sec</h3>
+        <button type="button" class="adm-modal-close" onclick="AdminApp.closeModal('mediaPickerDialog')">&#10005;</button>
+      </div>
+      <div class="adm-modal-body">
+        <div class="adm-toolbar" style="margin-bottom:1.25rem;">
+          <div class="adm-toolbar-search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="mediaPickerSearch" placeholder="Fayl adi ile axtar..." oninput="AdminApp.renderMediaPickerGrid()" />
+          </div>
+          <div class="adm-toolbar-filters">
+            <button type="button" class="adm-btn adm-btn-secondary" onclick="document.getElementById('mediaPickerUploadInput').click()">&#8593; Yeni sekil yukle</button>
+            <input type="file" id="mediaPickerUploadInput" accept="image/*" style="display:none;" onchange="AdminApp.handleMediaPickerUpload(event)" />
+            <button type="button" class="adm-btn adm-btn-secondary" onclick="AdminApp.promptVimeoUpload(true)">+ Vimeo video</button>
+          </div>
+        </div>
+
+        <div id="mediaPickerGrid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:1rem; max-height:52vh; overflow-y:auto; padding:0.25rem;">
+          <!-- JS terefinden doldurulur -->
+        </div>
+
+        <div style="margin-top:1.5rem; display:flex; justify-content:flex-end; border-top:1px solid var(--adm-border); padding-top:1.25rem;">
+          <button type="button" class="adm-btn adm-btn-secondary" onclick="AdminApp.closeModal('mediaPickerDialog')">Bagla</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- AI Content Manager Modal -->
+    <div id="aiContentManagerModal" class="adm-modal-backdrop">
+        <div class="modal-content" style="max-width: 1200px; display: flex; flex-direction: column; height: 90vh;">
+            <div class="modal-header">
+                <h2><i class="fi fi-rr-sparkles"></i> AI Content Manager</h2>
+                <span class="close-modal" onclick="closeModal('aiContentManagerModal')">&times;</span>
+            </div>
+            <div class="modal-body" style="display: flex; gap: 2rem; flex: 1; overflow: hidden; padding: 1.5rem;">
+                <!-- Left: Settings & Input -->
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 1rem; overflow-y: auto; padding-right: 1rem; border-right: 1px solid var(--border-color);">
+                    <div class="form-group" id="aiEntityGroup">
+                        <label>Content Type</label>
+                        <select id="aiContentType" class="form-control">
+                            <option value="project">Project</option>
+                            <option value="solution">Solution</option>
+                            <option value="article">Article</option>
+                            <option value="job">Job / Career</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Language</label>
+                        <select id="aiLanguage" class="form-control">
+                            <option value="Azərbaycan dili">Azərbaycan dili</option>
+                            <option value="English">English</option>
+                            <option value="Russian">Russian</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Tone & Style</label>
+                        <select id="aiTone" class="form-control">
+                            <option value="Professional & Premium">Professional & Premium</option>
+                            <option value="Corporate">Corporate</option>
+                            <option value="Editorial">Editorial</option>
+                            <option value="Minimal">Minimal</option>
+                            <option value="Sales-focused">Sales-focused</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" style="flex: 1; display: flex; flex-direction: column;">
+                        <label>Instruction</label>
+                        <textarea id="aiInstruction" class="form-control" placeholder="Təlimatınızı bura yazın (məs: 2026 üçün premium branding layihəsi yarat...)" style="flex: 1; resize: none; min-height: 200px;" maxlength="4000"></textarea>
+                        <small class="form-help">Max 4000 simvol. Dəqiq və aydın təlimat verin.</small>
+                    </div>
+                    
+                    <div class="form-actions" style="margin-top: 1rem;">
+                        <button type="button" class="btn btn-primary" id="btnAIGenerate" style="width: 100%; justify-content: center;">
+                            <i class="fi fi-rr-magic-wand"></i> Yarat (Generate)
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Right: Preview & Review -->
+                <div style="flex: 1.5; display: flex; flex-direction: column; overflow-y: auto; padding-left: 1rem; position: relative;">
+                    
+                    <!-- Loading overlay -->
+                    <div id="aiLoadingState" style="display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.8); z-index: 10; align-items: center; justify-content: center; flex-direction: column;">
+                        <div class="spinner" style="width: 40px; height: 40px; border: 4px solid var(--primary-light); border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                        <p style="margin-top: 1rem; font-weight: 500;">AI məzmun hazırlayır, lütfən gözləyin...</p>
+                    </div>
+                    
+                    <div class="empty-state" id="aiEmptyState">
+                        <i class="fi fi-rr-document" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 1rem;"></i>
+                        <h3>Nəticə yoxdur</h3>
+                        <p>Sol tərəfdən təlimat verin və AI tərəfindən yaradılacaq məzmunu burada görəcəksiniz.</p>
+                    </div>
+                    
+                    <!-- Preview Form Fields (Dynamic injection) -->
+                    <div id="aiPreviewForm" style="display: none; flex-direction: column; gap: 1.5rem;">
+                        <!-- Fields injected via JS -->
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="modal-footer" id="aiModalFooter" style="display: none; justify-content: space-between;">
+                <div>
+                    <button class="btn btn-outline" onclick="AIContentManager.regenerate()"><i class="fi fi-rr-refresh"></i> Yenidən Yarat</button>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <button class="btn btn-outline" onclick="closeModal('aiContentManagerModal')">Ləğv et</button>
+                    <button class="btn btn-primary" onclick="AIContentManager.applyToEditor()">
+                        <i class="fi fi-rr-check"></i> Formaya Tətbiq et (Apply)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN ADMIN SCRIPT -->
+    <script src="js/admin.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+- `[x]` Audit frontend & backend code and fix API_BASE conflicts
+- `[x]` Ensure cookie configurations are correct for development/production
+- `[x]` Verify/update Prisma schema, run migrations, verify seed configuration
+- `[x]` Test admin authentication, dashboard metrics, and CRUD operations
+- `[x]` Test submission actions, CV file uploads, and secure streaming downloads
+- `[x]` Validate security parameters (CORS, Helmet, generic logins, generic errors)
+- `[x]` Execute automated tests to verify full route integrity
+- `[x]` Ensure no console errors remain on browser screens
