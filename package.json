@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "cd backend && npm run dev",
-    "start": "cd backend && npm start"
+    "start": "cd backend && npm start",
+    "test": "node tests/verify-hero.js"
   }
 }

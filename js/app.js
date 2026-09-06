@@ -57,20 +57,18 @@ const App = {
       this.renderAll();
     } catch (e) {
       console.error("Məlumatlar yüklənərkən xəta baş verdi:", e);
-      // Dev mode local fallback check
+      let local = null;
       if (typeof BrandfullStore !== 'undefined' && BrandfullStore.isDevFallbackAllowed()) {
-        const local = await import('./seed-data.js').catch(() => null);
-        if (local) {
-          this.data = {
-            ...BRANDFULL_DEFAULT_DATA,
-            projects: local.projects,
-            solutions: local.solutions,
-            articles: local.articles,
-            jobs: local.jobs
-          };
-          this.renderAll();
-        }
+        local = await import('./seed-data.js').catch(() => null);
       }
+      this.data = {
+        ...BRANDFULL_DEFAULT_DATA,
+        projects: local?.projects || [],
+        solutions: local?.solutions || [],
+        articles: local?.articles || [],
+        jobs: local?.jobs || []
+      };
+      this.renderAll();
     }
   },
 
@@ -105,7 +103,7 @@ const App = {
         return `
           <section class="hero-dark-opening">
             <div class="hero-dark-center-visual">
-              <img class="inflatable-3d-letter" src="${block.mediaUrl || ''}" alt="${title || ''}">
+              <img class="inflatable-3d-letter" id="heroShowreelVisual" src="${block.mediaUrl || ''}" alt="${title || ''}">
             </div>
             <div class="hero-dark-bottom-content">
               <div style="z-index: 10;">
@@ -193,14 +191,141 @@ const App = {
           }
       }
 
-      const heroVideo = document.getElementById('heroShowreelVideo');
-      if (heroVideo && s.showreelVideoUrl) {
-        const src = heroVideo.querySelector('source');
-        if (src && src.src !== s.showreelVideoUrl) {
-          src.src = s.showreelVideoUrl;
-          heroVideo.load();
+      // Hero Center Visual Media (Poster / Video) from Admin Dynamic Settings
+      const heroCenterVisual = document.querySelector('.hero-dark-center-visual');
+      const heroVisual = document.getElementById('heroShowreelVisual') ||
+                         document.querySelector('.hero-dark-center-visual img') ||
+                         document.querySelector('.hero-dark-opening img.inflatable-3d-letter') ||
+                         document.querySelector('img.inflatable-3d-letter');
+
+      const videoUrl = (typeof s.showreelVideoUrl === 'string') ? s.showreelVideoUrl.trim() : '';
+      const posterUrl = (typeof s.showreelPosterUrl === 'string') ? s.showreelPosterUrl.trim() : '';
+
+      // Sync poster image src if provided
+      if (heroVisual && posterUrl) {
+        heroVisual.src = posterUrl;
+      }
+
+      // If video URL is provided, inject/update video element in hero visual container
+      if (videoUrl && heroCenterVisual) {
+        let heroVid = document.getElementById('heroShowreelVideo');
+        const handleVideoError = () => {
+          if (heroVisual) heroVisual.style.display = '';
+          if (heroVid) heroVid.style.display = 'none';
+        };
+
+        if (!heroVid) {
+          heroVid = document.createElement('video');
+          heroVid.id = 'heroShowreelVideo';
+          heroVid.className = 'inflatable-3d-letter';
+          heroVid.autoplay = true;
+          heroVid.loop = true;
+          heroVid.muted = true;
+          heroVid.defaultMuted = true;
+          heroVid.playsInline = true;
+          heroVid.setAttribute('autoplay', '');
+          heroVid.setAttribute('loop', '');
+          heroVid.setAttribute('muted', '');
+          heroVid.setAttribute('playsinline', '');
+          heroVid.setAttribute('webkit-playsinline', '');
+          if (posterUrl) {
+            heroVid.poster = posterUrl;
+            heroVid.setAttribute('poster', posterUrl);
+          }
+
+          // Graceful error fallback: capture error on video and source
+          heroVid.addEventListener('error', handleVideoError, true);
+
+          const source = document.createElement('source');
+          source.src = videoUrl;
+          source.type = 'video/mp4';
+          source.addEventListener('error', handleVideoError);
+          heroVid.appendChild(source);
+          heroVid.src = videoUrl;
+
+          heroCenterVisual.appendChild(heroVid);
+          heroVid.play().catch(() => {});
+        } else {
+          // Update existing video element
+          const source = heroVid.querySelector('source');
+          const currentSrc = source ? (source.getAttribute('src') || source.src) : (heroVid.getAttribute('src') || heroVid.src);
+          if (currentSrc !== videoUrl) {
+            if (source) {
+              source.src = videoUrl;
+              source.setAttribute('src', videoUrl);
+            }
+            heroVid.src = videoUrl;
+            heroVid.style.display = '';
+            heroVid.load();
+            heroVid.play().catch(() => {});
+          }
+          if (posterUrl) {
+            heroVid.poster = posterUrl;
+            heroVid.setAttribute('poster', posterUrl);
+          } else {
+            heroVid.removeAttribute('poster');
+            heroVid.poster = '';
+          }
         }
-        if (s.showreelPosterUrl) heroVideo.poster = s.showreelPosterUrl;
+        // Hide fallback image only when video is active and not errored/hidden
+        if (heroVisual) {
+          heroVisual.style.display = (heroVid && heroVid.style.display === 'none') ? '' : 'none';
+        }
+        const mp = (typeof MediaPlayer !== 'undefined') ? MediaPlayer : (typeof window !== 'undefined' ? window.MediaPlayer : null);
+        if (mp) {
+          mp.video = heroVid;
+        }
+      } else {
+        // No video URL provided: clean up any existing hero video and show the image
+        const existingHeroVid = document.getElementById('heroShowreelVideo');
+        if (existingHeroVid) {
+          try { existingHeroVid.pause(); } catch (e) {}
+          existingHeroVid.remove();
+        }
+        if (heroVisual) {
+          heroVisual.style.display = '';
+        }
+        const mp = (typeof MediaPlayer !== 'undefined') ? MediaPlayer : (typeof window !== 'undefined' ? window.MediaPlayer : null);
+        if (mp) {
+          mp.video = null;
+        }
+      }
+
+      // Update Lightbox Modal Video and Poster
+      const modalVideo = document.getElementById('modalVideo');
+      if (modalVideo) {
+        if (videoUrl) {
+          const src = modalVideo.querySelector('source');
+          const currentModalSrc = src ? (src.getAttribute('src') || src.src) : (modalVideo.getAttribute('src') || modalVideo.src);
+          if (currentModalSrc !== videoUrl) {
+            if (src) {
+              src.src = videoUrl;
+              src.setAttribute('src', videoUrl);
+            }
+            modalVideo.src = videoUrl;
+            modalVideo.setAttribute('src', videoUrl);
+            modalVideo.load();
+          }
+        } else {
+          const src = modalVideo.querySelector('source');
+          const currentModalSrc = src ? (src.getAttribute('src') || src.src) : (modalVideo.getAttribute('src') || modalVideo.src);
+          if (currentModalSrc && currentModalSrc !== 'Showreel.mp4') {
+            if (src) {
+              src.src = 'Showreel.mp4';
+              src.setAttribute('src', 'Showreel.mp4');
+            }
+            modalVideo.src = 'Showreel.mp4';
+            modalVideo.setAttribute('src', 'Showreel.mp4');
+            modalVideo.load();
+          }
+        }
+        if (posterUrl) {
+          modalVideo.poster = posterUrl;
+          modalVideo.setAttribute('poster', posterUrl);
+        } else {
+          modalVideo.removeAttribute('poster');
+          modalVideo.poster = '';
+        }
       }
     },
 
@@ -260,6 +385,16 @@ const App = {
     if (activeView) {
       activeView.style.display = 'block';
       setTimeout(() => activeView.classList.add('is-active'), 20);
+    }
+
+    // Video play/pause management on route transitions
+    const heroVid = document.getElementById('heroShowreelVideo');
+    if (heroVid) {
+      if (targetRoute === 'home') {
+        heroVid.play().catch(() => {});
+      } else {
+        try { heroVid.pause(); } catch (e) {}
+      }
     }
     
     // Dynamically load blocks if the container exists
@@ -1184,7 +1319,15 @@ const App = {
   }
 };
 
-document.addEventListener('DOMContentLoaded', () => {
+if (typeof window !== 'undefined') {
+  window.App = App;
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    App.init();
+  });
+} else {
   App.init();
-});
+}
 

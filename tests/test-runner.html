@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <title>Hero Media Integration Test Runner</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #111; color: #eee; padding: 2rem; }
+    h1 { color: #8dc63f; }
+    .test-result { padding: 0.5rem 1rem; margin: 0.25rem 0; border-radius: 4px; }
+    .pass { background: rgba(16, 185, 129, 0.2); border-left: 4px solid #10b981; }
+    .fail { background: rgba(239, 68, 68, 0.2); border-left: 4px solid #ef4444; }
+    #test-sandbox { display: none; }
+  </style>
+</head>
+<body>
+  <h1>Hero Media Integration - Test Results</h1>
+  <div id="results"></div>
+
+  <!-- Sandbox DOM matching index.html structure -->
+  <div id="test-sandbox">
+    <section class="hero-dark-opening">
+      <div class="hero-dark-center-visual">
+        <img class="inflatable-3d-letter" id="heroShowreelVisual" src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt248c176a03654ddd/6a905376a594511f0962c3ec/Hs_Poster.jpg?auto=webp" alt="Brandfull 3D Visual" />
+      </div>
+    </section>
+    <div id="videoModal">
+      <video id="modalVideo">
+        <source src="Showreel.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/media-player.js"></script>
+  <script src="../js/app.js"></script>
+  <script>
+    const resultsContainer = document.getElementById('results');
+    let total = 0;
+    let passed = 0;
+
+    function report(name, condition, details = '') {
+      total++;
+      if (condition) passed++;
+      const div = document.createElement('div');
+      div.className = `test-result ${condition ? 'pass' : 'fail'}`;
+      div.innerHTML = `<strong>${condition ? '✓ PASS' : '✗ FAIL'}</strong>: ${name} ${details ? `<small>(${details})</small>` : ''}`;
+      resultsContainer.appendChild(div);
+    }
+
+    // Run tests directly on the live App instance
+    window.addEventListener('DOMContentLoaded', () => {
+      const heroVisual = document.getElementById('heroShowreelVisual');
+      const centerVisual = document.querySelector('.hero-dark-center-visual');
+      const modalVideo = document.getElementById('modalVideo');
+
+      // Test 1: Poster Only
+      App.data = { settings: { showreelPosterUrl: 'https://cdn.example.com/poster-custom.jpg' } };
+      App.renderSiteSettings();
+
+      report('R1: Poster-only sets image src', heroVisual.src.includes('poster-custom.jpg'));
+      report('R1: Poster-only keeps image visible', heroVisual.style.display !== 'none');
+      report('R1: Poster-only does not inject video', document.getElementById('heroShowreelVideo') === null);
+
+      // Test 2: Video Only
+      App.data = { settings: { showreelVideoUrl: 'https://cdn.example.com/custom-vid.mp4' } };
+      App.renderSiteSettings();
+
+      const injectedVid = document.getElementById('heroShowreelVideo');
+      report('R1: Video-only injects heroShowreelVideo element', injectedVid !== null);
+      report('R1: Video-only sets video src', injectedVid && injectedVid.src.includes('custom-vid.mp4'));
+      report('R1: Video-only sets class inflatable-3d-letter', injectedVid && injectedVid.classList.contains('inflatable-3d-letter'));
+      report('R1: Video-only hides fallback image', heroVisual.style.display === 'none');
+      report('R1: Video-only has muted attribute', injectedVid && injectedVid.hasAttribute('muted'));
+      report('R1: Video-only has autoplay attribute', injectedVid && injectedVid.hasAttribute('autoplay'));
+      report('R1: Video-only has playsinline attribute', injectedVid && injectedVid.hasAttribute('playsinline'));
+      report('R1: Video-only updates modalVideo', modalVideo && modalVideo.querySelector('source').src.includes('custom-vid.mp4'));
+
+      // Test 3: BOTH Video and Poster (CRITICAL PRIOR FLAW)
+      App.data = { settings: { 
+        showreelVideoUrl: 'https://cdn.example.com/video-both.mp4',
+        showreelPosterUrl: 'https://cdn.example.com/poster-both.jpg'
+      } };
+      App.renderSiteSettings();
+
+      const bothVid = document.getElementById('heroShowreelVideo');
+      report('R1 (Both): Video element is active and NOT removed', bothVid !== null);
+      report('R1 (Both): Video element has poster attribute', bothVid && bothVid.getAttribute('poster') === 'https://cdn.example.com/poster-both.jpg');
+      report('R1 (Both): Fallback image src is updated', heroVisual.src.includes('poster-both.jpg'));
+      report('R1 (Both): Fallback image remains hidden while video is active', heroVisual.style.display === 'none');
+      report('R1 (Both): modalVideo has poster attribute', modalVideo && modalVideo.getAttribute('poster') === 'https://cdn.example.com/poster-both.jpg');
+
+      // Test 4: Dynamic Switch back to Poster Only
+      App.data = { settings: { showreelPosterUrl: 'https://cdn.example.com/poster-after.jpg' } };
+      App.renderSiteSettings();
+
+      report('R1 (Switch): Video element cleanly removed on transition to poster-only', document.getElementById('heroShowreelVideo') === null);
+      report('R1 (Switch): Image restored to visible', heroVisual.style.display !== 'none');
+      report('R1 (Switch): Image src updated to new poster', heroVisual.src.includes('poster-after.jpg'));
+
+      // Test 5: Dynamic Switch to None (Cleared settings)
+      App.data = { settings: {} };
+      App.renderSiteSettings();
+
+      report('R1 (Clear): Video element remains absent', document.getElementById('heroShowreelVideo') === null);
+      report('R1 (Clear): Image remains visible', heroVisual.style.display !== 'none');
+      report('R1 (Clear): Modal video reverts to Showreel.mp4', modalVideo && modalVideo.querySelector('source').src.includes('Showreel.mp4'));
+
+      // Test 6: Whitespace handling
+      const currentSrc = heroVisual.src;
+      App.data = { settings: { showreelVideoUrl: '   ', showreelPosterUrl: '   ' } };
+      App.renderSiteSettings();
+
+      report('R1 (Whitespace): Whitespace video does not inject video element', document.getElementById('heroShowreelVideo') === null);
+      report('R1 (Whitespace): Whitespace poster does not overwrite image src', heroVisual.src === currentSrc);
+      report('R1 (Whitespace): Hero image remains visible', heroVisual.style.display !== 'none');
+
+      // Test 7: Error Fallback
+      App.data = { settings: { showreelVideoUrl: 'https://cdn.example.com/broken-test.mp4' } };
+      App.renderSiteSettings();
+      const testVid = document.getElementById('heroShowreelVideo');
+      report('R1 (Error Fallback): Video injected before error', testVid !== null);
+      if (testVid) {
+        testVid.dispatchEvent(new Event('error'));
+        report('R1 (Error Fallback): Fallback image restored on video error event', heroVisual.style.display !== 'none');
+        report('R1 (Error Fallback): Broken video element hidden on error', testVid.style.display === 'none');
+
+        // Test 8: Re-render after error maintains fallback image
+        App.renderSiteSettings();
+        report('R1 (Error Persistence): Fallback image remains visible after re-render', heroVisual.style.display !== 'none');
+        report('R1 (Error Persistence): Broken video remains hidden after re-render', testVid.style.display === 'none');
+      }
+
+      // Test 9: Global window exports
+      report('R1 (Global Exports): window.App is exported', typeof window.App !== 'undefined' && window.App === App);
+      report('R1 (Global Exports): window.MediaPlayer is exported', typeof window.MediaPlayer !== 'undefined' && window.MediaPlayer === MediaPlayer);
+
+      // Test 10: Modal video pause/resume coordination
+      App.data = { settings: { showreelVideoUrl: 'https://cdn.example.com/playing-test.mp4' } };
+      App.renderSiteSettings();
+      const activeHeroVid = document.getElementById('heroShowreelVideo');
+      if (activeHeroVid) {
+        let heroPaused = false;
+        let heroPlayed = false;
+        activeHeroVid.pause = () => { heroPaused = true; };
+        activeHeroVid.play = () => { heroPlayed = true; return Promise.resolve(); };
+        
+        MediaPlayer.openModal();
+        report('R1 (Modal Coordination): Opening modal pauses hero video', heroPaused);
+
+        MediaPlayer.closeModal();
+        report('R1 (Modal Coordination): Closing modal resumes hero video', heroPlayed);
+      }
+
+      // Cleanup
+      App.data = { settings: {} };
+      App.renderSiteSettings();
+
+      const summary = document.createElement('h3');
+      summary.style.marginTop = '2rem';
+      summary.style.color = passed === total ? '#10b981' : '#ef4444';
+      summary.textContent = `All Tests Completed: ${passed} / ${total} Passed`;
+      document.body.appendChild(summary);
+    });
+  </script>
+</body>
+</html>
