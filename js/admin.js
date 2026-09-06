@@ -904,18 +904,18 @@
       const pageSubtitle = document.getElementById('pageSubtitle');
       
       const tabMeta = {
-        dashboard: { t: 'İcmal (Dashboard)', s: 'Sistem göstəriciləri və son fəaliyyətlər.' },
-        projects: { t: 'Layihələr (Portfolio)', s: 'Bütün işləri buradan yaradın, redaktə edin, silin və dərc edin.' },
-        clients: { t: 'Müştərilər (Clients)', s: 'Brendlərin siyahısı və loqoları.' },
+        dashboard: { t: 'İcmal ', s: 'Sistem göstəriciləri və son fəaliyyətlər.' },
+        projects: { t: 'Layihələr ', s: 'Bütün işləri buradan yaradın, redaktə edin, silin və dərc edin.' },
+        clients: { t: 'Müştərilər ', s: 'Brendlərin siyahısı və loqoları.' },
         media: { t: 'Media Kitabxanası', s: 'Təsvirlər və vizual materialların idarə olunması.' },
         solutions: { t: 'Həllər & Xidmətlər', s: 'Strukturlaşdırılmış xidmət modulları.' },
         articles: { t: 'Fikirlər & Məqalələr', s: 'Bloq yazıları və perspektivlər.' },
-        jobs: { t: 'Karyera (Vakansiyalar)', s: 'Aktiv vakansiya siyahısı.' },
+        jobs: { t: 'Karyera ', s: 'Aktiv vakansiya siyahısı.' },
         applications: { t: 'İş Müraciətləri', s: 'Vakansiyalara daxil olan müraciətlər və CV-lər.' },
         inbox: { t: 'Gələn Mesajlar', s: 'Müştərilərlə birbaşa sorğuların idarə olunması.' },
         subscribers: { t: 'Bülleten Abunəçiləri', s: 'Footer abunəçilərinin siyahısı.' },
         users: { t: 'İnzibatçılar', s: 'Rollar və təhlükəsizlik idarəetməsi.' },
-        auditLogs: { t: 'Əməliyyat Fəaliyyəti (Audit Logs)', s: 'Sistemdə həyata keçirilən bütün hərəkətlərin tam arxivi.' },
+        auditLogs: { t: 'Əməliyyat Fəaliyyəti ', s: 'Sistemdə həyata keçirilən bütün hərəkətlərin tam arxivi.' },
         settings: { t: 'Hero & Mətn Tənzimləmələri', s: 'Saytın ana səhifə məzmunları.' },
         preview: { t: 'Canlı Sayt Önizləməsi', s: 'Canlı sinxronizasiya paneli.' }
       };
@@ -1207,6 +1207,7 @@
     async renderProjects() {
       const grid = document.getElementById('projectsGrid');
       if (!grid) return;
+      grid.innerHTML = '<div class="spinner" style="margin:3rem auto; display:block;"></div>';
       const res = await fetch(`${API_BASE}/admin/projects`);
       const json = await res.json();
       if (json.success) {
@@ -1663,6 +1664,7 @@
     async renderClients() {
       const grid = document.getElementById('clientsGrid');
       if (!grid) return;
+      grid.innerHTML = '<div class="spinner" style="margin:3rem auto; display:block;"></div>';
       const res = await fetch(`${API_BASE}/admin/clients`);
       const json = await res.json();
       if (json.success) {
@@ -1775,6 +1777,7 @@
     async renderSolutions() {
       const grid = document.getElementById('solutionsGrid');
       if (!grid) return;
+      grid.innerHTML = '<div class="spinner" style="margin:3rem auto; display:block;"></div>';
       const res = await fetch(`${API_BASE}/admin/solutions`);
       const json = await res.json();
       if (json.success) {
@@ -2057,6 +2060,7 @@
     async renderArticles() {
       const grid = document.getElementById('articlesGrid');
       if (!grid) return;
+      grid.innerHTML = '<div class="spinner" style="margin:3rem auto; display:block;"></div>';
       const res = await fetch(`${API_BASE}/admin/articles`);
       const json = await res.json();
       if (json.success) {
@@ -2341,6 +2345,7 @@
     async renderJobs() {
       const grid = document.getElementById('jobsGrid');
       if (!grid) return;
+      grid.innerHTML = '<div class="spinner" style="margin:3rem auto; display:block;"></div>';
       const res = await fetch(`${API_BASE}/admin/jobs`);
       const json = await res.json();
       if (json.success) {
@@ -2563,6 +2568,7 @@
     async renderApplications() {
       const container = document.getElementById('applicationsList');
       if (!container) return;
+      container.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:3rem;"><div class="spinner" style="margin:0 auto; display:block;"></div></td></tr>';
       const res = await fetch(`${API_BASE}/admin/applications`);
       const json = await res.json();
       if (json.success) {
@@ -2675,6 +2681,7 @@
     async renderInquiries() {
       const container = document.getElementById('inboxList');
       if (!container) return;
+      container.innerHTML = '<div class="spinner" style="margin:2rem auto; display:block;"></div>';
 
       const search = document.getElementById('inqSearchInput')?.value || '';
       const status = document.getElementById('inqStatusFilter')?.value || 'all';
@@ -2801,6 +2808,7 @@
     async renderSubscribers() {
       const container = document.getElementById('subscribersList');
       if (!container) return;
+      container.innerHTML = '<div class="spinner" style="margin:3rem auto; display:block;"></div>';
       const res = await fetch(`${API_BASE}/admin/subscribers`);
       const json = await res.json();
       if (json.success) {
@@ -2841,6 +2849,7 @@
     async renderAuditLogs() {
       const container = document.getElementById('auditLogsList');
       if (!container) return;
+      container.innerHTML = '<div class="spinner" style="margin:3rem auto; display:block;"></div>';
       const res = await fetch(`${API_BASE}/admin/audit-logs`);
       const json = await res.json();
       if (json.success) {
@@ -2980,6 +2989,7 @@
     async renderUsers() {
       const container = document.getElementById('usersList');
       if (!container) return;
+      container.innerHTML = '<div class="spinner" style="margin:3rem auto; display:block;"></div>';
       const res = await fetch(`${API_BASE}/admin/users`);
       const json = await res.json();
       if (json.success) {
@@ -3194,6 +3204,7 @@
     async renderClients() {
       const grid = document.getElementById('clientsGrid');
       if (!grid) return;
+      grid.innerHTML = '<div class="spinner" style="margin:3rem auto; display:block;"></div>';
       const res = await fetch(`${API_BASE}/admin/clients`);
       const json = await res.json();
       if (json.success) {
@@ -3407,6 +3418,7 @@
     async renderMedia() {
       const grid = document.getElementById('mediaLibraryGrid');
       if (!grid) return;
+      grid.innerHTML = '<div class="spinner" style="margin:3rem auto; display:block;"></div>';
       const res = await fetch(`${API_BASE}/admin/media`);
       const json = await res.json();
       if (json.success) {
@@ -3576,6 +3588,7 @@
     async renderMediaPickerGrid() {
       const grid = document.getElementById('mediaPickerGrid');
       if (!grid) return;
+      grid.innerHTML = '<div class="spinner" style="margin:3rem auto; display:block;"></div>';
       const res = await fetch(`${API_BASE}/admin/media`);
       const json = await res.json();
       if (json.success) {
