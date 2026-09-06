@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    BRANDFULL ULTRA-CONVENIENT ADMIN PANEL - STYLESHEET
    ========================================================================== */
 
@@ -8,12 +8,12 @@
   --adm-card: #FFFFFF;
   --adm-card-hover: #FAFAFA;
   --adm-border: #E5E7EB;
-  --adm-border-active: rgba(141, 198, 63, 0.4);
+  --adm-border-active: rgba(255, 0, 144, 0.4);
   --adm-text: #1F2937; /* Dark charcoal */
   --adm-text-muted: #6B7280; /* Soft gray */
-  --adm-primary: #8dc63f;
-  --adm-primary-hover: #7ab036;
-  --adm-primary-glow: rgba(141, 198, 63, 0.15);
+  --adm-magenta: #ff0090;
+  --adm-magenta-hover: #e0007e;
+  --adm-magenta-glow: rgba(255, 0, 144, 0.15);
   --adm-green: #10b981;
   --adm-blue: #0ea5e9;
   --adm-radius: 12px;
@@ -28,7 +28,7 @@
 }
 
 body.admin-body {
-  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background-color: var(--adm-bg);
   color: var(--adm-text);
   min-height: 100vh;
@@ -73,7 +73,7 @@ body.admin-body {
 }
 
 .login-brand-title span {
-  color: var(--adm-primary);
+  color: var(--adm-magenta);
 }
 
 /* --------------------------------------------------------------------------
@@ -105,10 +105,10 @@ body.admin-body {
   align-items: center;
   gap: 0.5rem;
   padding: 0.35rem 0.85rem;
-  background: rgba(141, 198, 63, 0.12);
-  border: 1px solid rgba(141, 198, 63, 0.25);
+  background: rgba(255, 0, 144, 0.12);
+  border: 1px solid rgba(255, 0, 144, 0.25);
   border-radius: 9999px;
-  color: var(--adm-primary);
+  color: var(--adm-magenta);
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -152,10 +152,10 @@ body.admin-body {
 }
 
 .sidebar-btn.is-active {
-  background-color: var(--adm-primary);
+  background-color: var(--adm-magenta);
   color: var(--adm-text);
   font-weight: 700;
-  box-shadow: 0 4px 16px var(--adm-primary-glow);
+  box-shadow: 0 4px 16px var(--adm-magenta-glow);
 }
 
 .sidebar-btn.is-active svg {
@@ -169,7 +169,7 @@ body.admin-body {
   font-size: 0.75rem;
   font-weight: 800;
   background-color: var(--adm-text);
-  color: var(--adm-primary);
+  color: var(--adm-magenta);
 }
 
 /* Main Area */
@@ -245,8 +245,8 @@ body.admin-body {
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 50%;
-  background: rgba(141, 198, 63, 0.1);
-  color: var(--adm-primary);
+  background: rgba(255, 0, 144, 0.1);
+  color: var(--adm-magenta);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -348,14 +348,14 @@ body.admin-body {
 }
 
 .adm-btn-primary {
-  background-color: var(--adm-primary);
+  background-color: var(--adm-magenta);
   color: var(--adm-text);
 }
 
 .adm-btn-primary:hover {
-  background-color: var(--adm-primary-hover);
+  background-color: var(--adm-magenta-hover);
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px var(--adm-primary-glow);
+  box-shadow: 0 4px 16px var(--adm-magenta-glow);
 }
 
 .adm-btn-secondary {
@@ -413,7 +413,7 @@ body.admin-body {
 }
 
 .switch-input:checked {
-  background-color: var(--adm-primary);
+  background-color: var(--adm-magenta);
 }
 
 .switch-input:checked::after {
@@ -448,7 +448,7 @@ body.admin-body {
 }
 
 .preset-thumb-btn:hover, .preset-thumb-btn.is-selected {
-  border-color: var(--adm-primary);
+  border-color: var(--adm-magenta);
   transform: scale(1.05);
 }
 
@@ -521,8 +521,8 @@ body.admin-body {
 }
 
 .form-input:focus, .form-textarea:focus, .form-select:focus {
-  border-color: var(--adm-primary);
-  box-shadow: 0 0 0 3px var(--adm-primary-glow);
+  border-color: var(--adm-magenta);
+  box-shadow: 0 0 0 3px var(--adm-magenta-glow);
 }
 
 /* Modals */
@@ -576,7 +576,7 @@ body.admin-body {
   padding: 1rem 1.5rem;
   border-radius: var(--adm-radius-sm);
   background-color: #1a1816;
-  border-left: 4px solid var(--adm-primary);
+  border-left: 4px solid var(--adm-magenta);
   color: var(--adm-text);
   font-weight: 700;
   font-size: 0.9rem;
@@ -641,8 +641,8 @@ body.admin-body {
 /* AI Command Center */
 .ai-cmd-center {
   background: linear-gradient(145deg, #ffffff, #fafafa);
-  border: 1px solid var(--adm-primary);
-  box-shadow: 0 4px 15px var(--adm-primary-glow);
+  border: 1px solid var(--adm-magenta);
+  box-shadow: 0 4px 15px var(--adm-magenta-glow);
   padding: 2rem;
   border-radius: var(--adm-radius);
   margin-bottom: 2rem;
@@ -661,7 +661,7 @@ body.admin-body {
 }
 .ai-cmd-input:focus {
   outline: none;
-  border-color: var(--adm-primary);
+  border-color: var(--adm-magenta);
 }
 .ai-cmd-btn {
   padding: 0 2.5rem;
@@ -684,14 +684,14 @@ body.admin-body {
   background: var(--adm-card);
   border: 1px dashed var(--adm-border);
   border-radius: var(--adm-radius);
-  color: var(--adm-primary);
+  color: var(--adm-magenta);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
 }
 .quick-action-btn:hover {
-  background: var(--adm-primary-glow);
-  border-color: var(--adm-primary);
+  background: var(--adm-magenta-glow);
+  border-color: var(--adm-magenta);
 }
 
 /* Search Dropdown */
@@ -1030,16 +1030,16 @@ body.admin-body {
 
 /* Upload Dropzone */
 .adm-dropzone {
-  border: 2px dashed var(--adm-primary);
+  border: 2px dashed var(--adm-magenta);
   padding: 3rem 2rem;
   text-align: center;
   border-radius: var(--adm-radius);
-  background: rgba(141,198,63,0.02);
+  background: rgba(255,0,144,0.02);
   transition: background 0.2s;
   cursor: pointer;
 }
 .adm-dropzone:hover {
-  background: rgba(141,198,63,0.05);
+  background: rgba(255,0,144,0.05);
 }
 .adm-dropzone input[type="file"] {
   display: none;
@@ -1070,8 +1070,8 @@ body.admin-body {
   opacity: 1;
 }
 .adm-picker-item.selected .adm-picker-checkbox {
-  background: var(--adm-primary);
-  border-color: var(--adm-primary);
+  background: var(--adm-magenta);
+  border-color: var(--adm-magenta);
 }
 .adm-picker-checkbox::after {
   content: "";
@@ -1087,8 +1087,8 @@ body.admin-body {
   display: block;
 }
 .adm-picker-item.selected {
-  border-color: var(--adm-primary);
-  box-shadow: 0 0 0 2px var(--adm-primary);
+  border-color: var(--adm-magenta);
+  box-shadow: 0 0 0 2px var(--adm-magenta);
 }
 
 /* ==========================================================================
@@ -1133,9 +1133,9 @@ body.admin-body {
 }
 
 .adm-settings-nav-btn.active {
-  background: rgba(141, 198, 63, 0.05);
-  color: var(--adm-primary);
-  border-left: 4px solid var(--adm-primary);
+  background: rgba(255, 0, 144, 0.05);
+  color: var(--adm-magenta);
+  border-left: 4px solid var(--adm-magenta);
   padding-left: calc(1.25rem - 4px);
 }
 
@@ -1187,7 +1187,7 @@ body.admin-body {
   align-items: center;
   margin-bottom: 0.5rem;
   font-weight: 700;
-  color: var(--adm-primary);
+  color: var(--adm-magenta);
 }
 
 .adm-json-remove-btn {
@@ -1451,8 +1451,8 @@ body.admin-body {
 }
 .modal-tab-btn:hover { color: var(--adm-text); background: var(--adm-card-hover); }
 .modal-tab-btn.active {
-  color: var(--adm-primary);
-  background: var(--adm-primary-glow);
+  color: var(--adm-magenta);
+  background: var(--adm-magenta-glow);
   border-color: var(--adm-border-active);
 }
 .modal-tab-content { display: none; }
@@ -1521,8 +1521,8 @@ body.admin-body {
   transition: all 0.15s ease;
 }
 .btn:disabled { opacity: 0.55; cursor: not-allowed; }
-.btn-primary { background: var(--adm-primary); border-color: var(--adm-primary); color: #fff; }
-.btn-primary:hover { background: var(--adm-primary-hover); border-color: var(--adm-primary-hover); }
+.btn-primary { background: var(--adm-magenta); border-color: var(--adm-magenta); color: #fff; }
+.btn-primary:hover { background: var(--adm-magenta-hover); border-color: var(--adm-magenta-hover); }
 .btn-outline { background: transparent; border-color: var(--adm-border); color: var(--adm-text); }
 .btn-outline:hover { border-color: var(--adm-border-active); background: var(--adm-card-hover); }
 
@@ -1550,8 +1550,8 @@ body.admin-body {
 .adm-input::placeholder, .adm-textarea::placeholder, .form-control::placeholder { color: var(--adm-text-muted); }
 .adm-input:focus, .adm-select:focus, .adm-textarea:focus, .form-control:focus {
   outline: none;
-  border-color: var(--adm-primary);
-  box-shadow: 0 0 0 3px var(--adm-primary-glow);
+  border-color: var(--adm-magenta);
+  box-shadow: 0 0 0 3px var(--adm-magenta-glow);
 }
 .adm-textarea { min-height: 110px; resize: vertical; }
 .adm-select, select.form-control {
@@ -1579,7 +1579,7 @@ body.admin-body {
   background: #fff; border-radius: 50%; transition: transform 0.2s ease;
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
-.adm-toggle input:checked + .adm-toggle-slider { background: var(--adm-primary); }
+.adm-toggle input:checked + .adm-toggle-slider { background: var(--adm-magenta); }
 .adm-toggle input:checked + .adm-toggle-slider::before { transform: translateX(20px); }
 
 /* --- Kart / badge / grid --- */
@@ -1599,7 +1599,7 @@ body.admin-body {
 }
 .media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem; }
 
-/* --- Bos vЙ™ziyyЙ™t / spinner --- */
+/* --- Bos vəziyyət / spinner --- */
 .empty-state {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   text-align: center; padding: 3rem 1.5rem; color: var(--adm-text-muted);
@@ -1608,7 +1608,7 @@ body.admin-body {
 .empty-state p { font-size: 0.875rem; max-width: 380px; }
 .spinner {
   display: inline-block; width: 26px; height: 26px;
-  border: 3px solid var(--adm-border); border-top-color: var(--adm-primary);
+  border: 3px solid var(--adm-border); border-top-color: var(--adm-magenta);
   border-radius: 50%; animation: admSpin 0.8s linear infinite;
 }
 @keyframes admSpin { to { transform: rotate(360deg); } }
@@ -1622,7 +1622,7 @@ body.admin-body {
   padding: 0.8rem 1.1rem;
   background: var(--adm-card);
   border: 1px solid var(--adm-border);
-  border-left: 3px solid var(--adm-primary);
+  border-left: 3px solid var(--adm-magenta);
   border-radius: var(--adm-radius-sm);
   box-shadow: var(--adm-shadow);
   color: var(--adm-text);
@@ -1630,7 +1630,7 @@ body.admin-body {
   transition: opacity 0.3s ease;
 }
 
-/* --- Sorgu detal modalindaki melumat sahЙ™lЙ™ri --- */
+/* --- Sorgu detal modalindaki melumat sahələri --- */
 .inqName, .inqEmail, .inqPhone, .inqCompany, .inqDate, .inqMessage { color: var(--adm-text); }
 .inqMessage { white-space: pre-wrap; line-height: 1.55; }
 
@@ -1650,7 +1650,7 @@ body.admin-body {
 }
 
 /* --------------------------------------------------------------------------
-   SECTION SAVE BAR вЂ” "Tetbiq Et / Imtina Et" paneli
+   SECTION SAVE BAR — "Tetbiq Et / Imtina Et" paneli
    Her bolmenin ALTINDA, yalniz deyisiklik olduqda gorunur.
    FIXED: By Gsmv 
    -------------------------------------------------------------------------- */
@@ -1680,7 +1680,7 @@ body.admin-body {
   padding: 0.9rem 1.25rem;
   background: var(--adm-card);
   border: 1px solid var(--adm-border);
-  border-top: 2px solid var(--adm-primary);
+  border-top: 2px solid var(--adm-magenta);
   border-radius: var(--adm-radius);
   box-shadow: 0 -6px 20px -8px rgba(0, 0, 0, 0.18);
 }
@@ -1697,7 +1697,7 @@ body.admin-body {
   height: 8px;
   flex: 0 0 8px;
   border-radius: 50%;
-  background: var(--adm-primary);
+  background: var(--adm-magenta);
   animation: admSaveBarPulse 1.6s ease-in-out infinite;
 }
 @keyframes admSaveBarPulse {
@@ -1719,12 +1719,12 @@ body.admin-body {
 }
 
 /* ==========================================================================
-   PART 4 вЂ” AXTARIS QUTUSU + TAM RESPONSIVLIK  (2026-09)
+   PART 4 — AXTARIS QUTUSU + TAM RESPONSIVLIK  (2026-09)
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
    AXTARIS QUTUSU
-   FIX: Admin panel problemleri By Gsmv TЙ™rЙ™findЙ™n aradan qaldД±rД±lmД±ЕџdД±r
+   FIX: Admin panel problemleri By Gsmv Tərəfindən aradan qaldırılmışdır
    -------------------------------------------------------------------------- */
 .adm-toolbar {
   display: flex;
@@ -1765,8 +1765,8 @@ body.admin-body {
 .adm-toolbar-search > input::placeholder { color: var(--adm-text-muted); }
 .adm-toolbar-search > input:focus {
   outline: none;
-  border-color: var(--adm-primary);
-  box-shadow: 0 0 0 3px var(--adm-primary-glow);
+  border-color: var(--adm-magenta);
+  box-shadow: 0 0 0 3px var(--adm-magenta-glow);
 }
 
 /* Alet zolagindaki butun elementler eyni hundurlukde */
@@ -1787,7 +1787,7 @@ body.admin-body {
 .adm-toolbar-filters { flex: 1 1 auto; }
 
 /* --------------------------------------------------------------------------
-   RESPONSIVLIK вЂ” butun cihaz olculeri
+   RESPONSIVLIK — butun cihaz olculeri
    -------------------------------------------------------------------------- */
 
 /* Sekiller / cedveller hec vaxt ekrandan tasmasin */
@@ -1927,7 +1927,7 @@ img, video, canvas, iframe { max-width: 100%; }
 }
 
 /* --------------------------------------------------------------------------
-   FIX: Admin panel problemleri By Gsmv TЙ™rЙ™findЙ™n aradan qaldД±rД±lmД±ЕџdД±r.
+   FIX: Admin panel problemleri By Gsmv Tərəfindən aradan qaldırılmışdır.
    -------------------------------------------------------------------------- */
 .adm-toolbar-filters {
   display: flex;
@@ -1964,7 +1964,7 @@ img, video, canvas, iframe { max-width: 100%; }
 }
 
 /* --------------------------------------------------------------------------
-   FIX: Admin panel problemleri By Gsmv TЙ™rЙ™findЙ™n aradan qaldД±rД±lmД±ЕџdД±r
+   FIX: Admin panel problemleri By Gsmv Tərəfindən aradan qaldırılmışdır
    -------------------------------------------------------------------------- */
 .adm-modal-content > * { flex-shrink: 0; }
 
@@ -1975,7 +1975,7 @@ img, video, canvas, iframe { max-width: 100%; }
   min-height: auto;
 }
 
-/* Tab zolagД± */
+/* Tab zolagı */
 .modal-tabs {
   flex: 0 0 auto !important;
   min-height: 46px;
@@ -1997,6 +1997,3 @@ img, video, canvas, iframe { max-width: 100%; }
 /* Responsive*/
 .adm-modal-content > form { flex: 1 1 auto; min-height: 0; }
 .modal-tab-content.active { min-height: 0; }
-
-html { scroll-behavior: smooth; }
-
