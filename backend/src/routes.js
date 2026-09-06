@@ -445,6 +445,33 @@ ${publicContext}
   }
 });
 
+// GET /translations
+router.get('/translations', async (req, res) => {
+  try {
+    const translations = await prisma.translation.findMany();
+    
+    // Transform into { az: { key: value, ... }, en: { key: value, ... }, ru: { key: value, ... } }
+    const dict = { az: {}, en: {}, ru: {} };
+    
+    translations.forEach(t => {
+      dict.az[t.key] = t.az;
+      dict.en[t.key] = t.en;
+      dict.ru[t.key] = t.ru;
+    });
+
+    res.json({
+      success: true,
+      data: dict
+    });
+  } catch (error) {
+    console.error('Translations fetch error:', error);
+    res.status(500).json({
+      success: false,
+      error: { code: 'INTERNAL_ERROR', message: 'Failed to fetch translations' }
+    });
+  }
+});
+
 // ==========================================================================
 // SITE SETTINGS
 // ==========================================================================
@@ -458,8 +485,14 @@ router.get('/settings', async (req, res, next) => {
     // Only expose public-safe fields (we don't have sensitive fields in this model anyway, but this is future-proofing)
     const publicSettings = {
       heroTag: settings.heroTag,
+      heroTagEn: settings.heroTagEn,
+      heroTagRu: settings.heroTagRu,
       heroHeadline: settings.heroHeadline,
+      heroHeadlineEn: settings.heroHeadlineEn,
+      heroHeadlineRu: settings.heroHeadlineRu,
       heroSubtitle: settings.heroSubtitle,
+      heroSubtitleEn: settings.heroSubtitleEn,
+      heroSubtitleRu: settings.heroSubtitleRu,
       showreelVideoUrl: settings.showreelVideoUrl,
       showreelPosterUrl: settings.showreelPosterUrl,
       contactEmail: settings.contactEmail,
@@ -477,6 +510,60 @@ router.get('/settings', async (req, res, next) => {
     };
     
     res.json({ success: true, data: publicSettings });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// ==========================================
+// PAGES API
+// ==========================================
+router.get('/pages', async (req, res, next) => {
+  try {
+    const pages = await prisma.page.findMany({
+      where: { published: true },
+      orderBy: { createdAt: 'desc' },
+      select: {
+        id: true,
+        titleEn: true,
+        titleAz: true,
+        titleRu: true,
+        createdAt: true,
+        updatedAt: true
+      }
+    });
+    res.json({ success: true, data: pages });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/pages/:id', async (req, res, next) => {
+  try {
+    const page = await prisma.page.findFirst({
+      where: { id: req.params.id, published: true }
+    });
+    if (!page) {
+      return res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'Səhifə tapılmadı' } });
+    }
+    res.json({ success: true, data: page });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// ==========================================
+// BLOCKS
+// ==========================================
+
+router.get('/blocks/:pageId', async (req, res, next) => {
+  try {
+    const { pageId } = req.params;
+    const blocks = await prisma.siteBlock.findMany({
+      where: { pageId, isActive: true },
+      orderBy: { order: 'asc' }
+    });
+    res.json({ success: true, data: blocks });
   } catch (err) {
     next(err);
   }

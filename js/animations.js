@@ -190,9 +190,10 @@ const MotionEngine = {
   initScrollTextReveal() {
     const container = document.getElementById('revealText');
     if (!container) return;
-    const spans = container.querySelectorAll('span');
     
     window.addEventListener('scroll', () => {
+      const spans = container.querySelectorAll('span');
+      if (!spans.length) return;
       const rect = container.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       
@@ -222,14 +223,20 @@ const MotionEngine = {
     const wrap = document.querySelector('.hero-split-wrap');
     if (!wrap) return;
 
-    const images = [
-      'https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt3d44e42f259e0241/6a8ef31f8814aa40d789b067/mcdonalds.svg',
-      'https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt60dcaa824a8f5b35/6a8ef33c1eb9e500972c605c/google.svg',
-      'https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt5128afbbed6a5c03/6a7f094cafd7dbe48552b5a9/nbc.svg',
-      'https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt6b1a6ac451742f15/6a7f1dda1f7b5a8072791015/nike.svg',
-      'https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/bltdb2e9e3ad8d787c0/6a8ebd20da6aea230c37b3d2/logo-big-green-egg_1_(1).svg',
-      'https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt627a1e6b813a9b44/6a8ef348893681f9633dc03b/hublot.svg'
-    ];
+    const getImages = () => {
+      if (window.App && App.data && App.data.settings && App.data.settings.trailLogos) {
+        const customLogos = App.data.settings.trailLogos.split(',').map(s => s.trim()).filter(s => s);
+        if (customLogos.length > 0) return customLogos;
+      }
+      return [
+        'https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt3d44e42f259e0241/6a8ef31f8814aa40d789b067/mcdonalds.svg',
+        'https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt60dcaa824a8f5b35/6a8ef33c1eb9e500972c605c/google.svg',
+        'https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt5128afbbed6a5c03/6a7f094cafd7dbe48552b5a9/nbc.svg',
+        'https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt6b1a6ac451742f15/6a7f1dda1f7b5a8072791015/nike.svg',
+        'https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/bltdb2e9e3ad8d787c0/6a8ebd20da6aea230c37b3d2/logo-big-green-egg_1_(1).svg',
+        'https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt627a1e6b813a9b44/6a8ef348893681f9633dc03b/hublot.svg'
+      ];
+    };
     
     const colors = ['#fbc02d', '#e53935', '#a5d6a7', '#e1bee7', '#ffffff', '#212121'];
 
@@ -253,6 +260,7 @@ const MotionEngine = {
         wrapper.style.transform = `translate(-50%, -50%) rotate(${rot}deg)`;
         
         const img = document.createElement('img');
+        const images = getImages();
         img.src = images[currentIndex % images.length];
         
         // Random background color

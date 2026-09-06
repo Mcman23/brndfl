@@ -69,7 +69,7 @@
 }
 
 .mobile-menu-link:hover, .mobile-menu-link.is-active {
-  color: var(--color-brand-magenta);
+  color: var(--color-brand-primary);
   transform: translateX(8px);
 }
 
@@ -83,7 +83,7 @@
 .mobile-menu-slogan {
   font-size: 1.15rem;
   font-weight: 600;
-  color: var(--color-brand-magenta);
+  color: var(--color-brand-primary);
 }
 
 /* --------------------------------------------------------------------------

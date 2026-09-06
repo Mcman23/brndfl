@@ -211,4 +211,58 @@ model SiteSettings {
   footerLinks       Json     @default("[{\"label\":\"Privacy.\",\"url\":\"/privacy\"}]")
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
+  
+  heroHeadlineEn    String   @default("")
+  heroHeadlineRu    String   @default("")
+  heroSubtitleEn    String   @default("")
+  heroSubtitleRu    String   @default("")
+  heroTagEn         String   @default("")
+  heroTagRu         String   @default("")
+
+  kineticText       String   @default("Əhəmiyyətli işlər yaradırıq")
+  kineticTextEn     String   @default("")
+  kineticTextRu     String   @default("")
+  kineticWords      String   @default("bizneslər üçün.,brendlər üçün.,insanlar üçün.,komandalar üçün.")
+  kineticWordsEn    String   @default("")
+  kineticWordsRu    String   @default("")
+  
+  splitText         String   @db.Text @default("Hər kəs nəsə yarada bilər. Lakin mədəniyyət və bizneslə rezonans doğuran təcrübələr yaratmaq çətin tərəfdir. Bu, dizayn, texnologiya və insan zəkası tələb edir.")
+  splitTextEn       String   @db.Text @default("")
+  splitTextRu       String   @db.Text @default("")
+}
+
+model ApiSettings {
+  id                 String   @id @default("singleton")
+  googleTranslateKey String   @default("")
+  updatedAt          DateTime @updatedAt
+}
+
+model Translation {
+  key          String   @id
+  az           String   @db.Text
+  en           String   @db.Text
+  ru           String   @db.Text
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model SiteBlock {
+  id          String   @id @default(uuid())
+  pageId      String   @default("home")
+  type        String   @default("html")
+  titleAz     String   @default("")
+  titleEn     String   @default("")
+  titleRu     String   @default("")
+  subtitleAz  String   @default("")
+  subtitleEn  String   @default("")
+  subtitleRu  String   @default("")
+  contentAz   String   @db.Text @default("")
+  contentEn   String   @db.Text @default("")
+  contentRu   String   @db.Text @default("")
+  mediaUrl    String   @default("")
+  linkUrl     String   @default("")
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

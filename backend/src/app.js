@@ -52,14 +52,19 @@ app.get('/admin', (req, res) => {
 
 
 // CORS configuration (no wildcard * in production)
-const allowedOrigin = (process.env.CORS_ORIGIN || 'http://localhost:5500').replace(/['\"]/g, '');
+const allowedOrigins = [
+  (process.env.CORS_ORIGIN || 'http://localhost:5500').replace(/['"]/g, ''),
+  'http://localhost:5000',
+  'http://127.0.0.1:5000',
+  'http://127.0.0.1:5500',
+  'null'
+];
 app.use(cors({
   origin: (origin, callback) => {
-    // Allow request if origin matches env configuration, or if it is a local fetch (no origin)
-    if (!origin || origin === allowedOrigin || allowedOrigin === '*') {
+    if (!origin || origin === 'null' || allowedOrigins.includes(origin) || allowedOrigins.includes('*')) {
       callback(null, true);
     } else {
-      callback(new Error('CORS xətası: Mənbəyə icazə verilmir.'));
+      callback(new Error('CORS xətası: Mənbəyə icazə verilmir. Origin: ' + origin));
     }
   },
   credentials: true
@@ -76,6 +81,14 @@ app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 app.use('/api/auth', authRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api', apiRouter); // Public routes
+
+// SPA Fallback for frontend routes (must be before the API 404 handler)
+app.get('*', (req, res, next) => {
+  if (req.path.startsWith('/api')) {
+    return next();
+  }
+  res.sendFile(path.join(frontendPath, 'index.html'));
+});
 
 // Undefined API handler
 app.use((req, res) => {

@@ -49,7 +49,7 @@ const BRANDFULL_DEFAULT_DATA = {
   applications: []
 };
 // API Endpoint Configuration
-const API_BASE = '/api';
+const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && window.location.port !== '5000' ? 'http://localhost:5000/api' : (window.location.protocol === 'file:' ? 'http://localhost:5000/api' : '/api');
 const BrandfullStore = {
   // Flag to track if API was successfully reached
   apiAvailable: null,

@@ -36,7 +36,7 @@
   max-width: 650px;
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 20px 80px rgba(255, 0, 144, 0.5));
+  filter: drop-shadow(0 20px 80px rgba(141, 198, 63, 0.5));
   animation: float-slow 7s ease-in-out infinite alternate;
 }
 
@@ -138,7 +138,7 @@
   overflow: hidden;
   height: 1.1em;
   vertical-align: bottom;
-  color: var(--color-brand-magenta);
+  color: var(--color-brand-primary);
 }
 
 .scrolling-words {
@@ -199,7 +199,7 @@
 
 .hero-nav-item:hover {
   transform: translateX(10px);
-  color: var(--color-brand-magenta);
+  color: var(--color-brand-primary);
 }
 
 .hero-nav-arrow {
@@ -363,7 +363,7 @@
 .stack-num {
   font-size: 2.5rem;
   font-weight: 800;
-  color: var(--color-brand-magenta);
+  color: var(--color-brand-primary);
 }
 
 .stack-title {
@@ -412,7 +412,7 @@
   transform: translateY(-8px);
 }
 
-.dual-action-card:hover .color-magenta {
+.dual-action-card:hover .color-primary {
   color: #ffffff;
 }
 

@@ -74,8 +74,77 @@ const App = {
     }
   },
 
+  async renderPageBlocks(pageId) {
+    const container = document.getElementById(`${pageId}-blocks-container`);
+    if (!container) return;
+
+    try {
+      const res = await fetch(`${API_BASE}/api/blocks/${pageId}`);
+      const json = await res.json();
+      if (json.success && json.data) {
+        container.innerHTML = json.data.map(block => this.generateBlockHTML(block)).join('');
+        // Re-translate new content
+        if (typeof I18nManager !== 'undefined') {
+          I18nManager.translatePage();
+        }
+      }
+    } catch (e) {
+      console.error(`Failed to load blocks for ${pageId}`, e);
+    }
+  },
+
+  generateBlockHTML(block) {
+    // Determine which language to use based on I18nManager (fallback to Az if not defined yet)
+    const lang = (typeof I18nManager !== 'undefined') ? I18nManager.lang : 'az';
+    const title = lang === 'en' && block.titleEn ? block.titleEn : lang === 'ru' && block.titleRu ? block.titleRu : block.titleAz;
+    const subtitle = lang === 'en' && block.subtitleEn ? block.subtitleEn : lang === 'ru' && block.subtitleRu ? block.subtitleRu : block.subtitleAz;
+    const content = lang === 'en' && block.contentEn ? block.contentEn : lang === 'ru' && block.contentRu ? block.contentRu : block.contentAz;
+
+    switch (block.type) {
+      case 'hero_dark':
+        return `
+          <section class="hero-dark-opening">
+            <div class="hero-dark-center-visual">
+              <img class="inflatable-3d-letter" src="${block.mediaUrl || ''}" alt="${title || ''}">
+            </div>
+            <div class="hero-dark-bottom-content">
+              <div style="z-index: 10;">
+                <h1 class="hero-hello-title">${title || ''}<span class="color-primary">.</span></h1>
+                <p class="hero-hello-subtitle">${subtitle || ''}</p>
+              </div>
+              <div class="scroll-down-badge" onclick="window.scrollBy({top: window.innerHeight, behavior: 'smooth'})">
+                <span class="scroll-text-track">Scroll down &nbsp;&nbsp;&nbsp; Scroll down &nbsp;&nbsp;&nbsp; Scroll down &nbsp;&nbsp;&nbsp;</span>
+              </div>
+            </div>
+          </section>
+        `;
+      case 'kinetic_statement':
+        return `
+          <section class="kinetic-statement-section">
+            <h2 class="kinetic-statement-text">${title || ''}</h2>
+          </section>
+        `;
+      case 'rich_text':
+        return `
+          <section class="hero-split-wrap">
+            <div class="hero-split-grid" style="grid-template-columns: 1fr;">
+              <div>
+                <h2 class="scroll-reveal-text">${title || ''}</h2>
+                <div style="margin-top:2rem; font-size:1.2rem;">${content || ''}</div>
+              </div>
+            </div>
+          </section>
+        `;
+      case 'html':
+      default:
+        return content || '';
+    }
+  },
+
   renderAll() {
     this.renderSiteSettings();
+    this.renderHomeShowcase();
+    this.renderClientLogos();
     this.renderWorkGrid();
     this.renderSolutionsSection();
     this.renderCompanyTimeline();
@@ -90,29 +159,67 @@ const App = {
 
   // 1. Dynamic Site Settings
   renderSiteSettings() {
-    const s = this.data.settings || {};
-    const heroTag = document.querySelector('.hero-tag');
-    const heroHeadline = document.querySelector('.hero-headline');
-    const heroSubtitle = document.querySelector('.hero-lead-text');
-    const heroVideo = document.getElementById('heroShowreelVideo');
+      const s = this.data.settings || {};
+      const heroTag = document.getElementById('hero-hello-title');
+      const heroSubtitle = document.getElementById('dynamic-greeting-text');
+      
+      if (heroTag && s.heroTag) heroTag.innerHTML = I18nManager.get('heroTag', s) + '<span class="color-primary">.</span>';
+      if (heroSubtitle && s.heroSubtitle) heroSubtitle.textContent = I18nManager.get('heroSubtitle', s);
 
-    if (heroTag && s.heroTag) heroTag.textContent = s.heroTag;
-    if (heroHeadline && s.heroHeadline) heroHeadline.textContent = s.heroHeadline;
-    if (heroSubtitle && s.heroSubtitle) heroSubtitle.textContent = s.heroSubtitle;
-    if (heroVideo && s.showreelVideoUrl) {
-      const src = heroVideo.querySelector('source');
-      if (src && src.src !== s.showreelVideoUrl) {
-        src.src = s.showreelVideoUrl;
-        heroVideo.load();
+      // Kinetic Text
+      const kineticStatic = document.getElementById('kinetic-static-text');
+      if (kineticStatic && s.kineticText) {
+         kineticStatic.textContent = I18nManager.get('kineticText', s) + ' ';
       }
-      if (s.showreelPosterUrl) heroVideo.poster = s.showreelPosterUrl;
-    }
-  },
+      
+      const kineticScroller = document.getElementById('kinetic-scrolling-words');
+      if (kineticScroller && s.kineticWords) {
+          const wordsStr = I18nManager.get('kineticWords', s) || '';
+          const words = wordsStr.split(',').map(w => w.trim()).filter(Boolean);
+          if (words.length > 0) {
+              kineticScroller.innerHTML = words.map(w => '<span class="word">' + w + '</span>').join('');
+              // Clone the first word to the end for smooth loop if GSAP expects it
+              kineticScroller.innerHTML += '<span class="word">' + words[0] + '</span>';
+          }
+      }
+      
+      // Split Text (revealText)
+      const splitTextEl = document.getElementById('revealText');
+      if (splitTextEl && s.splitText) {
+          const text = I18nManager.get('splitText', s) || '';
+          const words = text.split(' ').map(w => w.trim()).filter(Boolean);
+          if (words.length > 0) {
+              splitTextEl.innerHTML = words.map(w => '<span>' + w + '</span>').join(' ');
+          }
+      }
+
+      const heroVideo = document.getElementById('heroShowreelVideo');
+      if (heroVideo && s.showreelVideoUrl) {
+        const src = heroVideo.querySelector('source');
+        if (src && src.src !== s.showreelVideoUrl) {
+          src.src = s.showreelVideoUrl;
+          heroVideo.load();
+        }
+        if (s.showreelPosterUrl) heroVideo.poster = s.showreelPosterUrl;
+      }
+    },
 
   // 2. Client-Side SPA Router (Every Link & Button)
-  navigateTo(route, updateHistory = true) {
+  async navigateTo(route, updateHistory = true) {
     const validRoutes = ['home', 'work', 'solutions', 'approach', 'company', 'ideas', 'careers', 'contact'];
-    const targetRoute = validRoutes.includes(route) ? route : 'home';
+    
+    // Support custom page routes e.g., page/xeberler
+    let isCustomPage = false;
+    let targetRoute = 'home';
+    let customPageSlug = '';
+
+    if (route && route.startsWith('page/')) {
+      isCustomPage = true;
+      targetRoute = 'custom-page';
+      customPageSlug = route.split('/')[1];
+    } else {
+      targetRoute = validRoutes.includes(route) ? route : 'home';
+    }
 
     // Hide all page views
     document.querySelectorAll('[data-page-view]').forEach(view => {
@@ -120,12 +227,43 @@ const App = {
       view.classList.remove('is-active');
     });
 
+    // If it's a custom page, fetch and populate
+    if (isCustomPage && customPageSlug) {
+      try {
+        const res = await fetch(`${API_BASE}/api/pages/${customPageSlug}`);
+        const json = await res.json();
+        if (json.success) {
+          const p = json.data;
+          const lang = I18nManager.lang;
+          
+          let title = p.titleAz;
+          let content = p.contentAz;
+          
+          if (lang === 'en' && p.titleEn) { title = p.titleEn; content = p.contentEn; }
+          if (lang === 'ru' && p.titleRu) { title = p.titleRu; content = p.contentRu; }
+
+          document.getElementById('customPageTitle').innerHTML = `${title}<span class="color-primary">.</span>`;
+          document.getElementById('customPageContent').innerHTML = content;
+          document.title = `${title} | Brandfull`;
+        } else {
+          document.getElementById('customPageTitle').innerHTML = `Xəta<span class="color-primary">.</span>`;
+          document.getElementById('customPageContent').innerHTML = `<p>${json.error?.message || 'Səhifə tapılmadı.'}</p>`;
+        }
+      } catch (err) {
+        document.getElementById('customPageTitle').innerHTML = `404<span class="color-primary">.</span>`;
+        document.getElementById('customPageContent').innerHTML = '<p>Səhifə tapılmadı və ya şəbəkə xətası.</p>';
+      }
+    }
+
     // Show target page view
     const activeView = document.querySelector(`[data-page-view="${targetRoute}"]`);
     if (activeView) {
       activeView.style.display = 'block';
       setTimeout(() => activeView.classList.add('is-active'), 20);
     }
+    
+    // Dynamically load blocks if the container exists
+    await this.renderPageBlocks(targetRoute);
 
     if (typeof MotionEngine !== 'undefined') {
       setTimeout(() => MotionEngine.scanAndObserve(), 80);
@@ -216,6 +354,40 @@ const App = {
   },
 
   // 3. Render Work Grid
+  
+  renderHomeShowcase() {
+    const scroller = document.getElementById('home-showcase-scroller');
+    if (!scroller) return;
+    
+    const projects = (this.data.projects || []).filter(p => p.featured);
+    if (projects.length === 0) return;
+    
+    scroller.innerHTML = projects.map((item, index) => `
+      <div class="showcase-feature-card" data-project-id="${item.id}" style="flex-shrink: 0; width: 75vw; max-width: 900px; height: 60vh; margin-bottom: 0; ${index === projects.length - 1 ? 'margin-right: var(--page-margin);' : ''}">
+        <img class="showcase-card-img" src="${item.image}" alt="${item.client}" style="height: 100%;" loading="lazy" />
+        <div class="showcase-card-caption">
+          <span class="text-tiny font-bold color-primary uppercase">${item.client}</span>
+          <h3 class="showcase-card-title">${I18nManager.get('title', item)}</h3>
+        </div>
+      </div>
+    `).join('');
+  },
+
+  renderClientLogos() {
+    const grid = document.getElementById('home-client-logos');
+    if (!grid) return;
+    
+    const clients = (this.data.clients || []).filter(c => c.active);
+    if (clients.length === 0) return;
+    
+    grid.innerHTML = clients.map(client => {
+       if(client.logoUrl) {
+         return `<div class="client-logo-box"><img src="${client.logoUrl}" alt="${client.name}" loading="lazy" /></div>`;
+       }
+       return '';
+    }).join('');
+  },
+
   renderWorkGrid() {
     const homeWorkContainer = document.getElementById('homeWorkGrid');
     const fullWorkContainer = document.getElementById('fullWorkGrid');
@@ -233,10 +405,10 @@ const App = {
               <span class="work-card-client-name">${item.client}</span>
               <span class="work-card-tag">${item.tag}</span>
             </div>
-            <h3 class="work-card-title">${item.title}</h3>
+            <h3 class="work-card-title">${I18nManager.get('title', item)}</h3>
           </div>
-          <p class="work-card-desc">${item.overview || ''}</p>
-          <span style="font-size:0.85rem; font-weight:700; color:var(--color-brand-magenta); margin-top:0.75rem; display:inline-block;">Layihəyə bax ↗</span>
+          <p class="work-card-desc">${I18nManager.get('overview', item) || ''}</p>
+          <span class="i18n" data-i18n="readMore" style="font-size:0.85rem; font-weight:700; color:var(--color-brand-magenta); margin-top:0.75rem; display:inline-block;">Layihəyə bax ↗</span>
         </div>
       </div>
     `;
@@ -249,7 +421,7 @@ const App = {
         </div>
         <div class="huge-work-card-content">
           <p class="huge-work-client">${item.client}.</p>
-          <p class="huge-work-title">${item.title}</p>
+          <p class="huge-work-title">${I18nManager.get('title', item)}</p>
         </div>
       </div>
     `;
@@ -274,8 +446,8 @@ const App = {
         <div class="solution-item" data-solution-id="${s.id}" data-action="open-solution" tabindex="0" role="button" aria-label="${s.title}">
           <span class="solution-number">${s.num}</span>
           <div>
-            <h3 class="solution-title">${s.title}</h3>
-            <p class="solution-desc">${s.tagline}</p>
+            <h3 class="solution-title">${I18nManager.get('title', s)}</h3>
+            <p class="solution-desc">${I18nManager.get('tagline', s)}</p>
           </div>
           <div class="solution-arrow">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -288,8 +460,8 @@ const App = {
       fullContainer.innerHTML = solutions.map(s => `
         <div class="solution-editorial-row" data-solution-id="${s.id}" tabindex="0" role="button" aria-label="${s.title}" style="display:flex; flex-direction:column; gap:1.5rem; padding: 4rem 0; border-top: 2px solid var(--theme-border-strong); cursor:pointer; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.6'" onmouseout="this.style.opacity='1'">
           <span class="text-display-lg color-magenta" style="line-height:1; margin-bottom: 1rem;">${s.num}</span>
-          <h3 class="text-display-md font-bold" style="max-width:80%; line-height: 1.1;">${s.title}</h3>
-          <p class="text-body-lead" style="max-width:85%; color:var(--theme-text-secondary); margin-bottom: 2rem;">${s.desc}</p>
+          <h3 class="text-display-md font-bold" style="max-width:80%; line-height: 1.1;">${I18nManager.get('title', s)}</h3>
+          <p class="text-body-lead" style="max-width:85%; color:var(--theme-text-secondary); margin-bottom: 2rem;">${I18nManager.get('desc', s)}</p>
           <ul class="flex flex-col gap-3" style="list-style:none; padding:0;">
             ${(s.deliverables || ['Strategiya', 'İcraat', 'Miqyaslama']).map(d => `<li style="font-weight:700; font-size:1.25rem; padding-left:2rem; position:relative;"><span style="position:absolute; left:0; color:var(--color-brand-magenta);">—</span>${d}</li>`).join('')}
           </ul>
@@ -327,8 +499,8 @@ const App = {
           <span class="text-tiny font-bold uppercase color-magenta" style="letter-spacing:0.05em;">${art.tag}</span>
           <span class="text-tiny font-semibold" style="color:var(--theme-text-muted);">${art.readTime}</span>
         </div>
-        <h4 class="text-display-md font-bold" style="max-width:90%; line-height: 1.1;">${art.title}</h4>
-        <p class="text-body-lead" style="color:var(--theme-text-secondary); margin-bottom: 2rem;">${art.excerpt}</p>
+        <h4 class="text-display-md font-bold" style="max-width:90%; line-height: 1.1;">${I18nManager.get('title', art)}</h4>
+        <p class="text-body-lead" style="color:var(--theme-text-secondary); margin-bottom: 2rem;">${I18nManager.get('excerpt', art)}</p>
         <div class="flex items-center justify-between" style="margin-top: auto; padding-top: 1.5rem;">
           <span class="text-tiny font-bold uppercase" style="letter-spacing:0.05em;">${art.author}</span>
           <span class="text-tiny font-semibold" style="color:var(--theme-text-muted);">${art.date}</span>
@@ -361,13 +533,13 @@ const App = {
         <div class="flex flex-col gap-6">
           <div>
             <span class="text-tiny font-bold color-magenta uppercase">${art.tag} • ${art.readTime}</span>
-            <h2 class="text-display-lg" style="margin-top: 0.5rem; margin-bottom: 1rem;">${art.title}</h2>
+            <h2 class="text-display-lg" style="margin-top: 0.5rem; margin-bottom: 1rem;">${I18nManager.get('title', art)}</h2>
             <div style="font-size:0.9rem; color:var(--theme-text-muted); font-weight:600;">
               Müəllif: <strong>${art.author}</strong> • ${art.date}
             </div>
           </div>
           <div style="padding: 1.5rem 0; border-top: 1px solid var(--theme-border-subtle); border-bottom: 1px solid var(--theme-border-subtle); font-size:1.2rem; line-height:1.6; font-weight:500;">
-            ${art.excerpt}
+            ${I18nManager.get('excerpt', art)}
           </div>
           <div class="text-body" style="font-size:1.05rem; line-height:1.7;">
             <p style="margin-bottom:1rem;">Brandfull komandası olaraq biz inanırıq ki, rəqəmsal innovasiyalar yalnız texniki baxımdan deyil, həm də insan təcrübəsi və biznes gəliri baxımından real dəyər yaratmalıdır.</p>
@@ -466,10 +638,10 @@ const App = {
     container.innerHTML = jobs.map(job => `
       <div style="display:flex; justify-content:space-between; align-items:flex-start; padding: 3rem 0; border-top: 1px solid var(--theme-border-strong); cursor:pointer; transition: opacity .3s;" onmouseover="this.style.opacity='0.6'" onmouseout="this.style.opacity='1'">
         <div style="flex:1;">
-          <h3 class="text-display-md font-bold" style="margin-bottom:1rem; line-height:1.1;">${job.title}</h3>
+          <h3 class="text-display-md font-bold" style="margin-bottom:1rem; line-height:1.1;">${I18nManager.get('title', job)}</h3>
           <span class="text-body font-bold" style="color:var(--theme-text-secondary); text-transform:uppercase; letter-spacing:0.05em;">${job.type} / ${job.location}</span>
         </div>
-        <span class="btn-pill btn-pill-outline" style="flex-shrink:0; align-self:center;" data-action="apply-job" data-job-id="${job.id}">Müraciət Et</span>
+        <span class="btn-pill btn-pill-outline i18n" data-i18n="applyBtn" style="flex-shrink:0; align-self:center;" data-action="apply-job" data-job-id="${job.id}">Müraciət Et</span>
       </div>
     `).join('');
   },
@@ -499,7 +671,7 @@ const App = {
             </div>
             <div class="huge-work-card-content">
               <p class="huge-work-client">${item.client}.</p>
-              <p class="huge-work-title">${item.title}</p>
+              <p class="huge-work-title">${I18nManager.get('title', item)}</p>
             </div>
           </div>
         `).join('')}</div>`;
@@ -526,8 +698,8 @@ const App = {
         <div class="flex flex-col gap-6">
           <div>
             <span class="text-tiny font-bold color-magenta" style="letter-spacing:0.05em; text-transform:uppercase;">${project.client} • ${project.year || '2025'}</span>
-            <h2 class="text-display-lg" style="margin-top: 0.5rem; margin-bottom: 1rem;">${project.title}</h2>
-            <p class="text-body-lead">${project.headline || ''}</p>
+            <h2 class="text-display-lg" style="margin-top: 0.5rem; margin-bottom: 1rem;">${I18nManager.get('title', project)}</h2>
+            <p class="text-body-lead">${I18nManager.get('headline', project) || ''}</p>
           </div>
 
           <div style="border-radius: var(--radius-md); overflow: hidden; max-height: 420px; background:#000;">
@@ -545,17 +717,17 @@ const App = {
 
           <div>
             <h4 class="text-h4 font-bold" style="margin-bottom: 0.5rem;">Biznes Çağırışı və Problem</h4>
-            <p class="text-body">${project.challenge || 'Qlobal miqyasda istifadəçi təcrübəsinin optimallaşdırılması.'}</p>
+            <p class="text-body">${I18nManager.get('challenge', project) || 'Qlobal miqyasda istifadəçi təcrübəsinin optimallaşdırılması.'}</p>
           </div>
 
           <div>
             <h4 class="text-h4 font-bold" style="margin-bottom: 0.5rem;">Təqdim Olunan Həll Yolu</h4>
-            <p class="text-body">${project.solution || 'Brandfull-un modul dizayn sistemləri və AI texnologiyaları.'}</p>
+            <p class="text-body">${I18nManager.get('solution', project) || 'Brandfull-un modul dizayn sistemləri və AI texnologiyaları.'}</p>
           </div>
 
           <div>
             <h4 class="text-h4 font-bold" style="margin-bottom: 0.5rem;">Ümumi İcmal</h4>
-            <p class="text-body">${project.overview || ''}</p>
+            <p class="text-body">${I18nManager.get('overview', project) || ''}</p>
           </div>
         </div>
       `;
@@ -980,7 +1152,8 @@ const App = {
     const greetingEl = document.getElementById("dynamic-greeting-text");
     if (!greetingEl) return;
 
-    const day = new Date().getDay();
+    const bakuDate = new Date(new Date().toLocaleString("en-US", {timeZone: "Asia/Baku"}));
+    const day = bakuDate.getDay();
     let text = "";
 
     switch (day) {

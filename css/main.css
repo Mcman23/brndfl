@@ -8,7 +8,7 @@
   --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   /* Brand Colors */
-  --color-brand-magenta: #ff0090;
+  --color-brand-primary: #8dc63f;
   --color-brand-green: #00ff75;
   --color-brand-black: #000000;
   --color-brand-white: #ffffff;
@@ -43,11 +43,11 @@
   --theme-text-secondary: #433f3c;
   --theme-text-muted: #76726e;
   --theme-text-inverse: #ffffff;
-  --theme-cta: #ff0090;
+  --theme-cta: #8dc63f;
   --theme-border-strong: rgba(0, 0, 0, 0.7);
   --theme-border-subtle: rgba(0, 0, 0, 0.12);
   --theme-pill-bg: rgba(0, 0, 0, 0.05);
-  --theme-btn-hover: #ff0090;
+  --theme-btn-hover: #8dc63f;
   --theme-btn-active: #433f3c;
   --theme-card-bg: #ffffff;
   --theme-card-border: rgba(0, 0, 0, 0.08);
@@ -264,7 +264,7 @@ ul, ol {
 
 .font-bold { font-weight: 700; }
 .font-semibold { font-weight: 600; }
-.color-magenta { color: var(--color-brand-magenta); }
+.color-primary { color: var(--color-brand-primary); }
 
 /* ==========================================================================
    KINETIC MOTION REVEAL ENGINE (Huge Inc. Signature Motion)
@@ -420,7 +420,7 @@ ul, ol {
 }
 
 .nav-link:hover {
-  color: var(--color-brand-magenta);
+  color: var(--color-brand-primary);
 }
 
 .site-header.is-scrolled {
@@ -446,6 +446,18 @@ ul, ol {
 .site-header.theme-dark .btn-pill {
   background-color: #ffffff !important;
   color: #000000 !important;
+}
+
+.lang-btn, .lang-btn-mob {
+  color: #000000;
+  text-decoration: none;
+  transition: opacity 0.2s, color 0.2s;
+}
+.site-header.is-scrolled .lang-btn, .site-header.is-scrolled .lang-btn-mob {
+  color: #000000;
+}
+.site-header.theme-dark .lang-btn, .site-header.theme-dark .lang-btn-mob {
+  color: #ffffff !important;
 }
 
 .header-actions {
@@ -475,13 +487,13 @@ ul, ol {
   transform: scale(1.03);
 }
 
-.btn-pill-magenta {
-  background-color: var(--color-brand-magenta);
+.btn-pill-primary {
+  background-color: var(--color-brand-primary);
   color: #ffffff;
   padding: 0.75rem 1.6rem;
 }
 
-.btn-pill-magenta:hover {
+.btn-pill-primary:hover {
   background-color: #d10076;
 }
 
@@ -559,7 +571,7 @@ ul, ol {
   width: 3rem;
   height: 3rem;
   cursor: pointer;
-  color: var(--color-brand-magenta);
+  color: var(--color-brand-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -583,7 +595,7 @@ ul, ol {
   transition: color 0.2s ease;
 }
 .footer-link-main:hover {
-  color: var(--color-brand-magenta);
+  color: var(--color-brand-primary);
 }
 
 .footer-link-sub {
@@ -594,7 +606,7 @@ ul, ol {
   transition: color 0.2s ease;
 }
 .footer-link-sub:hover {
-  color: var(--color-brand-magenta);
+  color: var(--color-brand-primary);
 }
 
 .footer-bottom {
@@ -643,7 +655,7 @@ ul, ol {
 
 .cookie-brand-logo {
   font-weight: 900;
-  color: var(--color-brand-magenta);
+  color: var(--color-brand-primary);
   margin-bottom: 0.5rem;
   font-size: 1.25rem;
 }
@@ -688,8 +700,8 @@ ul, ol {
 }
 
 .btn-cookie-solid:hover {
-  background: var(--color-brand-magenta);
-  border-color: var(--color-brand-magenta);
+  background: var(--color-brand-primary);
+  border-color: var(--color-brand-primary);
 }
 
 .btn-cookie-close {
@@ -766,6 +778,7 @@ ul, ol {
   width: 100%;
   max-width: 600px;
   background: var(--theme-bg);
+  color: var(--theme-text-primary);
   z-index: 100000;
   transform: translateX(100%);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);

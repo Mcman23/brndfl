@@ -112,9 +112,15 @@ class S3StorageProvider {
     });
 
     await this.client.send(command);
-    const url = process.env.STORAGE_ENDPOINT 
-      ? `${process.env.STORAGE_ENDPOINT.replace(/\/$/, '')}/${this.bucket}/${randomizedName}`
-      : `https://${this.bucket}.s3.${process.env.STORAGE_REGION || 'us-east-1'}.amazonaws.com/${randomizedName}`;
+    let url = '';
+    if (process.env.STORAGE_PUBLIC_URL) {
+      // e.g. https://[PROJECT_ID].supabase.co/storage/v1/object/public
+      url = `${process.env.STORAGE_PUBLIC_URL.replace(/\/$/, '')}/${this.bucket}/${randomizedName}`;
+    } else if (process.env.STORAGE_ENDPOINT) {
+      url = `${process.env.STORAGE_ENDPOINT.replace(/\/$/, '')}/${this.bucket}/${randomizedName}`;
+    } else {
+      url = `https://${this.bucket}.s3.${process.env.STORAGE_REGION || 'us-east-1'}.amazonaws.com/${randomizedName}`;
+    }
     return {
       key: randomizedName,
       url

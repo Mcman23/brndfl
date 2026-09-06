@@ -5,6 +5,7 @@ import prisma from '../db.js';
 import { requireAuth, requireRole } from '../middleware/auth.js';
 import { logAction } from '../utils/audit.js';
 import { StorageService } from '../services/storage.js';
+import { autoTranslateFields } from '../utils/translate.js';
 import { aiService } from '../services/gemini.js';
 import rateLimit from 'express-rate-limit';
 
@@ -410,8 +411,25 @@ router.post('/projects', requireRole(['SUPER_ADMIN']), async (req, res, next) =>
       }
     }
 
+    const fieldsToTranslate = ['title', 'headline', 'overview', 'challenge', 'solution', 'metaTitle', 'metaDesc'];
+    await autoTranslateFields(req.body, fieldsToTranslate);
+    const { titleEn, titleRu, headlineEn, headlineRu, overviewEn, overviewRu, challengeEn, challengeRu, solutionEn, solutionRu, metaTitleEn, metaTitleRu, metaDescEn, metaDescRu } = req.body;
     const project = await prisma.project.create({
       data: {
+        titleEn: titleEn || '',
+        titleRu: titleRu || '',
+        headlineEn: headlineEn || '',
+        headlineRu: headlineRu || '',
+        overviewEn: overviewEn || '',
+        overviewRu: overviewRu || '',
+        challengeEn: challengeEn || '',
+        challengeRu: challengeRu || '',
+        solutionEn: solutionEn || '',
+        solutionRu: solutionRu || '',
+        metaTitleEn: metaTitleEn || '',
+        metaTitleRu: metaTitleRu || '',
+        metaDescEn: metaDescEn || '',
+        metaDescRu: metaDescRu || '',
         id,
         client: resolvedClientName,
         title,
@@ -478,6 +496,8 @@ router.put('/projects/:id', requireRole(['SUPER_ADMIN']), async (req, res, next)
       }
     }
 
+    const fieldsToTranslate = ['title', 'headline', 'overview', 'challenge', 'solution', 'metaTitle', 'metaDesc'];
+    await autoTranslateFields(updateData, fieldsToTranslate);
     const project = await prisma.project.update({
       where: { id },
       data: updateData
@@ -584,8 +604,23 @@ router.post('/solutions', requireRole(['SUPER_ADMIN']), async (req, res, next) =
       return res.status(409).json({ success: false, error: { code: 'CONFLICT', message: 'Bu ID və ya Slug ilə xidmət artıq mövcuddur.' } });
     }
 
+    const fieldsToTranslate = ['title', 'tagline', 'desc', 'cta', 'metaTitle', 'metaDesc'];
+    await autoTranslateFields(req.body, fieldsToTranslate);
+    const { titleEn, titleRu, taglineEn, taglineRu, descEn, descRu, ctaEn, ctaRu, metaTitleEn, metaTitleRu, metaDescEn, metaDescRu } = req.body;
     const sol = await prisma.solution.create({
       data: {
+        titleEn: titleEn || '',
+        titleRu: titleRu || '',
+        taglineEn: taglineEn || '',
+        taglineRu: taglineRu || '',
+        descEn: descEn || '',
+        descRu: descRu || '',
+        ctaEn: ctaEn || '',
+        ctaRu: ctaRu || '',
+        metaTitleEn: metaTitleEn || '',
+        metaTitleRu: metaTitleRu || '',
+        metaDescEn: metaDescEn || '',
+        metaDescRu: metaDescRu || '',
         id,
         num: num || '01',
         title,
@@ -641,6 +676,8 @@ router.put('/solutions/:id', requireRole(['SUPER_ADMIN']), async (req, res, next
       updateData.order = Number(updateData.order);
     }
 
+    const fieldsToTranslate = ['title', 'tagline', 'desc', 'cta', 'metaTitle', 'metaDesc'];
+    await autoTranslateFields(updateData, fieldsToTranslate);
     const sol = await prisma.solution.update({
       where: { id },
       data: updateData
@@ -698,8 +735,21 @@ router.post('/articles', requireRole(['SUPER_ADMIN']), async (req, res, next) =>
       return res.status(409).json({ success: false, error: { code: 'CONFLICT', message: 'Bu ID və ya Slug ilə məqalə artıq mövcuddur.' } });
     }
 
+    const fieldsToTranslate = ['title', 'excerpt', 'content', 'metaTitle', 'metaDesc'];
+    await autoTranslateFields(req.body, fieldsToTranslate);
+    const { titleEn, titleRu, excerptEn, excerptRu, contentEn, contentRu, metaTitleEn, metaTitleRu, metaDescEn, metaDescRu } = req.body;
     const article = await prisma.article.create({
       data: {
+        titleEn: titleEn || '',
+        titleRu: titleRu || '',
+        excerptEn: excerptEn || '',
+        excerptRu: excerptRu || '',
+        contentEn: contentEn || '',
+        contentRu: contentRu || '',
+        metaTitleEn: metaTitleEn || '',
+        metaTitleRu: metaTitleRu || '',
+        metaDescEn: metaDescEn || '',
+        metaDescRu: metaDescRu || '',
         id,
         tag: tag || 'Perspektiv',
         date: date || '',
@@ -750,6 +800,8 @@ router.put('/articles/:id', requireRole(['SUPER_ADMIN']), async (req, res, next)
       }
     }
 
+    const fieldsToTranslate = ['title', 'excerpt', 'content', 'metaTitle', 'metaDesc'];
+    await autoTranslateFields(updateData, fieldsToTranslate);
     const article = await prisma.article.update({
       where: { id },
       data: updateData
@@ -1473,13 +1525,18 @@ router.put('/settings', requireRole(['SUPER_ADMIN']), async (req, res, next) => 
     
     // Explicit allowlist of fields to update
     const allowedFields = [
-      'heroTag', 'heroHeadline', 'heroSubtitle', 
-      'showreelVideoUrl', 'showreelPosterUrl',
-      'contactEmail', 'contactPhone', 'contactAddress', 'workingHours',
-      'socialInstagram', 'socialFacebook', 'socialLinkedIn', 
-      'socialYouTube', 'socialTikTok', 'socialVimeo',
-      'copyrightText'
-    ];
+        'heroTag', 'heroHeadline', 'heroSubtitle', 
+        'heroTagEn', 'heroHeadlineEn', 'heroSubtitleEn',
+        'heroTagRu', 'heroHeadlineRu', 'heroSubtitleRu',
+        'showreelVideoUrl', 'showreelPosterUrl',
+        'contactEmail', 'contactPhone', 'contactAddress', 'workingHours',
+        'socialInstagram', 'socialFacebook', 'socialLinkedIn', 
+        'socialYouTube', 'socialTikTok', 'socialVimeo',
+        'copyrightText',
+        'kineticText', 'kineticTextEn', 'kineticTextRu',
+        'kineticWords', 'kineticWordsEn', 'kineticWordsRu',
+        'splitText', 'splitTextEn', 'splitTextRu'
+      ];
     
     const updateData = {};
     for (const field of allowedFields) {
@@ -1515,6 +1572,341 @@ router.put('/settings', requireRole(['SUPER_ADMIN']), async (req, res, next) => 
     await logAction({ adminUserId: req.user.id, action: 'UPDATE', entity: 'SiteSettings', entityId: 'singleton' });
     res.json({ success: true, data: settings });
   } catch (err) {
+    next(err);
+  }
+});
+
+// ==========================================================================
+// API SETTINGS & TRANSLATION
+// ==========================================================================
+router.get('/api-settings', requireRole(['SUPER_ADMIN']), async (req, res, next) => {
+  try {
+    let apiSettings = await prisma.apiSettings.findUnique({ where: { id: 'singleton' } });
+    if (!apiSettings) {
+      apiSettings = await prisma.apiSettings.create({ data: { id: 'singleton' } });
+    }
+    res.json({ success: true, data: apiSettings });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put('/api-settings', requireRole(['SUPER_ADMIN']), async (req, res, next) => {
+  try {
+    const { googleTranslateKey } = req.body;
+    const apiSettings = await prisma.apiSettings.upsert({
+      where: { id: 'singleton' },
+      update: { googleTranslateKey: String(googleTranslateKey || '').trim() },
+      create: { id: 'singleton', googleTranslateKey: String(googleTranslateKey || '').trim() }
+    });
+    await logAction({ adminUserId: req.user.id, action: 'UPDATE', entity: 'ApiSettings', entityId: 'singleton' });
+    res.json({ success: true, data: apiSettings });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post('/translate', requireRole(['SUPER_ADMIN', 'EDITOR']), async (req, res, next) => {
+  try {
+    const { text, targetLang } = req.body; // targetLang: 'en' or 'ru'
+    if (!text || !targetLang) {
+      return res.status(400).json({ success: false, error: { message: 'Mətn və hədəf dil (targetLang) daxil edilməlidir.' } });
+    }
+
+    const apiSettings = await prisma.apiSettings.findUnique({ where: { id: 'singleton' } });
+    const apiKey = apiSettings?.googleTranslateKey;
+    
+    if (!apiKey) {
+      return res.status(400).json({ success: false, error: { message: 'Google Translate API Key təyin edilməyib. API Tənzimləmələri bölməsindən əlavə edin.' } });
+    }
+
+    const response = await fetch(`https://translation.googleapis.com/language/translate/v2?key=${apiKey}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        q: text,
+        target: targetLang,
+        format: 'text'
+      })
+    });
+
+    const data = await response.json();
+    if (data.error) {
+       throw new Error(data.error.message || 'Translate API Error');
+    }
+    
+    const translatedText = data.data.translations[0].translatedText;
+    res.json({ success: true, data: { translatedText } });
+  } catch (err) {
+    console.error('Translation error:', err);
+    res.status(500).json({ success: false, error: { message: 'Tərcümə zamanı xəta baş verdi: ' + (err.message || 'Naməlum xəta') } });
+  }
+});
+
+// ==========================================================================
+// TRANSLATIONS
+// ==========================================================================
+
+router.get('/translations', async (req, res) => {
+  try {
+    const translations = await prisma.translation.findMany({
+      orderBy: { key: 'asc' }
+    });
+    res.json({ success: true, data: translations });
+  } catch (error) {
+    console.error('Fetch translations error:', error);
+    res.status(500).json({ success: false, message: 'Server xətası' });
+  }
+});
+
+
+router.patch('/translations/:key', async (req, res) => {
+  try {
+    const { key } = req.params;
+    const { az, en, ru } = req.body;
+    
+    // We only update the provided fields
+    const updateData = {};
+    if (az !== undefined) updateData.az = az;
+    if (en !== undefined) updateData.en = en;
+    if (ru !== undefined) updateData.ru = ru;
+
+    // Fetch existing first to ensure we don't overwrite with nulls if we have to create
+    let existing = await prisma.translation.findUnique({ where: { key } });
+    
+    if (existing) {
+       await prisma.translation.update({
+         where: { key },
+         data: updateData
+       });
+    } else {
+       await prisma.translation.create({
+         data: {
+           key,
+           az: az || '',
+           en: en || '',
+           ru: ru || ''
+         }
+       });
+    }
+
+    res.json({ success: true, message: 'Updated successfully' });
+  } catch (error) {
+    console.error('Update translation error:', error);
+    res.status(500).json({ success: false, message: 'Server xətası' });
+  }
+});
+
+router.put('/translations', async (req, res) => {
+  try {
+    const { translations } = req.body;
+    
+    if (!Array.isArray(translations)) {
+      return res.status(400).json({ success: false, message: 'Invalid data format' });
+    }
+
+    // Upsert all translations
+    const results = await prisma.$transaction(
+      translations.map(t => 
+        prisma.translation.upsert({
+          where: { key: t.key },
+          update: { az: t.az, en: t.en, ru: t.ru },
+          create: { key: t.key, az: t.az, en: t.en, ru: t.ru }
+        })
+      )
+    );
+
+    await logAction(req.user.id, 'UPDATE_TRANSLATIONS', 'Translation', 'bulk');
+    res.json({ success: true, data: results });
+  } catch (error) {
+    console.error('Update translations error:', error);
+    res.status(500).json({ success: false, message: 'Server xətası' });
+  }
+});
+
+// ==========================================
+// PAGES CRUD
+// ==========================================
+
+router.get('/pages', async (req, res, next) => {
+  try {
+    const list = await prisma.page.findMany({ orderBy: { createdAt: 'desc' } });
+    res.json({ success: true, data: list });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post('/pages', requireRole(['SUPER_ADMIN']), async (req, res, next) => {
+  try {
+    const { id, titleEn, titleAz, titleRu, contentEn, contentAz, contentRu, published } = req.body;
+    
+    if (!id || !titleAz) {
+      return res.status(422).json({ success: false, error: { code: 'VALIDATION_ERROR', message: 'ID və Başlıq (AZ) vacibdir.' } });
+    }
+
+    const slug = generateSlug(id);
+    const existing = await prisma.page.findUnique({ where: { id: slug } });
+    if (existing) {
+      return res.status(409).json({ success: false, error: { code: 'CONFLICT', message: 'Bu ID ilə səhifə artıq mövcuddur.' } });
+    }
+
+    await autoTranslateFields(req.body, ['title', 'content']);
+    
+    const page = await prisma.page.create({
+      data: {
+        id: slug,
+        titleAz: req.body.titleAz || '',
+        titleEn: req.body.titleEn || '',
+        titleRu: req.body.titleRu || '',
+        contentAz: req.body.contentAz || '',
+        contentEn: req.body.contentEn || '',
+        contentRu: req.body.contentRu || '',
+        published: published || false
+      }
+    });
+
+    await logAction(req.user.id, 'CREATE', 'Page', page.id);
+    res.status(201).json({ success: true, data: page });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put('/pages/:id', requireRole(['SUPER_ADMIN']), async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { titleEn, titleAz, titleRu, contentEn, contentAz, contentRu, published } = req.body;
+    
+    await autoTranslateFields(req.body, ['title', 'content']);
+
+    const page = await prisma.page.update({
+      where: { id },
+      data: {
+        titleAz: req.body.titleAz,
+        titleEn: req.body.titleEn,
+        titleRu: req.body.titleRu,
+        contentAz: req.body.contentAz,
+        contentEn: req.body.contentEn,
+        contentRu: req.body.contentRu,
+        published: published !== undefined ? published : undefined
+      }
+    });
+
+    await logAction(req.user.id, 'UPDATE', 'Page', page.id);
+    res.json({ success: true, data: page });
+  } catch (err) {
+    if (err.code === 'P2025') {
+      return res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'Səhifə tapılmadı.' } });
+    }
+    next(err);
+  }
+});
+
+router.delete('/pages/:id', requireRole(['SUPER_ADMIN']), async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await prisma.page.delete({ where: { id } });
+    await logAction(req.user.id, 'DELETE', 'Page', id);
+    res.json({ success: true, message: 'Silindi' });
+  } catch (err) {
+    if (err.code === 'P2025') {
+      return res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'Səhifə tapılmadı.' } });
+    }
+    next(err);
+  }
+});
+
+// ==========================================
+// SITE BLOCKS CRUD
+// ==========================================
+
+router.get('/blocks', async (req, res, next) => {
+  try {
+    const pageId = req.query.pageId || 'home';
+    const list = await prisma.siteBlock.findMany({ 
+      where: { pageId },
+      orderBy: { order: 'asc' } 
+    });
+    res.json({ success: true, data: list });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post('/blocks', requireRole(['SUPER_ADMIN']), async (req, res, next) => {
+  try {
+    const data = req.body;
+    const block = await prisma.siteBlock.create({
+      data: {
+        pageId: data.pageId || 'home',
+        type: data.type || 'html',
+        order: parseInt(data.order) || 0,
+        titleAz: data.titleAz || '',
+        titleEn: data.titleEn || '',
+        titleRu: data.titleRu || '',
+        subtitleAz: data.subtitleAz || '',
+        subtitleEn: data.subtitleEn || '',
+        subtitleRu: data.subtitleRu || '',
+        contentAz: data.contentAz || '',
+        contentEn: data.contentEn || '',
+        contentRu: data.contentRu || '',
+        mediaUrl: data.mediaUrl || '',
+        mediaPoster: data.mediaPoster || '',
+        isActive: data.isActive !== false,
+      }
+    });
+    await logAction(req.user.id, 'CREATE_BLOCK', 'SiteBlock', block.id);
+    res.status(201).json({ success: true, data: block });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put('/blocks/:id', requireRole(['SUPER_ADMIN']), async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const data = req.body;
+    const block = await prisma.siteBlock.update({
+      where: { id },
+      data: {
+        pageId: data.pageId,
+        type: data.type,
+        order: data.order !== undefined ? parseInt(data.order) : undefined,
+        titleAz: data.titleAz,
+        titleEn: data.titleEn,
+        titleRu: data.titleRu,
+        subtitleAz: data.subtitleAz,
+        subtitleEn: data.subtitleEn,
+        subtitleRu: data.subtitleRu,
+        contentAz: data.contentAz,
+        contentEn: data.contentEn,
+        contentRu: data.contentRu,
+        mediaUrl: data.mediaUrl,
+        mediaPoster: data.mediaPoster,
+        isActive: data.isActive,
+      }
+    });
+    await logAction(req.user.id, 'UPDATE_BLOCK', 'SiteBlock', id);
+    res.json({ success: true, data: block });
+  } catch (err) {
+    if (err.code === 'P2025') {
+      return res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'Blok tapılmadı.' } });
+    }
+    next(err);
+  }
+});
+
+router.delete('/blocks/:id', requireRole(['SUPER_ADMIN']), async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await prisma.siteBlock.delete({ where: { id } });
+    await logAction(req.user.id, 'DELETE_BLOCK', 'SiteBlock', id);
+    res.json({ success: true, message: 'Silindi' });
+  } catch (err) {
+    if (err.code === 'P2025') {
+      return res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'Blok tapılmadı.' } });
+    }
     next(err);
   }
 });
