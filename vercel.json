@@ -2,8 +2,7 @@
   "buildCommand": "cd backend && npm install --include=dev && npx prisma generate",
   "functions": {
     "api/index.js": {
-      "includeFiles": "backend/**",
-      "runtime": "nodejs20.x"
+      "includeFiles": "backend/**"
     }
   },
   "rewrites": [
