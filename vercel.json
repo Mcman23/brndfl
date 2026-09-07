@@ -1,6 +1,4 @@
 {
-  "buildCommand": "cd backend && npm install --include=dev && npx prisma generate",
-  "outputDirectory": ".",
   "functions": {
     "api/index.js": {
       "includeFiles": "backend/**"
