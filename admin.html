@@ -600,6 +600,26 @@
                     <button type="button" class="adm-btn adm-btn-secondary" onclick="AdminApp.openMediaPickerFor('setShowreelPosterUrl', 'showreelPosterSelection', false)">Poster Seç</button>
                   </div>
                 </div>
+
+                <hr style="border:0; border-top:1px solid var(--adm-border); margin: 2rem 0;" />
+                <h4 style="margin-bottom: 1rem; color: var(--adm-text);">Kinetik və Split Mətnlər</h4>
+                
+                <div class="adm-form-group">
+                  <label>Kinetic Statement Text</label>
+                  <input type="text" class="adm-input" id="setKineticText" name="kineticText" placeholder="Əhəmiyyətli işlər yaradırıq" />
+                </div>
+                <div class="adm-form-group">
+                  <label>Kinetic Scrolling Words (vergüllə ayrılmış)</label>
+                  <input type="text" class="adm-input" id="setKineticWords" name="kineticWords" placeholder="bizneslər üçün., brendlər üçün., insanlar üçün., komandalar üçün." />
+                </div>
+                <div class="adm-form-group">
+                  <label>Split Statement Text (Scroll Reveal Text)</label>
+                  <textarea class="adm-textarea" id="setSplitText" name="splitText" rows="3" placeholder="Hər kəs nəsə yarada bilər..."></textarea>
+                </div>
+                <div class="adm-form-group">
+                  <label>Mouse Trail Loqolar (vergüllə ayrılmış URL-lər)</label>
+                  <textarea class="adm-textarea" id="setTrailLogos" name="trailLogos" rows="2" placeholder="https://example.com/logo1.svg, https://example.com/logo2.svg"></textarea>
+                </div>
               </div>
               
               <!-- CONTACT PANE -->
@@ -695,6 +715,7 @@
           <div class="preview-bar">
             <span style="font-size:0.9rem; font-weight:700; color:var(--adm-text-muted);">CANLI SİNXRONİZASİYA</span>
             <div style="display:flex; gap:0.75rem;">
+              <button id="toggleVisualEditBtn" class="adm-btn adm-btn-secondary" style="padding:0.4rem 0.85rem; font-size:0.8rem;" onclick="AdminApp.toggleVisualEdit()">✏️ Vizual Redaktor</button>
               <button class="adm-btn adm-btn-secondary" style="padding:0.4rem 0.85rem; font-size:0.8rem;" onclick="AdminApp.refreshPreview()">🔄 Yenilə</button>
               <a href="index.html" target="_blank" class="adm-btn adm-btn-primary" style="padding:0.4rem 0.85rem; font-size:0.8rem;">Ayrı Pəncərədə Aç ↗</a>
             </div>

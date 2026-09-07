@@ -229,6 +229,7 @@ model SiteSettings {
   splitText         String   @db.Text @default("Hər kəs nəsə yarada bilər. Lakin mədəniyyət və bizneslə rezonans doğuran təcrübələr yaratmaq çətin tərəfdir. Bu, dizayn, texnologiya və insan zəkası tələb edir.")
   splitTextEn       String   @db.Text @default("")
   splitTextRu       String   @db.Text @default("")
+  trailLogos        String   @default("")
 }
 
 model ApiSettings {

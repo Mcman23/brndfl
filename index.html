@@ -109,13 +109,14 @@
            ================================================================== -->
       <section class="hero-dark-opening">
         <div class="hero-dark-center-visual">
-          <img class="inflatable-3d-letter" id="heroShowreelVisual" src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt248c176a03654ddd/6a905376a594511f0962c3ec/Hs_Poster.jpg?auto=webp" alt="Brandfull 3D Visual" />
+          <img class="inflatable-3d-letter" id="heroShowreelVisual" data-setting="showreelPosterUrl" src="https://images.contentstack.io/v3/assets/blt92018a2de1445ae9/blt248c176a03654ddd/6a905376a594511f0962c3ec/Hs_Poster.jpg?auto=webp" alt="Brandfull 3D Visual" />
         </div>
 
         <div class="hero-dark-bottom-content">
           <div style="z-index: 10;">
-            <h1 class="hero-hello-title" id="hero-hello-title">Salam<span class="color-primary">.</span></h1>
-            <p class="hero-hello-subtitle" id="dynamic-greeting-text">Xoş gəlmisiniz. Biznesinizi gələcəyə daşımağa hazırıq.</p>
+            <h1 class="hero-hello-title" id="hero-hello-title" data-setting="heroTag">Salam<span class="color-primary">.</span></h1>
+            <p class="hero-hello-headline" id="hero-hello-headline" data-setting="heroHeadline" style="font-size: clamp(1.2rem, 2vw, 1.8rem); font-weight: 700; color: #ffffff; margin-top: 0.75rem; max-width: 650px;">İnsanlar üçün əhəmiyyət kəsb edən işlər yaradırıq.</p>
+            <p class="hero-hello-subtitle" id="dynamic-greeting-text" data-setting="heroSubtitle">Xoş gəlmisiniz. Biznesinizi gələcəyə daşımağa hazırıq.</p>
           </div>
           <div class="scroll-down-badge" onclick="document.getElementById('statementSection').scrollIntoView({behavior: 'smooth'})">
             <span class="scroll-text-track">Scroll down &nbsp;&nbsp;&nbsp; Scroll down &nbsp;&nbsp;&nbsp; Scroll down &nbsp;&nbsp;&nbsp;</span>
@@ -127,7 +128,7 @@
            ================================================================== -->
       <section class="kinetic-statement-section" id="statementSection">
         <h2 class="kinetic-statement-text">
-          Əhəmiyyətli işlər yaradırıq 
+          <span id="kinetic-static-text" data-setting="kineticText">Əhəmiyyətli işlər yaradırıq</span> 
           <span class="word-scroller">
             <span class="scrolling-words" id="kinetic-scrolling-words">
               <span class="word">bizneslər üçün.</span>
@@ -146,7 +147,7 @@
       <section class="hero-split-wrap">
         <div class="hero-split-grid">
           <div>
-            <h2 class="scroll-reveal-text" id="revealText">
+            <h2 class="scroll-reveal-text" id="revealText" data-setting="splitText">
               <span>Hər</span> <span>kəs</span> <span>nəsə</span> <span>yarada</span> <span>bilər.</span>
               <span>Lakin</span> <span class="color-primary">mədəniyyət</span> <span class="color-primary">və</span> <span class="color-primary">bizneslə</span>
               <span>rezonans</span> <span>doğuran</span> <span>təcrübələr</span> <span>yaratmaq</span> <span>çətin</span> <span>tərəfdir.</span>

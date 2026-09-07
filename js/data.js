@@ -41,6 +41,7 @@ const BRANDFULL_DEFAULT_DATA = {
     { city: 'San-Fransisko', address: '100 Montgomery St, San Francisco' }
   ],
   projects: [],
+  clients: [],
   solutions: [],
   articles: [],
   jobs: [],
@@ -142,6 +143,24 @@ const BrandfullStore = {
     } catch (err) {
       console.warn('API getSettings connection failed, using defaults.', err);
       return null;
+    }
+  },
+
+  async getClients() {
+    try {
+      const res = await fetch(`${API_BASE}/clients`);
+      const payload = await res.json();
+      if (Array.isArray(payload)) return payload;
+      if (payload.success && Array.isArray(payload.data)) return payload.data;
+      if (Array.isArray(payload.data)) return payload.data;
+      throw new Error(payload.error?.message || 'Clients fetch failed');
+    } catch (err) {
+      console.warn('API getClients connection failed, using local development fallback.', err);
+      if (this.isDevFallbackAllowed()) {
+        const local = await import('./seed-data.js').catch(() => null);
+        return local ? (local.clients || []) : [];
+      }
+      return [];
     }
   },
 

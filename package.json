@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "cd backend && npm run dev",
     "start": "cd backend && npm start",
-    "test": "node tests/verify-hero.js",
+    "test": "node tests/run-all-tests.js",
     "postinstall": "prisma generate"
   },
   "dependencies": {

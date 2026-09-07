@@ -473,6 +473,21 @@ router.get('/translations', async (req, res) => {
 });
 
 // ==========================================================================
+// CLIENTS (PUBLIC)
+// ==========================================================================
+router.get('/clients', async (req, res, next) => {
+  try {
+    const clients = await prisma.client.findMany({
+      where: { active: true },
+      orderBy: { order: 'asc' }
+    });
+    res.json(clients);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// ==========================================================================
 // SITE SETTINGS
 // ==========================================================================
 router.get('/settings', async (req, res, next) => {
@@ -506,7 +521,17 @@ router.get('/settings', async (req, res, next) => {
       socialTikTok: settings.socialTikTok,
       socialVimeo: settings.socialVimeo,
       copyrightText: settings.copyrightText,
-      footerLinks: settings.footerLinks
+      footerLinks: settings.footerLinks,
+      kineticText: settings.kineticText,
+      kineticTextEn: settings.kineticTextEn,
+      kineticTextRu: settings.kineticTextRu,
+      kineticWords: settings.kineticWords,
+      kineticWordsEn: settings.kineticWordsEn,
+      kineticWordsRu: settings.kineticWordsRu,
+      splitText: settings.splitText,
+      splitTextEn: settings.splitTextEn,
+      splitTextRu: settings.splitTextRu,
+      trailLogos: settings.trailLogos || ''
     };
     
     res.json({ success: true, data: publicSettings });

@@ -1,0 +1,100 @@
+--- a/js/app.js
++++ b/js/app.js
+@@ -1,6 +1,20 @@
+ /* ==========================================================================
+    BRANDFULL MAIN APPLICATION & FULL INTERACTIVE ROUTER
+    ========================================================================== */
++
++function escapeHtml(str) {
++  if (str == null) return '';
++  return String(str)
++    .replace(/&/g, '&amp;')
++    .replace(/</g, '&lt;')
++    .replace(/>/g, '&gt;')
++    .replace(/"/g, '&quot;')
++    .replace(/'/g, '&#039;');
++}
+ 
+ const App = {
+   currentRoute: 'home',
+   data: null,
++  escapeHtml: escapeHtml,
+ 
+   async init() {
+@@ -174,7 +188,7 @@
+         return s[field] || '';
+       };
+ 
+-      if (heroTag && s.heroTag) heroTag.innerHTML = getI18n('heroTag') + '<span class="color-primary">.</span>';
++      if (heroTag && s.heroTag) heroTag.innerHTML = escapeHtml(getI18n('heroTag')) + '<span class="color-primary">.</span>';
+       if (heroHeadline && s.heroHeadline) heroHeadline.textContent = getI18n('heroHeadline');
+       if (heroSubtitle && s.heroSubtitle) {
+         heroSubtitle.textContent = getI18n('heroSubtitle');
+@@ -194,9 +208,8 @@
+           const wordsStr = getI18n('kineticWords') || '';
+           const words = wordsStr.split(',').map(w => w.trim()).filter(Boolean);
+           if (words.length > 0) {
+-              kineticScroller.innerHTML = words.map(w => '<span class="word">' + w + '</span>').join('');
+-              // Clone the first word to the end for smooth loop if GSAP expects it
+-              kineticScroller.innerHTML += '<span class="word">' + words[0] + '</span>';
++              kineticScroller.innerHTML = words.map(w => '<span class="word">' + escapeHtml(w) + '</span>').join('') +
++                                          '<span class="word">' + escapeHtml(words[0]) + '</span>';
+           }
+       }
+       
+@@ -206,7 +219,7 @@
+           const text = getI18n('splitText') || '';
+           const words = text.split(/\s+/).map(w => w.trim()).filter(Boolean);
+           if (words.length > 0) {
+-              splitTextEl.innerHTML = words.map(w => '<span>' + w + '</span>').join(' ');
++              splitTextEl.innerHTML = words.map(w => '<span>' + escapeHtml(w) + '</span>').join(' ');
+           }
+       }
+ 
+@@ -539,15 +552,22 @@
+     if (!grid) return;
+     
+     const rawClients = clientsData || (this.data && this.data.clients) || [];
+-    const clients = rawClients.filter(c => c.active !== false);
++    if (!Array.isArray(rawClients)) return;
++
++    const clients = rawClients.filter(c => 
++      c && 
++      typeof c === 'object' && 
++      c.active !== false && 
++      c.logoUrl && 
++      typeof c.logoUrl === 'string' && 
++      c.logoUrl.trim() !== ''
++    );
+     if (clients.length === 0) return;
+     
+     grid.innerHTML = clients.map(client => {
+-       if (client.logoUrl) {
+-         return `<div class="client-logo-box"><img src="${client.logoUrl}" alt="${client.name}" loading="lazy" /></div>`;
+-       }
+-       return '';
++      const safeUrl = escapeHtml(String(client.logoUrl).trim());
++      const safeName = escapeHtml(client.name || 'Client');
++      return `<div class="client-logo-box"><img src="${safeUrl}" alt="${safeName}" loading="lazy" /></div>`;
+     }).join('');
+   },
+ 
+@@ -1358,11 +1378,17 @@
+ if (typeof window !== 'undefined') {
+   window.App = App;
+ }
+ 
++if (typeof module !== 'undefined' && module.exports) {
++  module.exports = App;
++}
++
++if (typeof document !== 'undefined') {
+   if (document.readyState === 'loading') {
+     document.addEventListener('DOMContentLoaded', () => {
+       App.init();
+     });
+-  } else {
++  } else if (typeof window !== 'undefined' && !window.__DISABLE_AUTO_INIT__) {
+     App.init();
+   }
+ }

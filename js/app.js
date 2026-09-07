@@ -2,9 +2,23 @@
    BRANDFULL MAIN APPLICATION & FULL INTERACTIVE ROUTER
    ========================================================================== */
 
+/* ==========================================================================
+   HTML ENTITY ESCAPING HELPER
+   ========================================================================== */
+function escapeHtml(str) {
+  if (str == null) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 const App = {
   currentRoute: 'home',
   data: null,
+  escapeHtml: escapeHtml,
 
   async init() {
     this.initRouter();
@@ -30,12 +44,13 @@ const App = {
 
   async loadData() {
     try {
-      const [projects, solutions, articles, jobs, apiSettings] = await Promise.all([
+      const [projects, solutions, articles, jobs, apiSettings, clients] = await Promise.all([
         BrandfullStore.getProjects(),
         BrandfullStore.getSolutions(),
         BrandfullStore.getArticles(),
         BrandfullStore.getJobs(),
-        BrandfullStore.getSettings()
+        BrandfullStore.getSettings(),
+        (BrandfullStore.getClients ? BrandfullStore.getClients() : Promise.resolve([]))
       ]);
 
       this.data = {
@@ -43,7 +58,8 @@ const App = {
         projects,
         solutions,
         articles,
-        jobs
+        jobs,
+        clients: Array.isArray(clients) ? clients : []
       };
       
       // Override default settings with API settings if present
@@ -55,6 +71,7 @@ const App = {
       }
 
       this.renderAll();
+      this.renderClientLogos(this.data.clients);
     } catch (e) {
       console.error("Məlumatlar yüklənərkən xəta baş verdi:", e);
       let local = null;
@@ -66,9 +83,11 @@ const App = {
         projects: local?.projects || [],
         solutions: local?.solutions || [],
         articles: local?.articles || [],
-        jobs: local?.jobs || []
+        jobs: local?.jobs || [],
+        clients: local?.clients || []
       };
       this.renderAll();
+      this.renderClientLogos(this.data.clients);
     }
   },
 
@@ -159,36 +178,59 @@ const App = {
   renderSiteSettings() {
       const s = this.data.settings || {};
       const heroTag = document.getElementById('hero-hello-title');
+      const heroHeadline = document.getElementById('hero-hello-headline') || document.getElementById('heroHeadline');
       const heroSubtitle = document.getElementById('dynamic-greeting-text');
       
-      if (heroTag && s.heroTag) heroTag.innerHTML = I18nManager.get('heroTag', s) + '<span class="color-primary">.</span>';
-      if (heroSubtitle && s.heroSubtitle) heroSubtitle.textContent = I18nManager.get('heroSubtitle', s);
+      const getI18n = (field) => {
+        if (typeof I18nManager !== 'undefined' && I18nManager.get) {
+          return I18nManager.get(field, s);
+        }
+        return s[field] || '';
+      };
+
+      if (heroTag && s.heroTag && String(getI18n('heroTag')).trim()) heroTag.innerHTML = escapeHtml(String(getI18n('heroTag')).trim()) + '<span class="color-primary">.</span>';
+      if (heroHeadline && s.heroHeadline) heroHeadline.textContent = getI18n('heroHeadline');
+      if (heroSubtitle && s.heroSubtitle) {
+        heroSubtitle.textContent = getI18n('heroSubtitle');
+        if (typeof heroSubtitle.setAttribute === 'function') {
+          heroSubtitle.setAttribute('data-hero-subtitle-rendered', 'true');
+        }
+      }
 
       // Kinetic Text
       const kineticStatic = document.getElementById('kinetic-static-text');
       if (kineticStatic && s.kineticText) {
-         kineticStatic.textContent = I18nManager.get('kineticText', s) + ' ';
+         const trimmedStatic = String(getI18n('kineticText')).trim();
+         if (trimmedStatic) {
+           kineticStatic.textContent = trimmedStatic + ' ';
+         }
       }
       
       const kineticScroller = document.getElementById('kinetic-scrolling-words');
       if (kineticScroller && s.kineticWords) {
-          const wordsStr = I18nManager.get('kineticWords', s) || '';
+          const wordsStr = getI18n('kineticWords') || '';
           const words = wordsStr.split(',').map(w => w.trim()).filter(Boolean);
           if (words.length > 0) {
-              kineticScroller.innerHTML = words.map(w => '<span class="word">' + w + '</span>').join('');
-              // Clone the first word to the end for smooth loop if GSAP expects it
-              kineticScroller.innerHTML += '<span class="word">' + words[0] + '</span>';
+              kineticScroller.innerHTML = words.map(w => '<span class="word">' + escapeHtml(w) + '</span>').join('') +
+                                          '<span class="word">' + escapeHtml(words[0]) + '</span>';
           }
       }
       
       // Split Text (revealText)
       const splitTextEl = document.getElementById('revealText');
       if (splitTextEl && s.splitText) {
-          const text = I18nManager.get('splitText', s) || '';
-          const words = text.split(' ').map(w => w.trim()).filter(Boolean);
+          const text = getI18n('splitText') || '';
+          const words = text.split(/\s+/).map(w => w.trim()).filter(Boolean);
           if (words.length > 0) {
-              splitTextEl.innerHTML = words.map(w => '<span>' + w + '</span>').join(' ');
+              splitTextEl.innerHTML = words.map(w => '<span>' + escapeHtml(w) + '</span>').join(' ');
           }
+      }
+
+      // Mouse Trail Logos
+      if (s.trailLogos !== undefined) {
+        this.trailLogos = (typeof s.trailLogos === 'string')
+          ? s.trailLogos.split(',').map(u => u.trim()).filter(Boolean)
+          : (Array.isArray(s.trailLogos) ? s.trailLogos : []);
       }
 
       // Hero Center Visual Media (Poster / Video) from Admin Dynamic Settings
@@ -508,18 +550,26 @@ const App = {
     `).join('');
   },
 
-  renderClientLogos() {
+  renderClientLogos(clientsData) {
     const grid = document.getElementById('home-client-logos');
     if (!grid) return;
     
-    const clients = (this.data.clients || []).filter(c => c.active);
+    const rawClients = clientsData || (this.data && this.data.clients) || [];
+    if (!Array.isArray(rawClients)) return;
+
+    const clients = rawClients.filter(c => 
+      c && 
+      typeof c === 'object' && 
+      c.active !== false && 
+      c.logoUrl && 
+      String(c.logoUrl).trim() !== ''
+    );
     if (clients.length === 0) return;
     
     grid.innerHTML = clients.map(client => {
-       if(client.logoUrl) {
-         return `<div class="client-logo-box"><img src="${client.logoUrl}" alt="${client.name}" loading="lazy" /></div>`;
-       }
-       return '';
+      const safeUrl = escapeHtml(String(client.logoUrl).trim());
+      const safeName = escapeHtml(client.name || 'Client');
+      return `<div class="client-logo-box"><img src="${safeUrl}" alt="${safeName}" loading="lazy" /></div>`;
     }).join('');
   },
 
@@ -1287,6 +1337,15 @@ const App = {
     const greetingEl = document.getElementById("dynamic-greeting-text");
     if (!greetingEl) return;
 
+    // Do NOT overwrite #dynamic-greeting-text if s.heroSubtitle exists and is already rendered
+    const s = (this.data && this.data.settings) || {};
+    if (s.heroSubtitle && String(s.heroSubtitle).trim() !== '') {
+      return;
+    }
+    if (typeof greetingEl.hasAttribute === 'function' && greetingEl.hasAttribute('data-hero-subtitle-rendered')) {
+      return;
+    }
+
     const bakuDate = new Date(new Date().toLocaleString("en-US", {timeZone: "Asia/Baku"}));
     const day = bakuDate.getDay();
     let text = "";
@@ -1323,11 +1382,17 @@ if (typeof window !== 'undefined') {
   window.App = App;
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = App;
+}
+
+if (typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      App.init();
+    });
+  } else if (typeof window !== 'undefined' && !window.__DISABLE_AUTO_INIT__) {
     App.init();
-  });
-} else {
-  App.init();
+  }
 }
 

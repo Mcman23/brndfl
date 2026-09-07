@@ -46,7 +46,7 @@ const frontendPath = path.join(__dirname, '../../');
 app.use(express.static(frontendPath));
 
 // Route /admin to admin.html
-app.get('/admin', (req, res) => {
+app.get(['/admin', '/admin/'], (req, res) => {
   res.sendFile(path.join(frontendPath, 'admin.html'));
 });
 
@@ -80,11 +80,12 @@ app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 // Mount API routes
 app.use('/api/auth', authRouter);
 app.use('/api/admin', adminRouter);
+app.use('/admin', adminRouter); // Route /admin/settings and other admin routes to adminRouter
 app.use('/api', apiRouter); // Public routes
 
 // SPA Fallback for frontend routes (must be before the API 404 handler)
 app.get('*', (req, res, next) => {
-  if (req.path.startsWith('/api')) {
+  if (req.path.startsWith('/api') || req.path.startsWith('/admin/')) {
     return next();
   }
   res.sendFile(path.join(frontendPath, 'index.html'));

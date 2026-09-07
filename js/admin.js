@@ -2890,6 +2890,11 @@
           document.getElementById('setHeroTag').value = s.heroTag || '';
           document.getElementById('setHeroHeadline').value = s.heroHeadline || '';
           document.getElementById('setHeroSubtitle').value = s.heroSubtitle || '';
+
+          if (document.getElementById('setKineticText')) document.getElementById('setKineticText').value = s.kineticText || '';
+          if (document.getElementById('setKineticWords')) document.getElementById('setKineticWords').value = s.kineticWords || '';
+          if (document.getElementById('setSplitText')) document.getElementById('setSplitText').value = s.splitText || '';
+          if (document.getElementById('setTrailLogos')) document.getElementById('setTrailLogos').value = s.trailLogos || '';
           
           document.getElementById('setShowreelVideoUrl').value = s.showreelVideoUrl || '';
           this.renderMediaPreview(s.showreelVideoUrl, 'showreelVideoSelection', 'Vimeo / Video Seç');
@@ -2941,6 +2946,11 @@
         heroTag: v('setHeroTag'),
         heroHeadline: v('setHeroHeadline'),
         heroSubtitle: v('setHeroSubtitle'),
+
+        kineticText: v('setKineticText'),
+        kineticWords: v('setKineticWords'),
+        splitText: v('setSplitText'),
+        trailLogos: v('setTrailLogos'),
 
         showreelVideoUrl: v('setShowreelVideoUrl'),
         showreelPosterUrl: v('setShowreelPosterUrl'),
@@ -3181,7 +3191,55 @@
 
     refreshPreview() {
       const iframe = document.getElementById('livePreviewIframe');
-      if (iframe) iframe.src = iframe.src;
+      if (iframe) {
+        iframe.src = iframe.src;
+        if (this.isVisualEditActive) {
+          iframe.onload = () => {
+            try {
+              if (iframe.contentWindow) {
+                iframe.contentWindow.postMessage({
+                  type: 'TOGGLE_VISUAL_EDIT',
+                  active: true
+                }, '*');
+              }
+            } catch (e) {}
+          };
+        }
+      }
+    },
+
+    isVisualEditActive: false,
+    visualEditMediaTarget: null,
+
+    toggleVisualEdit() {
+      this.isVisualEditActive = !this.isVisualEditActive;
+      const iframe = document.getElementById('livePreviewIframe');
+      if (iframe && iframe.contentWindow) {
+        iframe.contentWindow.postMessage({
+          type: 'TOGGLE_VISUAL_EDIT',
+          active: this.isVisualEditActive
+        }, '*');
+      }
+      const btn = document.getElementById('toggleVisualEditBtn');
+      if (btn) {
+        if (this.isVisualEditActive) {
+          btn.textContent = '✏️ Vizual Redaktor: Aktiv';
+          btn.classList.add('adm-btn-primary');
+          btn.classList.remove('adm-btn-secondary');
+        } else {
+          btn.textContent = '✏️ Vizual Redaktor';
+          btn.classList.remove('adm-btn-primary');
+          btn.classList.add('adm-btn-secondary');
+        }
+      }
+      if (typeof this.showToast === 'function') {
+        this.showToast(this.isVisualEditActive ? 'Vizual Redaktor aktiv edildi.' : 'Vizual Redaktor deaktiv edildi.');
+      }
+    },
+
+    openMediaPickerFor(targetInputId, previewElementId) {
+      this._pickerPreviewEl = previewElementId || null;
+      this.triggerMediaPicker(targetInputId);
     },
 
     async resetAllData() {
@@ -3659,6 +3717,37 @@
     },
 
     selectMediaFromPicker(url) {
+      if (this.visualEditMediaTarget) {
+        const target = this.visualEditMediaTarget;
+        this.visualEditMediaTarget = null;
+        const iframe = document.getElementById('livePreviewIframe');
+        if (iframe && iframe.contentWindow) {
+          iframe.contentWindow.postMessage({
+            type: 'MEDIA_SELECTED',
+            target: target,
+            url: url
+          }, '*');
+        }
+
+        const settingKey = (target === 'heroPoster' || target === 'heroShowreelVisual') ? 'showreelPosterUrl' : target;
+        const token = this.token || localStorage.getItem('adminToken') || '';
+        const headers = { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        };
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+
+        fetch(`${API_BASE}/admin/settings`, {
+          method: 'PUT',
+          headers,
+          body: JSON.stringify({ [settingKey]: url })
+        }).then(() => {
+          if (typeof this.showToast === 'function') {
+            this.showToast('Şəkil yeniləndi və yadda saxlanıldı.');
+          }
+        }).catch(err => console.error('[VisualEditor] Save setting error:', err));
+      }
+
       if (this.mediaPickerTargetField) {
         const targetInput = document.getElementById(this.mediaPickerTargetField);
         if (targetInput) {
@@ -3716,6 +3805,88 @@
         }
         this.closeModal('deleteConfirmModal');
       });
+
+      // PostMessage bridge for Live Visual Editor
+      if (!window.__adminPostMessageBridgeBound) {
+        window.__adminPostMessageBridgeBound = true;
+        window.addEventListener('message', async (event) => {
+          if (!event || !event.data || typeof event.data !== 'object') return;
+          const data = event.data;
+
+          if (data.type === 'SAVE_SETTINGS') {
+            const key = data.key || data.setting;
+            const value = data.value;
+            if (!key) return;
+
+            try {
+              const payload = { [key]: value };
+              const token = AdminApp.token || localStorage.getItem('adminToken') || '';
+              const headers = {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              };
+              if (token) headers['Authorization'] = `Bearer ${token}`;
+
+              const res = await fetch(`${API_BASE}/admin/settings`, {
+                method: 'PUT',
+                headers,
+                body: JSON.stringify(payload)
+              });
+              const json = await res.json().catch(() => ({}));
+              if (res.ok && json.success !== false) {
+                if (typeof AdminApp.showToast === 'function') {
+                  AdminApp.showToast(`Tənzimləmə saxlanıldı: ${key}`);
+                }
+              } else {
+                console.error('SAVE_SETTINGS failed:', json);
+              }
+            } catch (err) {
+              console.error('SAVE_SETTINGS error:', err);
+            }
+          } else if (data.type === 'SAVE_I18N') {
+            const key = data.key;
+            const text = data.text;
+            if (!key) return;
+
+            try {
+              const token = AdminApp.token || localStorage.getItem('adminToken') || '';
+              const headers = {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              };
+              if (token) headers['Authorization'] = `Bearer ${token}`;
+
+              const res = await fetch(`${API_BASE}/admin/translations/${encodeURIComponent(key)}`, {
+                method: 'PATCH',
+                headers,
+                body: JSON.stringify({ az: text })
+              });
+              const json = await res.json().catch(() => ({}));
+              if (res.ok && json.success !== false) {
+                if (typeof AdminApp.showToast === 'function') {
+                  AdminApp.showToast(`Tərcümə saxlanıldı: ${key}`);
+                }
+              } else {
+                await fetch(`${API_BASE}/admin/settings`, {
+                  method: 'PUT',
+                  headers,
+                  body: JSON.stringify({ [key]: text })
+                }).catch(() => {});
+              }
+            } catch (err) {
+              console.error('SAVE_I18N error:', err);
+            }
+          } else if (data.type === 'OPEN_MEDIA_PICKER' || data.type === 'REQUEST_IMAGE_PICKER') {
+            const target = data.target;
+            AdminApp.visualEditMediaTarget = target;
+            if (typeof AdminApp.openMediaPickerFor === 'function') {
+              AdminApp.openMediaPickerFor('__visual_editor_target__');
+            } else if (typeof AdminApp.triggerMediaPicker === 'function') {
+              AdminApp.triggerMediaPicker('__visual_editor_target__');
+            }
+          }
+        });
+      }
     }
   };
 

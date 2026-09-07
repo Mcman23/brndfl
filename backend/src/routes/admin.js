@@ -1535,7 +1535,8 @@ router.put('/settings', requireRole(['SUPER_ADMIN']), async (req, res, next) => 
         'copyrightText',
         'kineticText', 'kineticTextEn', 'kineticTextRu',
         'kineticWords', 'kineticWordsEn', 'kineticWordsRu',
-        'splitText', 'splitTextEn', 'splitTextRu'
+        'splitText', 'splitTextEn', 'splitTextRu',
+        'trailLogos'
       ];
     
     const updateData = {};

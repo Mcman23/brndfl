@@ -3,7 +3,16 @@ import prisma from '../db.js';
 
 export const requireAuth = async (req, res, next) => {
   try {
-    const token = req.cookies.brandfull_token;
+    let token = req.cookies?.brandfull_token;
+    if (!token && req.headers?.authorization) {
+      const authHeader = req.headers.authorization.trim();
+      if (/^Bearer\s+/i.test(authHeader)) {
+        token = authHeader.replace(/^Bearer\s+/i, '').trim();
+      } else if (authHeader) {
+        token = authHeader;
+      }
+    }
+
     if (!token) {
       return res.status(401).json({
         success: false,
